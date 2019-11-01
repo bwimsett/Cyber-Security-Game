@@ -7,35 +7,38 @@ public class Connection : MonoBehaviour {
     public Node start;
     public Node end;
     public float defaultLineThickness;
-    public float defaultColliderThickness;
+    public float colliderThickness;
     public LineRenderer lineRenderer;
-    public MeshCollider meshCollider;
-    private Mesh mesh;
+    public ConnectionCollider connectionCollider;
     
     // Refreshes the positions of the two ends of the line
     public void RefreshPosition() {
         Vector3 startPos = start.transform.position;
-        Vector3 endPos = end.transform.position;
-        
-        lineRenderer.SetPosition(0, startPos);
-        lineRenderer.SetPosition(1, endPos);
+        if (end) {
+            Vector3 endPos = end.transform.position;
+            lineRenderer.SetPosition(1, endPos);
+        }
 
-        lineRenderer.startWidth = defaultColliderThickness;
-        lineRenderer.BakeMesh(mesh, Camera.main, true);
+        lineRenderer.SetPosition(0, startPos);
         lineRenderer.startWidth = defaultLineThickness;
-        meshCollider.sharedMesh = mesh;
+        connectionCollider.Refresh();
     }
     
     // Refreshes the gradient of the line
     public void RefreshGradient() {
         Color startColor = start.nodeColor;
-        Color endColor = end.nodeColor;
         
         GradientColorKey startColorKey = new GradientColorKey(startColor, 0);
-        GradientColorKey endColorKey = new GradientColorKey(endColor, 1);
-        GradientAlphaKey startAlphaKey = new GradientAlphaKey(1,0);
-        GradientAlphaKey endAlphaKey = new GradientAlphaKey(1,1);
+        GradientColorKey endColorKey = new GradientColorKey();
         
+        GradientAlphaKey startAlphaKey = new GradientAlphaKey(1,0);
+        GradientAlphaKey endAlphaKey = new GradientAlphaKey(1,1);  
+        
+        if (end) {
+            Color endColor = end.nodeColor;
+            endColorKey = new GradientColorKey(endColor, 1);
+        }
+
         GradientColorKey[] gradientKey = new[] {startColorKey, endColorKey};
         GradientAlphaKey[] alphaKey = new[] {startAlphaKey, endAlphaKey}; 
         
@@ -46,12 +49,7 @@ public class Connection : MonoBehaviour {
     }
 
     // Sets the ends of the connection, and refreshes the line.
-    public void SetEnds(Node start, Node end) {
-        if (mesh == null) {
-            mesh = new Mesh();
-            meshCollider.sharedMesh = mesh;
-        }
-        
+    public void SetEnds(Node start, Node end) {  
         if (start == end) {
             return;
         }
@@ -83,7 +81,11 @@ public class Connection : MonoBehaviour {
 
     // Output a string description of the connection
     public override string ToString() {
-        return "(" + start.nodeName + " -> " + end.nodeName + ")";
+        if (end) {
+            return "(" + start.nodeName + " -> " + end.nodeName + ")";
+        } 
+        
+        return "(" + start.nodeName + " -> null )";
     }
 
     private void OnMouseOver() {

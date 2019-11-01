@@ -10,37 +10,57 @@ public class Node : MonoBehaviour {
     public String nodeName;
     public int nodeCost;
     public NodeType nodeType;
-    private Vector2 dragStartPos;
     public List<Node> connectedNodes;
     public Color nodeColor;
     public Sprite nodeIcon;
     public TextAsset description;
 
+    public NodeInteractor nodeInteractor;
+
+    private Connection tempConnection;
+    
     void Start() {
         GameManager.levelScene.connectionManager.CreateConnectionsForNode(this);
     }
-    
-    private void OnMouseDown() {
-        Debug.Log("Node clicked",this);
-        dragStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
 
-    private void OnMouseDrag() {
-        DragNode();
-    }
-
-    // Moves the node by the amount since the last dragging movement.
-    private void DragNode() {
-        Vector2 currentDragPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dragDifference = currentDragPos-dragStartPos;
-        transform.Translate(dragDifference);
-        dragStartPos = currentDragPos;
-        
-        // Refresh connections
-        Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(this);
-        foreach (Connection c in connections) {
-            c.RefreshPosition();
+    // Mouse functions for drawing new connections
+    void OnMouseDown() {
+        if (!GameManager.currentLevel.IsEditMode()) {
+            return;
         }
+        
+        tempConnection = GameManager.levelScene.connectionManager.CreateAndAddConnection(this, null);
+        tempConnection.start = this;
+        tempConnection.connectionCollider.drawingConnection = true;
+        tempConnection.lineRenderer.SetPosition(1, GameManager.levelScene.guiManager.GetMousePosition());
+        tempConnection.connectionCollider.Refresh();
     }
+
+    void OnMouseDrag() {
+        if (!tempConnection) {
+            return;
+        }
+        
+        tempConnection.lineRenderer.SetPosition(1, GameManager.levelScene.guiManager.GetMousePosition());
+        tempConnection.connectionCollider.Refresh();
+    }
+
+    void OnMouseUp() {
+        if (!tempConnection) {
+            return;
+        }
+
+        if (tempConnection.end) {
+            tempConnection = null;
+            return;
+        }
+        
+        GameManager.levelScene.connectionManager.RemoveConnection(tempConnection);
+        tempConnection = null;
+    }
+
+    
+    
+
 }
  

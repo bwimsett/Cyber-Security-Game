@@ -30,17 +30,18 @@ namespace DefaultNamespace {
         }
         
         //If the connection already exists, return, otherwise create a new one and add it to connections.
-        public void CreateAndAddConnection(Node start, Node end) {
+        public Connection CreateAndAddConnection(Node start, Node end) {
             Connection connection = GetConnection(start, end);
-            
+
             if (connection) {
-                return;
+                return connection;
             }
-            
+
             connection = CreateConnection(start, end);
             connections.Add(connection);
+            return connection;
         }
-        
+
         // Performs a linear search for a connection with both nodes
         public Connection GetConnection(Node end1, Node end2) {
             foreach (Connection connection in connections) {
@@ -56,6 +57,11 @@ namespace DefaultNamespace {
             }
 
             return null;
+        }
+
+        public void RemoveConnection(Connection connection) {
+            connections.Remove(connection);
+            Destroy(connection.gameObject);
         }
         
         // Returns all the connections to a particular Node

@@ -6,9 +6,10 @@ namespace DefaultNamespace {
         public static LevelScene levelScene;
         public static Level currentLevel;
 
-        void Start() {
+        void Awake() {
             levelScene = GameObject.Find("Level Scene").GetComponent<LevelScene>();
             currentLevel = new Level();
+            Physics.queriesHitTriggers = true;
         }
 
     }

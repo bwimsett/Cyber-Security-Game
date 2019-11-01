@@ -5,10 +5,9 @@ namespace DefaultNamespace {
 
         private int budget;
         private bool editMode;
-        
-        void Awake() {
-            GameManager.currentLevel = this;
-            Physics.queriesHitTriggers = true;
+
+
+        public Level() {
             editMode = false;
         }
 
