@@ -24,7 +24,10 @@ namespace DefaultNamespace {
 
         // Create all the necessary connections for a node
         public void CreateConnectionsForNode(Node node) {
-            foreach (Node neighbour in node.connectedNodes) {
+
+            Node[] nodes = node.GetConnectedNodes();
+            
+            foreach (Node neighbour in nodes) {
                 CreateAndAddConnection(node, neighbour);
             }
         }
@@ -43,7 +46,7 @@ namespace DefaultNamespace {
         }
 
         // Performs a linear search for a connection with both nodes
-        public Connection GetConnection(Node end1, Node end2) {
+        public Connection GetConnection(Node end1, Node end2) {            
             foreach (Connection connection in connections) {
 
                 bool start_end1 = connection.start == end1;

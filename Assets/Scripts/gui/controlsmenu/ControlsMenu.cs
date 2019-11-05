@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class ControlsMenu : MonoBehaviour {
 
     public Animator animator;
-    public Node[] nodeTypes;
     public GameObject optionPrefab;
     public Transform optionsContainer;
     private ControlsMenu_Option[] options;
@@ -18,12 +18,13 @@ public class ControlsMenu : MonoBehaviour {
         if (options != null) {
             ClearOptions();
         }
-        
-        options = new ControlsMenu_Option[nodeTypes.Length];
 
-        for (int i = 0; i < nodeTypes.Length; i++) {
+        NodeDefinition[] nodeDefinitions = GameManager.levelScene.nodeManager.nodeDefinitions;
+        options = new ControlsMenu_Option[nodeDefinitions.Length];
+
+        for (int i = 0; i < nodeDefinitions.Length; i++) {
             options[i] = Instantiate(optionPrefab, optionsContainer).GetComponent<ControlsMenu_Option>();
-            options[i].SetNode(nodeTypes[i]);
+            options[i].SetNode(nodeDefinitions[i]);
         }
     }
 

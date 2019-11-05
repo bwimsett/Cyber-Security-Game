@@ -45,25 +45,25 @@ public class ConnectionCollider : MonoBehaviour {
             return;
         }
         
-        Node otherNode = other.transform.GetComponent<Node>();
+        NodeObject otherNodeObject = other.transform.GetComponent<NodeObject>();
 
         // If connection already exists, ignore it
-        if (otherNode && GameManager.levelScene.connectionManager.GetConnection(connection.start, otherNode)) {
+        if (otherNodeObject && GameManager.levelScene.connectionManager.GetConnection(connection.start, otherNodeObject.GetNode())) {
             return;
         }
 
-        if (!otherNode || otherNode == connection.start) {
+        if (!otherNodeObject || otherNodeObject.GetNode() == connection.start) {
             return;
         }
 
         drawingConnection = false;
         
-        connection.start.connectedNodes.Add(otherNode);
-        otherNode.connectedNodes.Add(connection.start);
+        connection.start.AddConnection(otherNodeObject);
+        otherNodeObject.GetNode().connectedNodes.Add(connection.start);
         
-        Debug.Log(otherNode.transform.position);
+        Debug.Log(otherNodeObject.transform.position);
         
-        GameManager.levelScene.connectionManager.CreateAndAddConnection(connection.start, otherNode);
+        GameManager.levelScene.connectionManager.CreateAndAddConnection(connection.start, otherNodeObject.GetNode());
         GameManager.levelScene.connectionManager.RemoveConnection(connection);
     }
 }

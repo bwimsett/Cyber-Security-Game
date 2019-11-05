@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace gui.controlsmenu {
     public class ControlsMenu_InfoButton : MonoBehaviour {
 
-        private Node node;
+        private NodeDefinition node;
         public TextMeshProUGUI text;
         public Image outline;
         
@@ -23,7 +23,7 @@ namespace gui.controlsmenu {
             GameManager.levelScene.guiManager.controlDescriptionWindow.SetVisible(false);
         }
 
-        public void SetNode(Node node) {
+        public void SetNode(NodeDefinition node) {
             this.node = node;
             text.color = node.nodeColor;
             outline.color = node.nodeColor;

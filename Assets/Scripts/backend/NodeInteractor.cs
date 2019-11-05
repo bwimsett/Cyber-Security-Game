@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class NodeInteractor : MonoBehaviour {
 
-    private Node node;
+    private NodeObject _nodeObject;
     private Vector2 dragStartPos;
     
     void Start() {
-        node = transform.parent.GetComponent<Node>();
+        _nodeObject = transform.parent.GetComponent<NodeObject>();
     }
     
     void OnMouseDown() {
@@ -25,17 +25,17 @@ public class NodeInteractor : MonoBehaviour {
     void DragNode() {
         Vector2 currentDragPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dragDifference = currentDragPos - dragStartPos;
-        node.transform.Translate(dragDifference);
+        _nodeObject.transform.Translate(dragDifference);
         dragStartPos = currentDragPos;
 
         // Refresh connections
-        Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(node);
+        Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(_nodeObject.GetNode());
         foreach (Connection c in connections) {
             c.RefreshPosition();
         }
     }
 
-    public Node GetNode() {
-        return node;
+    public NodeObject GetNode() {
+        return _nodeObject;
     }
 }

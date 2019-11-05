@@ -13,13 +13,13 @@ namespace gui {
         public Image nodeIcon;
         
         public Animator animator;
-        private Node currentNode;
+        private NodeDefinition currentNode;
         
         public void SetVisible(bool value) {
             animator.SetBool("Visible", value);
         }
 
-        public void SetNode(Node node) {
+        public void SetNode(NodeDefinition node) {
             currentNode = node;
             Refresh();
         }
@@ -27,7 +27,7 @@ namespace gui {
         public void Refresh() {
             SetTitle(currentNode.nodeName);
             nodeDescription.text = currentNode.description.text;
-            nodeOutline.sprite = GameManager.levelScene.nodeManager.GetNodeShapeSprite(currentNode);
+            nodeOutline.sprite = GameManager.levelScene.nodeManager.GetNodeShapeSprite(currentNode.nodeFamily);
             nodeInterior.sprite = nodeOutline.sprite;
             nodeIcon.sprite = currentNode.nodeIcon;
         }

@@ -7,6 +7,7 @@ namespace DefaultNamespace {
 
         public string editModeCommand;
         public string setBudgetCommand;
+        public string saveLevelCommand;
         
         public void ParseInput(string input) {
             string[] commandList = ExtractCommandList(input);
@@ -46,6 +47,11 @@ namespace DefaultNamespace {
             // Set budget
             if (command.Contains(setBudgetCommand.ToLower())) {
                 GameManager.currentLevel.SetBudget(GetIntFromValue(GetValueFromCommand(command)));
+            }
+            
+            //Save level
+            if (command.Contains(saveLevelCommand.ToLower())) {
+                GameManager.currentLevel.SerializeLevel(GetValueFromCommand(command));
             }
         }
         

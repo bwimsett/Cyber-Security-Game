@@ -60,7 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\backend\ConnectionCollider.cs" />
+    <Compile Include="Assets\Scripts\backend\enums\NodeFamily.cs" />
     <Compile Include="Assets\Scripts\backend\enums\NodeType.cs" />
+    <Compile Include="Assets\Scripts\backend\level_serialization\LevelSave.cs" />
+    <Compile Include="Assets\Scripts\backend\level_serialization\LevelSerializer.cs" />
+    <Compile Include="Assets\Scripts\backend\level_serialization\NodeSave.cs" />
+    <Compile Include="Assets\Scripts\backend\level_serialization\Vector2Save.cs" />
     <Compile Include="Assets\Scripts\backend\managers\CommandManager.cs" />
     <Compile Include="Assets\Scripts\backend\managers\ConnectionManager.cs" />
     <Compile Include="Assets\Scripts\backend\managers\GameManager.cs" />
@@ -70,7 +75,9 @@
     <Compile Include="Assets\Scripts\backend\NodeInteractor.cs" />
     <Compile Include="Assets\Scripts\game\Connection.cs" />
     <Compile Include="Assets\Scripts\game\Level.cs" />
-    <Compile Include="Assets\Scripts\game\Node.cs" />
+    <Compile Include="Assets\Scripts\game\node\Node.cs" />
+    <Compile Include="Assets\Scripts\game\node\NodeDefinition.cs" />
+    <Compile Include="Assets\Scripts\game\node\NodeObject.cs" />
     <Compile Include="Assets\Scripts\gui\ControlDescriptionWindow.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu_InfoButton.cs" />
@@ -80,8 +87,10 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Nodes\Descriptions\Internet_Description.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Nodes\Descriptions\Server_Description.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -89,7 +98,6 @@
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\Prefabs\Nodes\Test Description.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />

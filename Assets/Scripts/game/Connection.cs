@@ -13,9 +13,9 @@ public class Connection : MonoBehaviour {
     
     // Refreshes the positions of the two ends of the line
     public void RefreshPosition() {
-        Vector3 startPos = start.transform.position;
-        if (end) {
-            Vector3 endPos = end.transform.position;
+        Vector3 startPos = start.nodeObject.transform.position;
+        if (end != null) {
+            Vector3 endPos = end.nodeObject.transform.position;
             lineRenderer.SetPosition(1, endPos);
         }
 
@@ -26,7 +26,8 @@ public class Connection : MonoBehaviour {
     
     // Refreshes the gradient of the line
     public void RefreshGradient() {
-        Color startColor = start.nodeColor;
+        
+        Color startColor = start.nodeObject.GetNodeDefinition().nodeColor;
         
         GradientColorKey startColorKey = new GradientColorKey(startColor, 0);
         GradientColorKey endColorKey = new GradientColorKey();
@@ -34,8 +35,8 @@ public class Connection : MonoBehaviour {
         GradientAlphaKey startAlphaKey = new GradientAlphaKey(1,0);
         GradientAlphaKey endAlphaKey = new GradientAlphaKey(1,1);  
         
-        if (end) {
-            Color endColor = end.nodeColor;
+        if (end != null) {
+            Color endColor = end.nodeObject.GetNodeDefinition().nodeColor;
             endColorKey = new GradientColorKey(endColor, 1);
         }
 
@@ -81,11 +82,11 @@ public class Connection : MonoBehaviour {
 
     // Output a string description of the connection
     public override string ToString() {
-        if (end) {
-            return "(" + start.nodeName + " -> " + end.nodeName + ")";
+        if (end != null) {
+            return "(" + start.nodeObject.GetNodeDefinition().nodeName + " -> " + end.nodeObject.GetNodeDefinition().nodeName + ")";
         } 
         
-        return "(" + start.nodeName + " -> null )";
+        return "(" + start.nodeObject.GetNodeDefinition().nodeName + " -> null )";
     }
 
     private void OnMouseOver() {

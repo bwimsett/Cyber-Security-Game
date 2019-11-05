@@ -9,34 +9,50 @@ namespace DefaultNamespace{
         public Sprite connectionNodeShape;
         public Sprite tableNodeShape;
 
-        private List<Node> nodes;
+        public GameObject defaultNode;
 
-        void Awake() {
-            nodes = new List<Node>();
-        }
+        public NodeDefinition[] nodeDefinitions;
         
-        public Sprite GetNodeShapeSprite(Node node) {
-            NodeType nodeType = node.nodeType;
-            
-            switch (nodeType) {
-                case NodeType.Base:
+        public Sprite GetNodeShapeSprite(NodeFamily family) {            
+            switch (family) {
+                case NodeFamily.Base:
                     return baseNodeShape;
-                case NodeType.Table:
+                case NodeFamily.Table:
                     return tableNodeShape;
-                case NodeType.Logical:
+                case NodeFamily.Logical:
                     return logicalNodeShape;
-                case NodeType.Connection:
+                case NodeFamily.Connection:
                     return connectionNodeShape;
             }
             
             return null;
         }
 
-        public Node CreateNode(Node node, Vector2 position) {
-            Node newNode = Instantiate(node.gameObject, GameManager.levelScene.transform).GetComponent<Node>();
-            newNode.transform.position = new Vector3(position.x, position.y, 0);
-            nodes.Add(newNode);
-            return newNode;
+        public NodeObject CreateNode(NodeType nodeType, Vector2 position) {
+            NodeDefinition nodeDefinition = GetNodeScriptable(nodeType);
+            
+            if (!nodeDefinition) {
+                Debug.Log("NodeDefinition "+nodeType+" not attached to NodeManager");
+                return null;
+            }
+                      
+            NodeObject newNodeObject = Instantiate(defaultNode, GameManager.levelScene.transform).GetComponent<NodeObject>();
+            newNodeObject.transform.position = new Vector3(position.x, position.y, 0);
+            newNodeObject.SetNodeDefinition(nodeDefinition);
+            GameManager.currentLevel.nodes.Add(newNodeObject.GetNode());
+            return newNodeObject;
         }
+
+        private NodeDefinition GetNodeScriptable(NodeType nodeType) {
+            foreach (NodeDefinition nodeSc in nodeDefinitions) {
+                if (nodeSc.nodeType == nodeType) {
+                    return nodeSc;
+                }
+            }
+
+            return null;
+        }
+        
+        
     }
 }

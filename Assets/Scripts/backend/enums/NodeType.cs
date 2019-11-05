@@ -1,8 +1,8 @@
+using UnityEngine;
+
 namespace DefaultNamespace {
     public enum NodeType {
-        Base,
-        Logical,
-        Connection,
-        Table
+        Server,
+        Internet
     }
 }

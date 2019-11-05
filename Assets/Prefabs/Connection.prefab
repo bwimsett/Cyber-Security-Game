@@ -69,7 +69,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Positions:
   - {x: -25, y: 0, z: 0}
   - {x: 25, y: 0, z: 1}
@@ -140,8 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76444866fa1a7e448a119b9c95ab6b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 0}
-  end: {fileID: 0}
   defaultLineThickness: 0.5
   colliderThickness: 5
   lineRenderer: {fileID: 1230916103888320158}
@@ -191,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 262276450325062886}
+  drawingConnection: 0
 --- !u!61 &262276450325062886
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,14 +1,19 @@
+using System.Collections.Generic;
+using backend.level_serialization;
 using UnityEngine;
 
 namespace DefaultNamespace {
+    
     public class Level {
 
         private int budget;
-        private bool editMode;
-
+        private bool editMode = true;
+        public List<Node> nodes;
+        private int currentNodeId;
 
         public Level() {
-            editMode = false;
+            currentNodeId = 0;
+            nodes = new List<Node>();
         }
 
         public void SetEditMode(bool value) {
@@ -28,6 +33,16 @@ namespace DefaultNamespace {
 
         public int GetBudget() {
             return budget;
+        }
+
+        public int GetNewNodeID() {
+            currentNodeId++;
+            return currentNodeId;
+        }
+
+        public void SerializeLevel(string levelName) {
+            LevelSerializer lvlSerializer = new LevelSerializer();
+            lvlSerializer.SaveCurrentLevelAsTemplate(levelName);
         }
         
     }

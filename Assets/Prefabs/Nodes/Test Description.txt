@@ -1,7 +1,0 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit
-
-Morbi porttitor mattis vulputate Maecenas quis nunc tempor, egestas massa quis, rutrum risus
-
-Suspendisse augue tortor, iaculis eget tempus in, semper in eros Aenean volutpat enim non mollis bibendum
-
-Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos Phasellus in ligula leo 

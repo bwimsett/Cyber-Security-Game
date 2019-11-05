@@ -13,11 +13,11 @@ public class ControlsMenu_Option : MonoBehaviour {
     public Image controlIcon;
     public ControlsMenu_InfoButton infoButton;
     
-    private Node node;
-    private Node clonedNode;
+    private NodeDefinition node;
+    private NodeObject _clonedNodeObject;
 
     // Sets the node type, and refreshes the option
-    public void SetNode(Node node) {
+    public void SetNode(NodeDefinition node) {
         this.node = node;
         Refresh();
     }
@@ -27,7 +27,7 @@ public class ControlsMenu_Option : MonoBehaviour {
         controlName.text = node.nodeName;
         controlCost.text = node.nodeCost+" hrs";
 
-        Sprite shape = GameManager.levelScene.nodeManager.GetNodeShapeSprite(node);
+        Sprite shape = GameManager.levelScene.nodeManager.GetNodeShapeSprite(node.nodeFamily);
 
         controlImageOutline.sprite = controlImageBackground.sprite = shape;
         controlIcon.sprite = node.nodeIcon;
@@ -37,15 +37,15 @@ public class ControlsMenu_Option : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        clonedNode = GameManager.levelScene.nodeManager.CreateNode(node, GameManager.levelScene.guiManager.GetMousePosition());
+        _clonedNodeObject = GameManager.levelScene.nodeManager.CreateNode(node.nodeType, GameManager.levelScene.guiManager.GetMousePosition());
     }
     
     void OnMouseDrag() {
-        if (clonedNode) {
+        if (_clonedNodeObject) {
             Vector3 mousePos = GameManager.levelScene.guiManager.GetMousePosition();
             mousePos.z = 0;
             
-            clonedNode.transform.position = mousePos;
+            _clonedNodeObject.transform.position = mousePos;
         }
     }
 }

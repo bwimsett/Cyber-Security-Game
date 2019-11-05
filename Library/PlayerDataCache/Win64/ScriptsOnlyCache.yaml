@@ -12,8 +12,9 @@ ScriptsOnlyBuild:
     - DefaultNamespace.LevelScene
     - DefaultNamespace.NodeManager
     - DeveloperConsole
-    - Node
+    - NodeDefinition
     - NodeInteractor
+    - NodeObject
     - gui.ControlDescriptionWindow
     - gui.controlsmenu.ControlsMenu_InfoButton
     Unity.TextMeshPro.dll:
@@ -56,6 +57,8 @@ ScriptsOnlyBuild:
     - Class: 48
       Script: {instanceID: 0}
     - Class: 49
+      Script: {instanceID: 0}
+    - Class: 50
       Script: {instanceID: 0}
     - Class: 58
       Script: {instanceID: 0}
@@ -116,23 +119,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9864}
     - Class: 114
-      Script: {instanceID: 10004}
+      Script: {instanceID: 10006}
     - Class: 114
-      Script: {instanceID: 10014}
+      Script: {instanceID: 10016}
     - Class: 114
-      Script: {instanceID: 10060}
+      Script: {instanceID: 10062}
     - Class: 114
-      Script: {instanceID: 10108}
+      Script: {instanceID: 10110}
     - Class: 114
-      Script: {instanceID: 10118}
+      Script: {instanceID: 10120}
     - Class: 114
-      Script: {instanceID: 10252}
+      Script: {instanceID: 10254}
     - Class: 114
-      Script: {instanceID: 10492}
+      Script: {instanceID: 10496}
     - Class: 114
-      Script: {instanceID: 10510}
+      Script: {instanceID: 10514}
     - Class: 114
-      Script: {instanceID: 10532}
+      Script: {instanceID: 10536}
+    - Class: 114
+      Script: {instanceID: 10642}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -166,10 +171,10 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: cfb0de7158405a4a62c2a42d7867da40
+      Hash: efaa11cfd04fc08a1d724587797cf75d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Node
+    className: NodeObject
   - hash:
       serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
@@ -622,7 +627,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: e5406b2c261a1c9b1f2c25232cfd2c09
+      Hash: 8467eb4f9c31ff97fca976300dc13edd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ConnectionCollider
@@ -658,7 +663,7 @@ ScriptsOnlyBuild:
     className: AnalyticsTracker
   - hash:
       serializedVersion: 2
-      Hash: 30c3a89cc8661ff4146ffd1450c3ee9c
+      Hash: 601dff70b7511b67a64871221e4f8b2d
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
     className: NodeManager
@@ -688,7 +693,7 @@ ScriptsOnlyBuild:
     className: DeveloperConsole
   - hash:
       serializedVersion: 2
-      Hash: 6fdf35340d86a4f62a8a88375f9505ec
+      Hash: f6a35d5ccb22834893109ad375fcb869
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Connection
@@ -736,7 +741,7 @@ ScriptsOnlyBuild:
     className: ConnectionManager
   - hash:
       serializedVersion: 2
-      Hash: 41b930707f8f491afce964f7cc49395b
+      Hash: 09d09aa73e644e700b95123126a27a23
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlsMenu
@@ -884,6 +889,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalEmitter
+  - hash:
+      serializedVersion: 2
+      Hash: 73ef9313f5128407f5f490ec4c90a848
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NodeDefinition
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
