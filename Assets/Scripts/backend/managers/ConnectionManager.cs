@@ -77,6 +77,19 @@ namespace DefaultNamespace {
 
             return nodeConnections.ToArray();
         }
-        
+
+        public void CreateConnectionsFromIDArray(Node startNode, int[] connectedNodes) {
+            foreach (int i in connectedNodes) {
+                Node connectedNode = GameManager.levelScene.nodeManager.GetNodeByID(i);
+                CreateAndAddConnection(startNode, connectedNode);
+                startNode.AddConnection(connectedNode.nodeObject);
+                connectedNode.AddConnection(startNode.nodeObject);
+            }
+        }
+
+
+        public Connection[] GetConnections() {
+            return connections.ToArray();
+        }
     }
 }

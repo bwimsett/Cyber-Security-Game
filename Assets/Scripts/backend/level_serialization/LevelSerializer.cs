@@ -20,6 +20,25 @@ namespace backend.level_serialization {
             
             Debug.Log("Level saved to: "+path);
         }
-        
+
+        public LevelSave GetLevelSave(String name) {
+            LevelSave levelSave = null;
+            
+            BinaryFormatter bf = new BinaryFormatter();
+            String path = Application.persistentDataPath + "/" + name + levelFileExtension;
+            FileStream file = null;
+            
+            try {
+                file = File.Open(path, FileMode.Open);
+                levelSave = (LevelSave)bf.Deserialize(file);
+            }
+            catch {
+                Debug.Log("File path not a valid level: "+name);
+            }
+
+            file?.Close();
+
+            return levelSave;
+        }
     }
 }

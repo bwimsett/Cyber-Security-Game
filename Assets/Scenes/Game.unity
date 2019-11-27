@@ -1675,7 +1675,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1150602609}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1680074019}
+        m_MethodName: SimulateThreats
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1150602609
@@ -2005,6 +2016,7 @@ GameObject:
   - component: {fileID: 1680074015}
   - component: {fileID: 1680074017}
   - component: {fileID: 1680074018}
+  - component: {fileID: 1680074019}
   m_Layer: 0
   m_Name: Level Scene
   m_TagString: Untagged
@@ -2055,6 +2067,7 @@ MonoBehaviour:
   connectionManager: {fileID: 1680074015}
   nodeManager: {fileID: 1680074017}
   guiManager: {fileID: 801024576}
+  threatManager: {fileID: 1680074019}
 --- !u!114 &1680074017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,6 +2090,7 @@ MonoBehaviour:
   nodeDefinitions:
   - {fileID: 11400000, guid: f93a483e7757f2e439e2d3a603d5540a, type: 2}
   - {fileID: 11400000, guid: e372d0f3c874c814dbf7b2ccdff2b221, type: 2}
+  - {fileID: 11400000, guid: 4114b2872fc91634b9db01f51ca8f8d8, type: 2}
 --- !u!114 &1680074018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2091,6 +2105,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editModeCommand: editMode
   setBudgetCommand: setBudget
+  saveLevelCommand: save
+  loadLevelCommand: load
+  clearLevelCommand: clear
+--- !u!114 &1680074019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680074013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f460052100904a6e9961a240a1026d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1743926688
 GameObject:
   m_ObjectHideFlags: 0

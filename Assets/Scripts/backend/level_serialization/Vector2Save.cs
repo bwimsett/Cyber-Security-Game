@@ -11,5 +11,9 @@ namespace backend.level_serialization {
             xPos = vector.x;
             yPos = vector.y;
         }
+
+        public Vector2 Vector2() {
+            return new Vector2(xPos, yPos);
+        }
     }
 }

@@ -9,12 +9,14 @@ namespace backend.level_serialization {
         public NodeType nodeType;
         public Vector2Save position;
         public int[] connectedNodes;
+        public int id;
 
         public NodeSave(NodeObject nodeObject) {
             nodeFamily = nodeObject.GetNodeDefinition().nodeFamily;
             nodeType = nodeObject.GetNodeDefinition().nodeType;
             position = new Vector2Save(nodeObject.transform.localPosition);
             connectedNodes = ParseConnectedNodes(nodeObject.GetNode().GetConnectedNodes());
+            id = nodeObject.GetNode().GetNodeID();
         }
 
         private int[] ParseConnectedNodes(Node[] nodes) {

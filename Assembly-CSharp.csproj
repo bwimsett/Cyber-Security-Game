@@ -62,6 +62,9 @@
     <Compile Include="Assets\Scripts\backend\ConnectionCollider.cs" />
     <Compile Include="Assets\Scripts\backend\enums\NodeFamily.cs" />
     <Compile Include="Assets\Scripts\backend\enums\NodeType.cs" />
+    <Compile Include="Assets\Scripts\backend\enums\ThreatStatus.cs" />
+    <Compile Include="Assets\Scripts\backend\enums\ThreatType.cs" />
+    <Compile Include="Assets\Scripts\backend\EvolutionNotDefinedException.cs" />
     <Compile Include="Assets\Scripts\backend\level_serialization\LevelSave.cs" />
     <Compile Include="Assets\Scripts\backend\level_serialization\LevelSerializer.cs" />
     <Compile Include="Assets\Scripts\backend\level_serialization\NodeSave.cs" />
@@ -72,7 +75,11 @@
     <Compile Include="Assets\Scripts\backend\managers\GUIManager.cs" />
     <Compile Include="Assets\Scripts\backend\managers\LevelScene.cs" />
     <Compile Include="Assets\Scripts\backend\managers\NodeManager.cs" />
+    <Compile Include="Assets\Scripts\backend\managers\ThreatManager.cs" />
     <Compile Include="Assets\Scripts\backend\NodeInteractor.cs" />
+    <Compile Include="Assets\Scripts\backend\Threat.cs" />
+    <Compile Include="Assets\Scripts\backend\Threat_EffectPair.cs" />
+    <Compile Include="Assets\Scripts\backend\Threat_EvolutionPair.cs" />
     <Compile Include="Assets\Scripts\game\Connection.cs" />
     <Compile Include="Assets\Scripts\game\Level.cs" />
     <Compile Include="Assets\Scripts\game\node\Node.cs" />

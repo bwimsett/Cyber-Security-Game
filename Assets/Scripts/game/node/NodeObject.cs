@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Mime;
-using DefaultNamespace;
+﻿using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class NodeObject : MonoBehaviour {
     
@@ -19,7 +15,7 @@ public class NodeObject : MonoBehaviour {
     private Connection tempConnection;
 
     void Awake() {
-        node = new Node(this, GameManager.currentLevel.GetNewNodeID());
+        node = new Node(this);
     }
     
     void Start() {
@@ -78,6 +74,11 @@ public class NodeObject : MonoBehaviour {
         
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection);
         tempConnection = null;
+    }
+
+    public void Destroy() {
+        GameManager.currentLevel.nodes.Remove(node);
+        Destroy(gameObject);
     }
 
 }

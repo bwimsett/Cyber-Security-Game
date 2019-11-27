@@ -5,5 +5,6 @@ namespace DefaultNamespace {
         public ConnectionManager connectionManager;
         public NodeManager nodeManager;
         public GUIManager guiManager;
+        public ThreatManager threatManager;
     }
 }

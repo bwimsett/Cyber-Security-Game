@@ -119,25 +119,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9864}
     - Class: 114
-      Script: {instanceID: 10006}
+      Script: {instanceID: 10010}
     - Class: 114
-      Script: {instanceID: 10016}
+      Script: {instanceID: 10020}
     - Class: 114
-      Script: {instanceID: 10062}
+      Script: {instanceID: 10066}
     - Class: 114
-      Script: {instanceID: 10110}
+      Script: {instanceID: 10114}
     - Class: 114
-      Script: {instanceID: 10120}
+      Script: {instanceID: 10126}
     - Class: 114
-      Script: {instanceID: 10254}
+      Script: {instanceID: 10262}
     - Class: 114
-      Script: {instanceID: 10496}
+      Script: {instanceID: 10504}
     - Class: 114
-      Script: {instanceID: 10514}
+      Script: {instanceID: 10522}
     - Class: 114
-      Script: {instanceID: 10536}
+      Script: {instanceID: 10544}
     - Class: 114
-      Script: {instanceID: 10642}
+      Script: {instanceID: 10650}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -855,7 +855,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: b3d8d451706cd3bf5a916a22a856a647
+      Hash: 3f6e1a3ff364618c30273e952a6c31f3
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
     className: CommandManager

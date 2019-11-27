@@ -61,7 +61,7 @@ public class ConnectionCollider : MonoBehaviour {
         connection.start.AddConnection(otherNodeObject);
         otherNodeObject.GetNode().connectedNodes.Add(connection.start);
         
-        Debug.Log(otherNodeObject.transform.position);
+        //Debug.Log(otherNodeObject.transform.position);
         
         GameManager.levelScene.connectionManager.CreateAndAddConnection(connection.start, otherNodeObject.GetNode());
         GameManager.levelScene.connectionManager.RemoveConnection(connection);

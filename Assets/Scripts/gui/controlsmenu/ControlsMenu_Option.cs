@@ -37,7 +37,8 @@ public class ControlsMenu_Option : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        _clonedNodeObject = GameManager.levelScene.nodeManager.CreateNode(node.nodeType, GameManager.levelScene.guiManager.GetMousePosition());
+        int nodeId = GameManager.currentLevel.GetNewNodeID();
+        _clonedNodeObject = GameManager.levelScene.nodeManager.CreateNode(node.nodeType, GameManager.levelScene.guiManager.GetMousePosition(), nodeId);
     }
     
     void OnMouseDrag() {

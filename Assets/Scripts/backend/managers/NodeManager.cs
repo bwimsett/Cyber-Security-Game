@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using backend.level_serialization;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -43,6 +44,12 @@ namespace DefaultNamespace{
             return newNodeObject;
         }
 
+        public NodeObject CreateNode(NodeType nodeType, Vector2 position, int ID) {
+            NodeObject result = CreateNode(nodeType, position);
+            result.GetNode().SetNodeID(ID);
+            return result;
+        }
+
         private NodeDefinition GetNodeScriptable(NodeType nodeType) {
             foreach (NodeDefinition nodeSc in nodeDefinitions) {
                 if (nodeSc.nodeType == nodeType) {
@@ -52,7 +59,20 @@ namespace DefaultNamespace{
 
             return null;
         }
-        
+
+        public void CreateNodeFromSave(NodeSave nodeSave) {
+            NodeObject newNode = CreateNode(nodeSave.nodeType, nodeSave.position.Vector2(), nodeSave.id);
+        }
+
+        public Node GetNodeByID(int id) {
+            foreach (Node n in GameManager.currentLevel.nodes) {
+                if (n.GetNodeID() == id) {
+                    return n;
+                }
+            }
+
+            return null;
+        }
         
     }
 }
