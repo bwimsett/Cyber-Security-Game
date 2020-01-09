@@ -29,7 +29,7 @@ namespace DefaultNamespace {
         public void SetBudget(int amount) {
             if (editMode) {
                 budget = amount;
-                GameManager.levelScene.guiManager.RefreshBudget();
+                GameManager.levelScene.guiManager.SetBudgetText(budget);
             }
         }
 
@@ -65,13 +65,18 @@ namespace DefaultNamespace {
         public void LoadLevel(String name) {
             LevelSerializer ls = new LevelSerializer();
             LevelSave levelSave = ls.GetLevelSave(name);
+            LoadLevel(levelSave);
+        }
 
+        public void LoadLevel(LevelSave levelSave) {
             if (levelSave == null) {
                 return;
             }
-            
+
+
             ClearLevel();
-            
+
+
             // Set budget
             SetBudget(levelSave.budget);
             
@@ -87,8 +92,6 @@ namespace DefaultNamespace {
             for(int i = 0; i < nodes.Count; i++){
                 GameManager.levelScene.connectionManager.CreateConnectionsFromIDArray(nodes[i], levelSave.nodes[i].connectedNodes);
             }
-            
-            
         }
         
     }

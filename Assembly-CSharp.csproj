@@ -59,16 +59,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\Scripts\backend\ConnectionCollider.cs" />
+    <Compile Include="Assets\Scripts\backend\enums\Medal.cs" />
     <Compile Include="Assets\Scripts\backend\enums\NodeFamily.cs" />
     <Compile Include="Assets\Scripts\backend\enums\NodeType.cs" />
     <Compile Include="Assets\Scripts\backend\enums\ThreatStatus.cs" />
     <Compile Include="Assets\Scripts\backend\enums\ThreatType.cs" />
     <Compile Include="Assets\Scripts\backend\EvolutionNotDefinedException.cs" />
+    <Compile Include="Assets\Scripts\backend\level\LevelDescription.cs" />
+    <Compile Include="Assets\Scripts\backend\level\LevelSet.cs" />
+    <Compile Include="Assets\Scripts\backend\level_serialization\LevelProgress.cs" />
     <Compile Include="Assets\Scripts\backend\level_serialization\LevelSave.cs" />
     <Compile Include="Assets\Scripts\backend\level_serialization\LevelSerializer.cs" />
     <Compile Include="Assets\Scripts\backend\level_serialization\NodeSave.cs" />
     <Compile Include="Assets\Scripts\backend\level_serialization\Vector2Save.cs" />
+    <Compile Include="Assets\Scripts\backend\MainMenuLoader.cs" />
     <Compile Include="Assets\Scripts\backend\managers\CommandManager.cs" />
     <Compile Include="Assets\Scripts\backend\managers\ConnectionManager.cs" />
     <Compile Include="Assets\Scripts\backend\managers\GameManager.cs" />
@@ -77,6 +83,8 @@
     <Compile Include="Assets\Scripts\backend\managers\NodeManager.cs" />
     <Compile Include="Assets\Scripts\backend\managers\ThreatManager.cs" />
     <Compile Include="Assets\Scripts\backend\NodeInteractor.cs" />
+    <Compile Include="Assets\Scripts\backend\serialization\GameSerializer.cs" />
+    <Compile Include="Assets\Scripts\backend\serialization\SaveGame.cs" />
     <Compile Include="Assets\Scripts\backend\Threat.cs" />
     <Compile Include="Assets\Scripts\backend\Threat_EffectPair.cs" />
     <Compile Include="Assets\Scripts\backend\Threat_EvolutionPair.cs" />
@@ -90,11 +98,16 @@
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu_InfoButton.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu_Option.cs" />
     <Compile Include="Assets\Scripts\gui\DeveloperConsole.cs" />
+    <Compile Include="Assets\Scripts\gui\levelSelect\LevelSelector.cs" />
+    <Compile Include="Assets\Scripts\gui\levelSelect\LevelSetComponent.cs" />
+    <Compile Include="Assets\Scripts\gui\levelSelect\LevelSetConnection.cs" />
+    <Compile Include="Assets\Scripts\gui\levelSelect\LevelSetMedal.cs" />
     <Compile Include="Assets\Scripts\gui\Window.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Nodes\Descriptions\Internet_Description.txt" />
+    <None Include="Assets\Nodes\Descriptions\Sanitation Description.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Nodes\Descriptions\Server_Description.txt" />

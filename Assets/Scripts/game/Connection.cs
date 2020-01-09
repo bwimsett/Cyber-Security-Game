@@ -13,6 +13,10 @@ public class Connection : MonoBehaviour {
     
     // Refreshes the positions of the two ends of the line
     public void RefreshPosition() {
+        if (lineRenderer == null) {
+            return;
+        }
+        
         Vector3 startPos = start.nodeObject.transform.position;
         if (end != null) {
             Vector3 endPos = end.nodeObject.transform.position;

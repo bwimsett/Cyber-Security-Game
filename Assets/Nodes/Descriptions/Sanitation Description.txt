@@ -1,0 +1,5 @@
+Sanitation is vital wherever input is taken in and processed, and is a key step in preventing injection attacks and cross-site scripting
+
+It converts any user input travelling along a connection into a format that cannot be mistakenly executed as code
+
+This is a cheap and effective way to protect web servers

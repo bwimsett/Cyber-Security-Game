@@ -7,7 +7,9 @@ namespace DefaultNamespace {
         private List<Connection> connections;
 
         void Awake() {
-            connections = new List<Connection>();
+            if (connections == null) {
+                connections = new List<Connection>();
+            }
         }
         
         // Instantiates a new connection, and returns it.
@@ -40,6 +42,11 @@ namespace DefaultNamespace {
                 return connection;
             }
 
+            if (start != null && end != null) {
+                start.AddConnection(end.nodeObject);
+                end.AddConnection(start.nodeObject);
+            }
+
             connection = CreateConnection(start, end);
             connections.Add(connection);
             return connection;
@@ -63,8 +70,19 @@ namespace DefaultNamespace {
         }
 
         public void RemoveConnection(Connection connection) {
+            if (connection == null) {
+                return;
+            }
+
+            if(connection.end != null && connection.start != null) {
+                connection.end.connectedNodes.Remove(connection.start);
+                connection.start.connectedNodes.Remove(connection.end);
+            }
+            
             connections.Remove(connection);
             Destroy(connection.gameObject);
+
+            Debug.Log("Connection removed: " + connection);
         }
         
         // Returns all the connections to a particular Node
@@ -82,13 +100,15 @@ namespace DefaultNamespace {
             foreach (int i in connectedNodes) {
                 Node connectedNode = GameManager.levelScene.nodeManager.GetNodeByID(i);
                 CreateAndAddConnection(startNode, connectedNode);
-                startNode.AddConnection(connectedNode.nodeObject);
-                connectedNode.AddConnection(startNode.nodeObject);
             }
         }
 
 
         public Connection[] GetConnections() {
+            if (connections == null) {
+                connections = new List<Connection>();
+            }
+            
             return connections.ToArray();
         }
     }

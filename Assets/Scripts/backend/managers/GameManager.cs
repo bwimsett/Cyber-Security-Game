@@ -1,3 +1,5 @@
+using backend.level_serialization;
+using backend.serialization;
 using UnityEngine;
 
 namespace DefaultNamespace {
@@ -5,10 +7,17 @@ namespace DefaultNamespace {
 
         public static LevelScene levelScene;
         public static Level currentLevel;
+        public static LevelSave selectedLevelSave;
+        public static SaveGame currentSaveGame;
 
         void Awake() {
             levelScene = GameObject.Find("Level Scene").GetComponent<LevelScene>();
             currentLevel = new Level();
+            
+            if (selectedLevelSave != null) {
+                currentLevel.LoadLevel(selectedLevelSave);
+            }
+            
             Physics.queriesHitTriggers = true;
         }
 

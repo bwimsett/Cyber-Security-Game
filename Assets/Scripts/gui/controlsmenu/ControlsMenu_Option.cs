@@ -46,6 +46,7 @@ public class ControlsMenu_Option : MonoBehaviour {
             Vector3 mousePos = GameManager.levelScene.guiManager.GetMousePosition();
             mousePos.z = 0;
             
+            _clonedNodeObject.nodeInteractor.DragNode();
             _clonedNodeObject.transform.position = mousePos;
         }
     }

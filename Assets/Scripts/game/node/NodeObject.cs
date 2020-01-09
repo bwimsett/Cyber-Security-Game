@@ -8,6 +8,10 @@ public class NodeObject : MonoBehaviour {
     public NodeInteractor nodeInteractor;
     public SpriteRenderer icon;
     public SpriteRenderer outline;
+
+    public SpriteMask outlineMask;
+    public SpriteRenderer outlineRenderer;
+    public SpriteRenderer centerRenderer;
     
     private NodeDefinition nodeDefinition;
     private Node node;
@@ -38,11 +42,17 @@ public class NodeObject : MonoBehaviour {
     public void Refresh() {
         icon.sprite = nodeDefinition.nodeIcon;
         outline.color = icon.color = nodeDefinition.nodeColor;
+        outlineMask.sprite = outlineRenderer.sprite = centerRenderer.sprite =
+            GameManager.levelScene.nodeManager.GetNodeShapeSprite(nodeDefinition.nodeFamily);
     }
 
     // Mouse functions for drawing new connections
     void OnMouseDown() {
         if (!GameManager.currentLevel.IsEditMode()) {
+            return;
+        }
+
+        if (nodeDefinition.nodeFamily == NodeFamily.Connection) {
             return;
         }
         

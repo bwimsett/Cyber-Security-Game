@@ -4,6 +4,7 @@ namespace DefaultNamespace {
     public enum NodeType {
         Server,
         Internet,
-        Table
+        Table,
+        Sanitation
     }
 }

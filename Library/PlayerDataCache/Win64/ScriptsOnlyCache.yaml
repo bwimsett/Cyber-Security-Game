@@ -11,12 +11,19 @@ ScriptsOnlyBuild:
     - DefaultNamespace.GameManager
     - DefaultNamespace.LevelScene
     - DefaultNamespace.NodeManager
+    - DefaultNamespace.ThreatManager
     - DeveloperConsole
+    - LevelSelector
+    - MainMenu
     - NodeDefinition
     - NodeInteractor
     - NodeObject
+    - backend.level.LevelDescription
+    - backend.level.LevelSet
     - gui.ControlDescriptionWindow
     - gui.controlsmenu.ControlsMenu_InfoButton
+    - gui.levelSelect.LevelSetComponent
+    - gui.levelSelect.LevelSetMedal
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
     - TMPro.TMP_InputField
@@ -37,11 +44,13 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.RectMask2D
     - UnityEngine.UI.Shadow
+    - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
     Assets/Scenes/Game.unity:
     - Class: 1
@@ -74,70 +83,66 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
-    - Class: 109
-      Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 9244}
     - Class: 114
       Script: {instanceID: 9282}
     - Class: 114
-      Script: {instanceID: 9340}
+      Script: {instanceID: 9284}
     - Class: 114
-      Script: {instanceID: 9354}
+      Script: {instanceID: 9344}
     - Class: 114
-      Script: {instanceID: 9356}
+      Script: {instanceID: 9358}
     - Class: 114
-      Script: {instanceID: 9362}
+      Script: {instanceID: 9360}
     - Class: 114
-      Script: {instanceID: 9368}
+      Script: {instanceID: 9366}
     - Class: 114
       Script: {instanceID: 9372}
     - Class: 114
       Script: {instanceID: 9376}
     - Class: 114
-      Script: {instanceID: 9400}
+      Script: {instanceID: 9380}
     - Class: 114
-      Script: {instanceID: 9408}
+      Script: {instanceID: 9404}
     - Class: 114
       Script: {instanceID: 9412}
     - Class: 114
-      Script: {instanceID: 9434}
+      Script: {instanceID: 9416}
     - Class: 114
-      Script: {instanceID: 9656}
+      Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 9678}
+      Script: {instanceID: 9438}
     - Class: 114
-      Script: {instanceID: 9724}
+      Script: {instanceID: 9662}
     - Class: 114
-      Script: {instanceID: 9756}
+      Script: {instanceID: 9684}
     - Class: 114
-      Script: {instanceID: 9772}
+      Script: {instanceID: 9732}
     - Class: 114
-      Script: {instanceID: 9796}
+      Script: {instanceID: 9766}
     - Class: 114
-      Script: {instanceID: 9850}
+      Script: {instanceID: 9808}
     - Class: 114
-      Script: {instanceID: 9864}
+      Script: {instanceID: 9862}
     - Class: 114
-      Script: {instanceID: 10010}
+      Script: {instanceID: 9876}
     - Class: 114
-      Script: {instanceID: 10020}
+      Script: {instanceID: 10026}
     - Class: 114
-      Script: {instanceID: 10066}
+      Script: {instanceID: 10036}
     - Class: 114
-      Script: {instanceID: 10114}
+      Script: {instanceID: 10086}
     - Class: 114
-      Script: {instanceID: 10126}
+      Script: {instanceID: 10134}
     - Class: 114
-      Script: {instanceID: 10262}
+      Script: {instanceID: 10284}
     - Class: 114
-      Script: {instanceID: 10504}
+      Script: {instanceID: 10550}
     - Class: 114
-      Script: {instanceID: 10522}
+      Script: {instanceID: 10572}
     - Class: 114
-      Script: {instanceID: 10544}
-    - Class: 114
-      Script: {instanceID: 10650}
+      Script: {instanceID: 10682}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -162,6 +167,91 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 331
       Script: {instanceID: 0}
+    Assets/Scenes/Level Select.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 109
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9312}
+    - Class: 114
+      Script: {instanceID: 9358}
+    - Class: 114
+      Script: {instanceID: 9360}
+    - Class: 114
+      Script: {instanceID: 9362}
+    - Class: 114
+      Script: {instanceID: 9366}
+    - Class: 114
+      Script: {instanceID: 9372}
+    - Class: 114
+      Script: {instanceID: 9376}
+    - Class: 114
+      Script: {instanceID: 9380}
+    - Class: 114
+      Script: {instanceID: 9416}
+    - Class: 114
+      Script: {instanceID: 9428}
+    - Class: 114
+      Script: {instanceID: 9740}
+    - Class: 114
+      Script: {instanceID: 9784}
+    - Class: 114
+      Script: {instanceID: 9922}
+    - Class: 114
+      Script: {instanceID: 10044}
+    - Class: 114
+      Script: {instanceID: 10134}
+    - Class: 114
+      Script: {instanceID: 10146}
+    - Class: 114
+      Script: {instanceID: 10284}
+    - Class: 114
+      Script: {instanceID: 10326}
+    - Class: 114
+      Script: {instanceID: 10452}
+    - Class: 114
+      Script: {instanceID: 10530}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 120
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
   scriptHashData:
   - hash:
       serializedVersion: 2
@@ -171,7 +261,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: efaa11cfd04fc08a1d724587797cf75d
+      Hash: 0824f896d3f35c4ff6d189ff7e6b239f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NodeObject
@@ -195,6 +285,12 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: DefaultNamespace
+    className: ThreatManager
+  - hash:
+      serializedVersion: 2
       Hash: cd525ff472b124fd6be35ab337f903ae
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
@@ -213,7 +309,13 @@ ScriptsOnlyBuild:
     className: ActivationTrack
   - hash:
       serializedVersion: 2
-      Hash: 8aaa919c9c738ae504e3c55a40869644
+      Hash: 3ab4db4d61d41695e5a67e3898ce653a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LevelSelector
+  - hash:
+      serializedVersion: 2
+      Hash: 840020e376b9adef36caba3b81886c7a
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
     className: LevelScene
@@ -651,6 +753,12 @@ ScriptsOnlyBuild:
     className: ControlDescriptionWindow
   - hash:
       serializedVersion: 2
+      Hash: c28a043504210cecddd56ef92f0b1b04
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: backend.level
+    className: LevelSet
+  - hash:
+      serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
     assemblyName: Unity.Analytics.Tracker.dll
     namespaceName: UnityEngine.Analytics
@@ -717,6 +825,12 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 095d2ff623f27826ff0f311da7df2a88
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.Analytics.Editor.dll
     namespaceName: UnityEditor.Analytics
@@ -745,6 +859,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlsMenu
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: gui.levelSelect
+    className: LevelSetMedal
   - hash:
       serializedVersion: 2
       Hash: 7fdb644da4183c8cf63ebd3bc25aac24
@@ -837,10 +957,22 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
+      Hash: a3a2b62f2917b53ec452187c82e44e20
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: gui.levelSelect
+    className: LevelSetComponent
+  - hash:
+      serializedVersion: 2
       Hash: 148b1ccbd15604f72e73b55338b641c0
     assemblyName: Assembly-CSharp.dll
     namespaceName: gui
     className: Window
+  - hash:
+      serializedVersion: 2
+      Hash: fce63cceb8e39d57455b69db3eb6eb42
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: backend.level
+    className: LevelDescription
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -891,7 +1023,7 @@ ScriptsOnlyBuild:
     className: SignalEmitter
   - hash:
       serializedVersion: 2
-      Hash: 73ef9313f5128407f5f490ec4c90a848
+      Hash: f428b7521d3a4a5b154d83179e6981e9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: NodeDefinition
@@ -903,5 +1035,6 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 19
   scenePathNames:
+  - Assets/Scenes/Level Select.unity
   - Assets/Scenes/Game.unity
   playerPath: C:/Users/Ben/Desktop/Cyber Security Game.exe

@@ -1,6 +1,7 @@
 using gui;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace {
     public class GUIManager : MonoBehaviour {
@@ -13,7 +14,15 @@ namespace DefaultNamespace {
         }
 
         public void RefreshBudget() {
-            budgetText.text = "Budget | " + GameManager.currentLevel.GetBudget()+" hrs";
+            SetBudgetText(GameManager.currentLevel.GetBudget());
+        }
+
+        public void SetBudgetText(int value) {
+            budgetText.text = "Budget | " +value+" hrs";
+        }
+
+        public void Back() {
+            SceneManager.LoadScene(0);
         }
     }
 }

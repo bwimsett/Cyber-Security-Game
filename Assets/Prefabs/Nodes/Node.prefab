@@ -417,6 +417,9 @@ MonoBehaviour:
   nodeInteractor: {fileID: 8051289691394746994}
   icon: {fileID: 7729355255509432326}
   outline: {fileID: 7729355256867158040}
+  outlineMask: {fileID: 7729355256117780157}
+  outlineRenderer: {fileID: 7729355256867158040}
+  centerRenderer: {fileID: 1941616922363472697}
 --- !u!58 &7729355256334455807
 CircleCollider2D:
   m_ObjectHideFlags: 0
