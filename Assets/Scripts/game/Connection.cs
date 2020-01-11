@@ -14,6 +14,7 @@ public class Connection : MonoBehaviour {
     // Refreshes the positions of the two ends of the line
     public void RefreshPosition() {
         if (lineRenderer == null) {
+            Debug.Log("Null line renderer: "+this);
             return;
         }
         
@@ -74,10 +75,10 @@ public class Connection : MonoBehaviour {
 
         Connection connection = (Connection) other;
 
-        bool startMatches = connection.start == start || connection.end == start;
-        bool endMatches = connection.end == start || connection.end == end;
+        bool matchLR = connection.start == start && connection.end == end;
+        bool matchRL = connection.start == end && connection.end == start;
 
-        if (startMatches && endMatches) {
+        if (matchLR ^ matchRL) {
             return true;
         }
 

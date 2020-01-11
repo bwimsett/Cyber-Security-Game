@@ -20,12 +20,44 @@ public class NodeInteractor : MonoBehaviour {
     }
     
     void OnMouseDown() {
-        Debug.Log("Click");
         dragStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void OnMouseDrag() {
         DragNode();
+    }
+
+    public void OnMouseUp() {        
+        // Check node family
+        if (_nodeObject.GetNodeDefinition().nodeFamily != NodeFamily.Connection) {
+            Debug.Log("Mouse up, but not a connection node.");
+            return;
+        }
+        
+        // Check for temporary connections
+        if (tempConnectionCreator == null) {
+            Debug.Log("Mouse up, but no temporary connection creator");
+            return;
+        }
+        
+        Debug.Log("Mouse up. Moving to mid point.");
+        
+        // Remove temporary connection creator
+        Node end1 = tempConnectionCreator.start;
+        Node end2 = tempConnectionCreator.end;
+        tempConnection1 = null;
+        tempConnection2 = null;
+        GameManager.levelScene.connectionManager.RemoveConnection(tempConnectionCreator);
+        
+        // Move node to middle of two 
+        Vector2 end1pos = end1.nodeObject.transform.position;
+        Vector2 end2pos = end2.nodeObject.transform.position;
+        
+        Vector2 midPoint = Vector2.Lerp(end1pos, end2pos, 0.5f);
+
+        _nodeObject.transform.position = midPoint;
+        
+        RefreshConnections();
     }
 
     // Moves the node by the amount since the last dragging movement.
@@ -34,21 +66,7 @@ public class NodeInteractor : MonoBehaviour {
         Vector2 dragDifference = currentDragPos - dragStartPos;
         _nodeObject.transform.Translate(dragDifference);
         dragStartPos = currentDragPos;
-
-        // Refresh connections
-        Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(_nodeObject.GetNode()); 
-        
-        foreach (Connection c in connections) {
-            try {
-                c.RefreshPosition();
-            }
-            catch (Exception e) {
-                Debug.Log("Attempted to update "+connections.Length+" connections.");
-                Debug.Log(c);
-                throw;
-            }
-            
-        }
+        RefreshConnections();
     }
 
     public NodeObject GetNode() {
@@ -80,11 +98,16 @@ public class NodeInteractor : MonoBehaviour {
         if (end1 == thisNode || end2 == thisNode) {
             return;
         }
+
+        if (tempConnectionCreator) {
+            tempConnectionCreator.lineRenderer.enabled = true;
+        }
         
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
 
         tempConnectionCreator = startingConnection;
+        tempConnectionCreator.lineRenderer.enabled = false;
         tempConnection1 = GameManager.levelScene.connectionManager.CreateAndAddConnection(thisNode, end1);
         tempConnection2 = GameManager.levelScene.connectionManager.CreateAndAddConnection(thisNode, end2);
     }
@@ -109,6 +132,7 @@ public class NodeInteractor : MonoBehaviour {
         }
         
         //Remove connection
+        tempConnectionCreator.lineRenderer.enabled = true;
         tempConnectionCreator = null;
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
@@ -116,5 +140,14 @@ public class NodeInteractor : MonoBehaviour {
         tempConnection1 = null;
         tempConnection2 = null;
 
+    }
+    
+    private void RefreshConnections() {
+        // Refresh connections
+        Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(_nodeObject.GetNode()); 
+        
+        foreach (Connection c in connections) {
+            c.RefreshPosition();
+        }
     }
 }

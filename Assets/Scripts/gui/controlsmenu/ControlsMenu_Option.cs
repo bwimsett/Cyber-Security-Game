@@ -50,4 +50,10 @@ public class ControlsMenu_Option : MonoBehaviour {
             _clonedNodeObject.transform.position = mousePos;
         }
     }
+
+    void OnMouseUp() {
+        if (_clonedNodeObject) {
+            _clonedNodeObject.nodeInteractor.OnMouseUp();
+        }
+    }
 }

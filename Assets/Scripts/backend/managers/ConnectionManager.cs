@@ -39,6 +39,7 @@ namespace DefaultNamespace {
             Connection connection = GetConnection(start, end);
 
             if (connection) {
+                //Debug.Log("Found existing connection: "+connection);
                 return connection;
             }
 
@@ -48,7 +49,11 @@ namespace DefaultNamespace {
             }
 
             connection = CreateConnection(start, end);
+
             connections.Add(connection);
+            
+            //Debug.Log("Created new connection: "+connection);
+         
             return connection;
         }
 
@@ -71,6 +76,7 @@ namespace DefaultNamespace {
 
         public void RemoveConnection(Connection connection) {
             if (connection == null) {
+                //Debug.Log("Cannot remove null connection.");
                 return;
             }
 
@@ -78,11 +84,13 @@ namespace DefaultNamespace {
                 connection.end.connectedNodes.Remove(connection.start);
                 connection.start.connectedNodes.Remove(connection.end);
             }
-            
+
+            string output = "removing connection: " + connection + ". From: "+ConnectionsToString();
             connections.Remove(connection);
             Destroy(connection.gameObject);
+            output += " after: " + ConnectionsToString();
+            //Debug.Log(output);
 
-            Debug.Log("Connection removed: " + connection);
         }
         
         // Returns all the connections to a particular Node
@@ -90,7 +98,10 @@ namespace DefaultNamespace {
             List<Connection> nodeConnections = new List<Connection>();
             
             foreach (Node neighbour in node.connectedNodes) {
-                nodeConnections.Add(GetConnection(node, neighbour));
+                Connection c = GetConnection(node, neighbour);
+                if (c) {
+                    nodeConnections.Add(c);
+                }
             }
 
             return nodeConnections.ToArray();
@@ -110,6 +121,16 @@ namespace DefaultNamespace {
             }
             
             return connections.ToArray();
+        }
+
+        public string ConnectionsToString() {
+            string output = "";
+            
+            foreach (Connection c in connections) {
+                output += c + ", ";
+            }
+
+            return output;
         }
     }
 }
