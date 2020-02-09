@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using TMPro;
+﻿using DefaultNamespace;
 using UnityEngine;
 
 public class NodeInteractor : MonoBehaviour {
@@ -14,6 +10,8 @@ public class NodeInteractor : MonoBehaviour {
     private Connection tempConnection1;
     private Connection tempConnection2;
     private Connection tempConnectionCreator;
+
+    private bool hasDragged = false;
     
     void Start() {
         _nodeObject = transform.parent.GetComponent<NodeObject>();
@@ -22,25 +20,37 @@ public class NodeInteractor : MonoBehaviour {
     void OnMouseDown() {
         dragStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
-
+    
     void OnMouseDrag() {
         DragNode();
     }
 
-    public void OnMouseUp() {        
+    public void OnMouseUp() {    
+        Debug.Log("Has Dragged: "+hasDragged);
+        
+        if (!hasDragged) {
+            OpenNodeSettings();
+        }
+
+        hasDragged = false;
+        
+        MoveConnectionNodeIntoPlace();
+    }
+
+    private void MoveConnectionNodeIntoPlace() {
         // Check node family
         if (_nodeObject.GetNodeDefinition().nodeFamily != NodeFamily.Connection) {
-            Debug.Log("Mouse up, but not a connection node.");
+            //Debug.Log("Mouse up, but not a connection node.");
             return;
         }
         
         // Check for temporary connections
         if (tempConnectionCreator == null) {
-            Debug.Log("Mouse up, but no temporary connection creator");
+            //Debug.Log("Mouse up, but no temporary connection creator");
             return;
         }
         
-        Debug.Log("Mouse up. Moving to mid point.");
+        //Debug.Log("Mouse up. Moving to mid point.");
         
         // Remove temporary connection creator
         Node end1 = tempConnectionCreator.start;
@@ -55,21 +65,24 @@ public class NodeInteractor : MonoBehaviour {
         
         Vector2 midPoint = Vector2.Lerp(end1pos, end2pos, 0.5f);
 
-        _nodeObject.transform.position = midPoint;
+        _nodeObject.MoveToPosition(midPoint);
         
         RefreshConnections();
     }
-
+    
     // Moves the node by the amount since the last dragging movement.
     public void DragNode() {
         Vector2 currentDragPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dragDifference = currentDragPos - dragStartPos;
         _nodeObject.transform.Translate(dragDifference);
         dragStartPos = currentDragPos;
+        if (dragDifference.magnitude > 0) {
+            hasDragged = true;    
+        }
         RefreshConnections();
     }
 
-    public NodeObject GetNode() {
+    public NodeObject GetNodeObject() {
         return _nodeObject;
     }
 
@@ -78,6 +91,11 @@ public class NodeInteractor : MonoBehaviour {
         // Check this is a connection node
         NodeFamily family = _nodeObject.GetNodeDefinition().nodeFamily;
         if (family != NodeFamily.Connection) {
+            return;
+        }
+        
+        //Check node doesn't already have connections
+        if (_nodeObject.GetNode().connectedNodes.Count > 0 && !tempConnectionCreator) {
             return;
         }
         
@@ -142,12 +160,16 @@ public class NodeInteractor : MonoBehaviour {
 
     }
     
-    private void RefreshConnections() {
+    public void RefreshConnections() {
         // Refresh connections
         Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(_nodeObject.GetNode()); 
         
         foreach (Connection c in connections) {
             c.RefreshPosition();
         }
+    }
+
+    private void OpenNodeSettings() {
+        GameManager.levelScene.guiManager.OpenControlSettingsWindow(_nodeObject.GetNode());
     }
 }

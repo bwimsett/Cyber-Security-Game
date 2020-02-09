@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1230916103888320129}
   - component: {fileID: 1230916103888320158}
   - component: {fileID: 2535179492198045371}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Connection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4641725092119946784}
   - component: {fileID: 642485401956589659}
   - component: {fileID: 262276450325062886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Connection Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

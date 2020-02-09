@@ -26,7 +26,7 @@ namespace backend.level_serialization {
             LevelSave levelSave = null;
             
             BinaryFormatter bf = new BinaryFormatter();
-            String path = Application.persistentDataPath + "/" + name + levelFileExtension;
+            String path = Application.dataPath +levelFolder+"/" + name + levelFileExtension;
             FileStream file = null;
             
             try {
@@ -34,7 +34,7 @@ namespace backend.level_serialization {
                 levelSave = (LevelSave)bf.Deserialize(file);
             }
             catch {
-                Debug.Log("File path not a valid level: "+name);
+                Debug.Log("File path not a valid level: "+path);
             }
 
             file?.Close();

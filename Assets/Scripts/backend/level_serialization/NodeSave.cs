@@ -1,5 +1,6 @@
 using System.Numerics;
 using DefaultNamespace;
+using DefaultNamespace.node;
 
 namespace backend.level_serialization {
     [System.Serializable]
@@ -10,12 +11,14 @@ namespace backend.level_serialization {
         public Vector2Save position;
         public int[] connectedNodes;
         public int id;
+        public NodeField[] fields;
 
         public NodeSave(NodeObject nodeObject) {
             nodeFamily = nodeObject.GetNodeDefinition().nodeFamily;
             nodeType = nodeObject.GetNodeDefinition().nodeType;
             position = new Vector2Save(nodeObject.transform.localPosition);
             connectedNodes = ParseConnectedNodes(nodeObject.GetNode().GetConnectedNodes());
+            fields = nodeObject.GetNode().GetBehaviour().GetFields();
             id = nodeObject.GetNode().GetNodeID();
         }
 

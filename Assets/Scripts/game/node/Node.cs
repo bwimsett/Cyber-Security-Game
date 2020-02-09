@@ -10,10 +10,15 @@ public class Node {
     public List<Node> connectedNodes;
     public NodeObject nodeObject;
     private int nodeID;
+    private NodeBehaviour behaviour;
 
     public Node(NodeObject nodeObject) {
         this.nodeObject = nodeObject;
         connectedNodes = new List<Node>();
+        
+        // Set default behaviour
+        behaviour = new NodeBehaviour(this);
+
     }
 
     public void AddConnection(NodeObject nodeObject) {
@@ -44,18 +49,7 @@ public class Node {
     }
 
     public ThreatStatus Attack(Threat threat) {
-        
-        // Check if any of the logical nodes connected are effective against the threat
-        foreach (Node n in connectedNodes) {
-            if (n.nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Logical) {
-                ThreatStatus status = n.GetThreatEffect(threat);
-                if (status == ThreatStatus.Failure) {
-                    return status;
-                }
-            }
-        }
-
-        return GetThreatEffect(threat);
+        return behaviour.Attack(threat);
     }
 
     public void EvolveThreat(Threat threat) {
@@ -82,7 +76,7 @@ public class Node {
         Threat newThreat = GameManager.levelScene.threatManager.CreateThreat(chosenEvolution, threat, this);
     }
     
-    private ThreatStatus GetThreatEffect(Threat threat) {
+    public ThreatStatus GetThreatEffect(Threat threat) {
         Threat_EffectPair[] responses = nodeObject.GetNodeDefinition().threatResponses;   
         
         foreach (Threat_EffectPair t in responses) {
@@ -96,5 +90,13 @@ public class Node {
 
     public override string ToString() {
         return nodeObject.GetNodeDefinition().nodeName;
+    }
+
+    public void SetBehaviour(NodeBehaviour behaviour) {
+        this.behaviour = behaviour;
+    }
+
+    public NodeBehaviour GetBehaviour() {
+        return behaviour;
     }
 }

@@ -59,13 +59,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\LevelGUIBackground.cs" />
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\Scripts\backend\ConnectionCollider.cs" />
     <Compile Include="Assets\Scripts\backend\enums\Medal.cs" />
     <Compile Include="Assets\Scripts\backend\enums\NodeFamily.cs" />
+    <Compile Include="Assets\Scripts\backend\enums\NodeFieldType.cs" />
     <Compile Include="Assets\Scripts\backend\enums\NodeType.cs" />
     <Compile Include="Assets\Scripts\backend\enums\ThreatStatus.cs" />
     <Compile Include="Assets\Scripts\backend\enums\ThreatType.cs" />
+    <Compile Include="Assets\Scripts\backend\enums\UserTypes.cs" />
     <Compile Include="Assets\Scripts\backend\EvolutionNotDefinedException.cs" />
     <Compile Include="Assets\Scripts\backend\level\LevelDescription.cs" />
     <Compile Include="Assets\Scripts\backend\level\LevelSet.cs" />
@@ -88,11 +91,18 @@
     <Compile Include="Assets\Scripts\backend\Threat.cs" />
     <Compile Include="Assets\Scripts\backend\Threat_EffectPair.cs" />
     <Compile Include="Assets\Scripts\backend\Threat_EvolutionPair.cs" />
+    <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour.cs" />
+    <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Table.cs" />
     <Compile Include="Assets\Scripts\game\Connection.cs" />
     <Compile Include="Assets\Scripts\game\Level.cs" />
     <Compile Include="Assets\Scripts\game\node\Node.cs" />
     <Compile Include="Assets\Scripts\game\node\NodeDefinition.cs" />
+    <Compile Include="Assets\Scripts\game\node\NodeField.cs" />
     <Compile Include="Assets\Scripts\game\node\NodeObject.cs" />
+    <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Dropdown.cs" />
+    <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Field.cs" />
+    <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Slider.cs" />
+    <Compile Include="Assets\Scripts\gui\control_settings\ControlSettingsWindow.cs" />
     <Compile Include="Assets\Scripts\gui\ControlDescriptionWindow.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu_InfoButton.cs" />

@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 697093505373253500}
   - component: {fileID: 7327081150199751955}
   - component: {fileID: -6226752751372790180}
-  - component: {fileID: 5358102174435304099}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NodeInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,11 +87,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
---- !u!222 &5358102174435304099
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2899231403170545728}
-  m_CullTransparentMesh: 0

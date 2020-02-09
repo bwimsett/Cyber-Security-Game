@@ -31,7 +31,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6877294149978574584}
   - component: {fileID: 7193453309819286449}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Connection Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7158492661599256116}
   - component: {fileID: 1941616922363472697}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7729355255509432377}
   - component: {fileID: 7729355255509432326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 7729355256117780159}
   - component: {fileID: 7729355256117780157}
   - component: {fileID: 7729355256117780156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Outline Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 7729355256334455804}
   - component: {fileID: 7729355256334455807}
   - component: {fileID: 3660294222897277973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,6 +420,7 @@ MonoBehaviour:
   outlineMask: {fileID: 7729355256117780157}
   outlineRenderer: {fileID: 7729355256867158040}
   centerRenderer: {fileID: 1941616922363472697}
+  moveSpeed: 7.5
 --- !u!58 &7729355256334455807
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -467,7 +468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7729355256867158043}
   - component: {fileID: 7729355256867158040}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,6 +553,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NodeInteractor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899231403170545728, guid: 976f7290e6b456f4db974b4d0f705372,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4981315133390415518, guid: 976f7290e6b456f4db974b4d0f705372,
         type: 3}

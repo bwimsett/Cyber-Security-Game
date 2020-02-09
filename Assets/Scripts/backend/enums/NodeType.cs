@@ -5,6 +5,11 @@ namespace DefaultNamespace {
         Server,
         Internet,
         Table,
-        Sanitation
+        Sanitisation,
+        CAPTCHA,
+        Password,
+        Authentication,
+        Lockout,
+        Encryption
     }
 }

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using backend.level_serialization;
-using DefaultNamespace;
 using UnityEngine;
 
 namespace DefaultNamespace{
@@ -41,12 +39,20 @@ namespace DefaultNamespace{
             newNodeObject.transform.position = new Vector3(position.x, position.y, 0);
             newNodeObject.SetNodeDefinition(nodeDefinition);
             GameManager.currentLevel.nodes.Add(newNodeObject.GetNode());
+            AssignNodeBehaviour(newNodeObject);
             return newNodeObject;
         }
 
         public NodeObject CreateNode(NodeType nodeType, Vector2 position, int ID) {
             NodeObject result = CreateNode(nodeType, position);
             result.GetNode().SetNodeID(ID);
+            return result;
+        }
+        
+        public NodeObject CreateNode(NodeSave nodeSave) {
+            NodeObject result = CreateNode(nodeSave.nodeType, nodeSave.position.Vector2());
+            result.GetNode().SetNodeID(nodeSave.id);
+            result.GetNode().GetBehaviour().SetFields(nodeSave.fields);
             return result;
         }
 
@@ -61,7 +67,7 @@ namespace DefaultNamespace{
         }
 
         public void CreateNodeFromSave(NodeSave nodeSave) {
-            NodeObject newNode = CreateNode(nodeSave.nodeType, nodeSave.position.Vector2(), nodeSave.id);
+            NodeObject newNode = CreateNode(nodeSave);
         }
 
         public Node GetNodeByID(int id) {
@@ -72,6 +78,24 @@ namespace DefaultNamespace{
             }
 
             return null;
+        }
+
+        private void AssignNodeBehaviour(NodeObject nodeObject) {
+            NodeType nodeType = nodeObject.GetNodeDefinition().nodeType;
+
+            Node node = nodeObject.GetNode();
+            NodeBehaviour behaviour;
+            
+            switch (nodeType) {
+                case NodeType.Table:
+                    behaviour = new NodeBehaviour_Table(node);
+                    break;
+                default:
+                    behaviour = new NodeBehaviour(node);
+                    break;
+            }
+            
+            node.SetBehaviour(behaviour);
         }
         
     }

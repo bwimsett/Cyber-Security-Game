@@ -44,6 +44,7 @@ namespace DefaultNamespace {
             // Enter level builder
             if (command.Contains(editModeCommand.ToLower())) {
                 GameManager.currentLevel.SetEditMode(GetBoolFromValue(GetValueFromCommand(command)));
+                Debug.Log("Edit mode: " + GameManager.currentLevel.IsEditMode());
             }
             
             // Set budget
