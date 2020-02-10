@@ -3,5 +3,6 @@ namespace DefaultNamespace {
         integer,
         integer_range,
         enumerable,
+        text
     }
 }

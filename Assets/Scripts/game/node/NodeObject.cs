@@ -79,7 +79,7 @@ public class NodeObject : MonoBehaviour {
             return;
         }
 
-        if (nodeDefinition.nodeFamily == NodeFamily.Connection) {
+        if (nodeDefinition.nodeFamily != NodeFamily.Base) {
             return;
         }
         

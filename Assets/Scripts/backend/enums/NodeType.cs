@@ -10,6 +10,10 @@ namespace DefaultNamespace {
         Password,
         Authentication,
         Lockout,
-        Encryption
+        Encryption,
+        Antivirus,
+        Smartphone,
+        PC,
+        Laptop
     }
 }

@@ -49,6 +49,10 @@ namespace DefaultNamespace.node {
             if (value is int && options != null) {
                 fieldType = NodeFieldType.enumerable;
             }
+
+            if (value is string) {
+                fieldType = NodeFieldType.text;
+            }
         }
 
         public NodeFieldType GetFieldType() {

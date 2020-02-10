@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -53,6 +54,13 @@ public class ConnectionCollider : MonoBehaviour {
         }
 
         if (!otherNodeObject || otherNodeObject.GetNode() == connection.start) {
+            return;
+        }
+        
+        // If node is not base or table, ignore it
+        NodeDefinition nodeDef = otherNodeObject.GetNodeDefinition();
+
+        if (nodeDef.nodeFamily != NodeFamily.Base && nodeDef.nodeFamily != NodeFamily.Table) {
             return;
         }
 

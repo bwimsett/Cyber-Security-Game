@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\backend\managers\NodeManager.cs" />
     <Compile Include="Assets\Scripts\backend\managers\ThreatManager.cs" />
     <Compile Include="Assets\Scripts\backend\NodeInteractor.cs" />
+    <Compile Include="Assets\Scripts\backend\NodeInteractor_Logical.cs" />
     <Compile Include="Assets\Scripts\backend\serialization\GameSerializer.cs" />
     <Compile Include="Assets\Scripts\backend\serialization\SaveGame.cs" />
     <Compile Include="Assets\Scripts\backend\Threat.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Dropdown.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Field.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Slider.cs" />
+    <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Text.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettingsWindow.cs" />
     <Compile Include="Assets\Scripts\gui\ControlDescriptionWindow.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu.cs" />
@@ -132,6 +134,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Images\GUI Decoration\Dotted Line.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">

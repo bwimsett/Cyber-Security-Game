@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1edd7f81d6d674fa997bd43704027b, type: 3}
+  m_Name: Laptop
+  m_EditorClassIdentifier: 
+  nodeName: Laptop
+  nodeCost: 0
+  nodeFamily: 0
+  nodeType: 12
+  nodeColor: {r: 0, g: 0, b: 0, a: 0}
+  nodeIcon: {fileID: 0}
+  description: {fileID: 0}
+  startingThreats: 
+  threatResponses: []
+  threatEvolutions: []

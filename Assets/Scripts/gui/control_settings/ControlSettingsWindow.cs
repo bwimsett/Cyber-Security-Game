@@ -6,13 +6,15 @@ using gui;
 using gui.control_settings;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlSettingsWindow : Window {
     private Node node;
 
-    public Transform settingContainerTransform;
+    public RectTransform settingContainerTransform;
     public ControlSettings_Slider slider_prefab;
     public ControlSettings_Dropdown dropdown_prefab;
+    public ControlSettings_Text text_prefab;
 
     private ControlSettings_Field[] fieldObjects;
     
@@ -39,6 +41,9 @@ public class ControlSettingsWindow : Window {
             NodeField f = fields[i];
             fieldObjects[i] = GetFieldFromFieldType(f);
         }
+        
+        settingContainerTransform.ForceUpdateRectTransforms();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(settingContainerTransform);
 
     }
 
@@ -50,6 +55,8 @@ public class ControlSettingsWindow : Window {
             case NodeFieldType.integer_range: prefab = slider_prefab.gameObject;
                 break;
             case NodeFieldType.enumerable: prefab = dropdown_prefab.gameObject;
+                break;
+            case NodeFieldType.text: prefab = text_prefab.gameObject;
                 break;
         }
 
