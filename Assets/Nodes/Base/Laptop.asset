@@ -16,9 +16,15 @@ MonoBehaviour:
   nodeCost: 0
   nodeFamily: 0
   nodeType: 12
-  nodeColor: {r: 0, g: 0, b: 0, a: 0}
+  nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
   nodeIcon: {fileID: 0}
   description: {fileID: 0}
-  startingThreats: 
-  threatResponses: []
-  threatEvolutions: []
+  startingThreats: 04000000
+  threatResponses:
+  - threatType: 3
+    threatStatus: 0
+  - threatType: 4
+    threatStatus: 3
+  threatEvolutions:
+  - threatType: 4
+    evolution: 3

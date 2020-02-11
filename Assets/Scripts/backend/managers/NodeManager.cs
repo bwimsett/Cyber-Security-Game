@@ -1,4 +1,5 @@
 using backend.level_serialization;
+using backend.threat_modelling;
 using UnityEngine;
 
 namespace DefaultNamespace{
@@ -11,6 +12,8 @@ namespace DefaultNamespace{
         public GameObject defaultNode;
 
         public NodeDefinition[] nodeDefinitions;
+
+        public Control_Dropdown_Option_Set[] optionSets;
         
         public Sprite GetNodeShapeSprite(NodeFamily family) {            
             switch (family) {
@@ -90,12 +93,25 @@ namespace DefaultNamespace{
                 case NodeType.Table:
                     behaviour = new NodeBehaviour_Table(node);
                     break;
+                case NodeType.Encryption:
+                    behaviour = new NodeBehaviour_ConnectionEncryption(node);
+                    break;
                 default:
                     behaviour = new NodeBehaviour(node);
                     break;
             }
             
             node.SetBehaviour(behaviour);
+        }
+
+        public Control_Dropdown_Option_Set GetControlOptionSet(ControlDropdownOptionSets setName) {
+            foreach (Control_Dropdown_Option_Set set in optionSets) {
+                if (set.setName == setName) {
+                    return set;
+                }
+            }
+
+            return null;
         }
         
     }

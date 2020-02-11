@@ -16,11 +16,20 @@ public class ControlSettingsWindow : Window {
     public ControlSettings_Dropdown dropdown_prefab;
     public ControlSettings_Text text_prefab;
 
+    public Vector2 positionOffset;
+    public RectTransform canvas;
+    
     private ControlSettings_Field[] fieldObjects;
     
     public void SetNode(Node node) {
         this.node = node;
         title.text = node.nodeObject.GetNodeDefinition().nodeName;
+
+        Vector3 canvasOffset = canvas.rect.size*0.5f;
+        Vector2 position = Camera.main.WorldToScreenPoint(node.nodeObject.gameObject.transform.position) - canvasOffset;
+
+        transform.localPosition = position+positionOffset;
+        
         GenerateFields();
     }
 
@@ -77,6 +86,10 @@ public class ControlSettingsWindow : Window {
         }
 
         fieldObjects = null;
+    }
+
+    public void Close() {
+        gameObject.SetActive(false);
     }
 
 }

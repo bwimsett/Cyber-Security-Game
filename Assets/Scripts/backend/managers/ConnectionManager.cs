@@ -17,7 +17,7 @@ namespace DefaultNamespace {
             Connection connection = Instantiate(connectionPrefab, GameManager.levelScene.transform)
                 .GetComponent<Connection>();
             
-            connection.SetEnds(start, end);
+            connection.SetEnds(start, end, false);
 
             connection.gameObject.name = "Connection " + connection;
 

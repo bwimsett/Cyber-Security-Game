@@ -1,4 +1,5 @@
 using System;
+using backend.threat_modelling;
 
 namespace DefaultNamespace.node {
     [Serializable]
@@ -12,7 +13,7 @@ namespace DefaultNamespace.node {
         private int minValue;
         private int maxValue;
 
-        private Type options;
+        private ControlDropdownOptionSets optionSet = ControlDropdownOptionSets.None;
 
         public NodeField(string fieldTitle, bool readOnly, object value) {
             this.fieldTitle = fieldTitle;
@@ -20,6 +21,13 @@ namespace DefaultNamespace.node {
             this.readOnly = readOnly;
             
             EstablishFieldType();
+        }
+        
+        public NodeField(string fieldTitle, string value) {
+            this.fieldTitle = fieldTitle;
+            this.value = value;
+            readOnly = true;
+            fieldType = NodeFieldType.text;
         }
         
         public NodeField(string fieldTitle, bool readOnly, int value, int minValue, int maxValue) {
@@ -32,11 +40,11 @@ namespace DefaultNamespace.node {
             fieldType = NodeFieldType.integer_range;
         }
 
-        public NodeField(string fieldTitle, int value, Type enumOptions) {
+        public NodeField(string fieldTitle, int value, ControlDropdownOptionSets optionSet) {
             this.fieldTitle = fieldTitle;
             this.value = value;
             readOnly = false;
-            options = enumOptions;
+            this.optionSet = optionSet;
 
             fieldType = NodeFieldType.enumerable;
         }
@@ -46,7 +54,7 @@ namespace DefaultNamespace.node {
                 fieldType = NodeFieldType.integer;
             }
 
-            if (value is int && options != null) {
+            if (value is int && optionSet != ControlDropdownOptionSets.None) {
                 fieldType = NodeFieldType.enumerable;
             }
 
@@ -83,8 +91,8 @@ namespace DefaultNamespace.node {
             this.value = value;
         }
 
-        public Type GetOptionsEnum() {
-            return options;
+        public Control_Dropdown_Option_Set GetOptionSet() {
+            return GameManager.levelScene.nodeManager.GetControlOptionSet(optionSet);
         }
 
     }

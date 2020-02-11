@@ -72,6 +72,12 @@ public class ConnectionCollider : MonoBehaviour {
         GameManager.levelScene.connectionManager.RemoveConnection(connection);
     }
 
+    void OnMouseUp() {
+        if (GameManager.currentLevel.IsEditMode()) {
+            connection.ToggleDuplex();
+        }
+    }
+    
     public Connection GetConnection() {
         return connection;
     }

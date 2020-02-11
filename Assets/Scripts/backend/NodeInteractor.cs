@@ -118,15 +118,15 @@ public class NodeInteractor : MonoBehaviour {
         }
 
         if (tempConnectionCreator) {
-            tempConnectionCreator.lineRenderer.enabled = true;
+            tempConnectionCreator.SetVisible(true);
         }
         
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
 
         tempConnectionCreator = startingConnection;
-        tempConnectionCreator.lineRenderer.enabled = false;
-        tempConnection1 = GameManager.levelScene.connectionManager.CreateAndAddConnection(thisNode, end1);
+        tempConnectionCreator.SetVisible(false);
+        tempConnection1 = GameManager.levelScene.connectionManager.CreateAndAddConnection(end1, thisNode);
         tempConnection2 = GameManager.levelScene.connectionManager.CreateAndAddConnection(thisNode, end2);
     }
 
@@ -150,7 +150,7 @@ public class NodeInteractor : MonoBehaviour {
         }
         
         //Remove connection
-        tempConnectionCreator.lineRenderer.enabled = true;
+        tempConnectionCreator.SetVisible(true);
         tempConnectionCreator = null;
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
@@ -161,11 +161,15 @@ public class NodeInteractor : MonoBehaviour {
     }
     
     public void RefreshConnections() {
+        if (!_nodeObject) {
+            return;
+        }
+        
         // Refresh connections
         Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(_nodeObject.GetNode()); 
         
         foreach (Connection c in connections) {
-            c.RefreshPosition();
+            c.Refresh();
         }
     }
 

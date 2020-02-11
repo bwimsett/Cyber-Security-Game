@@ -1,3 +1,4 @@
+using backend;
 using UnityEngine;
 
 namespace DefaultNamespace {
@@ -6,5 +7,6 @@ namespace DefaultNamespace {
         public NodeManager nodeManager;
         public GUIManager guiManager;
         public ThreatManager threatManager;
+        public AttackVisualiser attackVisualiser;
     }
 }

@@ -3,8 +3,9 @@ using backend;
 using UnityEngine;
 
 namespace DefaultNamespace {
-    public class ThreatManager : MonoBehaviour{
+    public class ThreatManager : MonoBehaviour {
 
+        
         private List<Threat> successfulThreats;
         private List<Threat> failedThreats;
         private List<Threat> propagatedThreats;
@@ -32,7 +33,7 @@ namespace DefaultNamespace {
 
         public Threat CreateThreat(ThreatType t, Threat parent, Node n) {
             activeThreatCount++;
-            Threat threat = new Threat(t, parent, n);
+            Threat threat = new Threat(t, parent, n, 100);
             return threat;
         }
 
@@ -69,6 +70,7 @@ namespace DefaultNamespace {
             
             if (total == activeThreatCount) {
                 PrintThreats(successfulThreats);
+                GameManager.levelScene.guiManager.AttackVisualiserDebugPanel.SetAttacks(successfulThreats.ToArray());
                 return true;
             }
 
@@ -77,7 +79,7 @@ namespace DefaultNamespace {
 
         private void PrintThreats(List<Threat> threats) {
             foreach (Threat t in threats) {
-                Debug.Log(t.GetTrace());
+                Debug.Log(t.GetStringTrace());
             }
         }
         

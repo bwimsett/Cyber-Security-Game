@@ -10,6 +10,7 @@ namespace DefaultNamespace {
         public string saveLevelCommand;
         public string loadLevelCommand;
         public string clearLevelCommand;
+        public string openAttackVisualiserCommand;
         
         public void ParseInput(string input) {
             string[] commandList = ExtractCommandList(input);
@@ -65,6 +66,11 @@ namespace DefaultNamespace {
             // Clear Level
             if (command.Contains(clearLevelCommand.ToLower())) {
                 GameManager.currentLevel.ClearLevel();
+            }
+            
+            // Attack visualiser debug panel
+            if (command.Contains(openAttackVisualiserCommand.ToLower())) {
+                GameManager.levelScene.guiManager.OpenAttackVisualiserDebug();
             }
         }
         

@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AttackVisualiserDebugPanel
     - Connection
     - ConnectionCollider
     - ControlSettingsWindow
@@ -21,9 +22,11 @@ ScriptsOnlyBuild:
     - NodeInteractor
     - NodeInteractor_Logical
     - NodeObject
+    - backend.AttackVisualiser
     - backend.MainMenuLoader
     - backend.level.LevelDescription
     - backend.level.LevelSet
+    - backend.threat_modelling.Control_Dropdown_Option_Set
     - gui.ControlDescriptionWindow
     - gui.control_settings.ControlSettings_Slider
     - gui.control_settings.ControlSettings_Text
@@ -170,15 +173,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10306}
     - Class: 114
-      Script: {instanceID: 10574}
+      Script: {instanceID: 10336}
     - Class: 114
-      Script: {instanceID: 10596}
+      Script: {instanceID: 10576}
     - Class: 114
-      Script: {instanceID: 10684}
+      Script: {instanceID: 10598}
     - Class: 114
-      Script: {instanceID: 10710}
+      Script: {instanceID: 10686}
     - Class: 114
-      Script: {instanceID: 10756}
+      Script: {instanceID: 10712}
+    - Class: 114
+      Script: {instanceID: 16638}
+    - Class: 114
+      Script: {instanceID: 27052}
+    - Class: 114
+      Script: {instanceID: 27124}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -267,11 +276,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10306}
     - Class: 114
-      Script: {instanceID: 10348}
+      Script: {instanceID: 10350}
     - Class: 114
-      Script: {instanceID: 10476}
+      Script: {instanceID: 10478}
     - Class: 114
-      Script: {instanceID: 10554}
+      Script: {instanceID: 10556}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -335,7 +344,7 @@ ScriptsOnlyBuild:
     className: ThreatManager
   - hash:
       serializedVersion: 2
-      Hash: 6c8b4eee182b998c8605f9424063ee76
+      Hash: 7d5720a5a2e08b459eff3ee4d3c80495
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
     className: GUIManager
@@ -365,7 +374,7 @@ ScriptsOnlyBuild:
     className: LevelGUIBackground
   - hash:
       serializedVersion: 2
-      Hash: 840020e376b9adef36caba3b81886c7a
+      Hash: f9253e1996b016564d3a183b03ec5a59
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
     className: LevelScene
@@ -827,7 +836,7 @@ ScriptsOnlyBuild:
     className: AnalyticsTracker
   - hash:
       serializedVersion: 2
-      Hash: 601dff70b7511b67a64871221e4f8b2d
+      Hash: e2ee39334f5dc7dd4d8fab7535f0b878
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
     className: NodeManager
@@ -863,7 +872,7 @@ ScriptsOnlyBuild:
     className: MainMenuLoader
   - hash:
       serializedVersion: 2
-      Hash: f6a35d5ccb22834893109ad375fcb869
+      Hash: 0451cf3a1c7cf37dbce5c3f33a973bfa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Connection
@@ -1025,6 +1034,12 @@ ScriptsOnlyBuild:
     className: DataPrivacyButton
   - hash:
       serializedVersion: 2
+      Hash: 1542ed605e6afaa97e5473a0dcaf3075
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: gui.control_settings
+    className: ControlSettings_Text
+  - hash:
+      serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1061,7 +1076,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 3f6e1a3ff364618c30273e952a6c31f3
+      Hash: 1fdc1b2e44b622cb7604d4c25cc04039
     assemblyName: Assembly-CSharp.dll
     namespaceName: DefaultNamespace
     className: CommandManager
@@ -1091,7 +1106,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 6a52da68271c705003473e32a579c97a
+      Hash: fd18afcc9e1925e48dddc1ae4545c92b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlSettingsWindow
@@ -1115,10 +1130,22 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 4e30b870c4222b912e60b4dd166e6b2c
+      Hash: cf6ea09812a83aca935703304e84fe00
     assemblyName: Assembly-CSharp.dll
-    namespaceName: gui.control_settings
-    className: ControlSettings_Text
+    namespaceName: backend.threat_modelling
+    className: Control_Dropdown_Option_Set
+  - hash:
+      serializedVersion: 2
+      Hash: 2ec1bf0be524485bedf3f1bf1a2e280a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: backend
+    className: AttackVisualiser
+  - hash:
+      serializedVersion: 2
+      Hash: 7f0840d455ec2dde554da79085436858
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AttackVisualiserDebugPanel
   platform: 19
   scenePathNames:
   - Assets/Scenes/Level Select.unity

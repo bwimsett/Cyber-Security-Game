@@ -8,6 +8,7 @@ namespace DefaultNamespace {
         public ControlDescriptionWindow controlDescriptionWindow;
         public TextMeshProUGUI budgetText;
         public ControlSettingsWindow controlSettingsWindow;
+        public AttackVisualiserDebugPanel AttackVisualiserDebugPanel;
 
         public Vector2 GetMousePosition() {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -35,7 +36,9 @@ namespace DefaultNamespace {
             controlSettingsWindow.gameObject.SetActive(false);
         }
 
-
+        public void OpenAttackVisualiserDebug() {
+            AttackVisualiserDebugPanel.gameObject.SetActive(true);
+        }
     }
     
 }

@@ -17,6 +17,7 @@ public class NodeObject : MonoBehaviour {
     
     private NodeDefinition nodeDefinition;
     private Node node;
+    private Color color;
 
     private Connection tempConnection;
 
@@ -37,9 +38,20 @@ public class NodeObject : MonoBehaviour {
     
     public void SetNodeDefinition(NodeDefinition nodeDefinition) {
         this.nodeDefinition = nodeDefinition;
+        color = nodeDefinition.nodeColor;
         Refresh();
     }
 
+    public void SetTempColor(Color color) {
+        this.color = color;
+        Refresh();
+    }
+
+    public void ResetColor() {
+        color = nodeDefinition.nodeColor;
+        Refresh();
+    }
+    
     public NodeDefinition GetNodeDefinition() {
         return nodeDefinition;
     }
@@ -50,7 +62,8 @@ public class NodeObject : MonoBehaviour {
 
     public void Refresh() {
         icon.sprite = nodeDefinition.nodeIcon;
-        outline.color = icon.color = nodeDefinition.nodeColor;
+        outline.color = icon.color = color;
+        nodeInteractor.RefreshConnections();
         outlineMask.sprite = outlineRenderer.sprite = centerRenderer.sprite =
             GameManager.levelScene.nodeManager.GetNodeShapeSprite(nodeDefinition.nodeFamily);
     }
@@ -97,6 +110,7 @@ public class NodeObject : MonoBehaviour {
         
         tempConnection.lineRenderer.SetPosition(1, GameManager.levelScene.guiManager.GetMousePosition());
         tempConnection.connectionCollider.Refresh();
+        tempConnection.RefreshChevron();
     }
 
     void OnMouseUp() {
@@ -116,6 +130,10 @@ public class NodeObject : MonoBehaviour {
     public void Destroy() {
         GameManager.currentLevel.nodes.Remove(node);
         Destroy(gameObject);
+    }
+
+    public Color GetCurrentColor() {
+        return color;
     }
 
 }
