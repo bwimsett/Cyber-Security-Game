@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f1edd7f81d6d674fa997bd43704027b, type: 3}
   m_Name: Input Sanitation
   m_EditorClassIdentifier: 
-  nodeName: Sanitation
+  nodeName: Sanitisation
   nodeCost: 2
   nodeFamily: 2
   nodeType: 3
@@ -20,7 +20,5 @@ MonoBehaviour:
   nodeIcon: {fileID: 21300000, guid: 6eb63fe12b88ed646a4235061304e34e, type: 3}
   description: {fileID: 4900000, guid: f1279215e929ef8498f201a48a8dd75d, type: 3}
   startingThreats: 
-  threatResponses:
-  - threatType: 0
-    threatStatus: 1
+  threatResponses: []
   threatEvolutions: []

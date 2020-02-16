@@ -60,8 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AttackOption.cs" />
+    <Compile Include="Assets\Control_Toggle.cs" />
     <Compile Include="Assets\LevelGUIBackground.cs" />
     <Compile Include="Assets\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\backend\CameraController.cs" />
     <Compile Include="Assets\Scripts\backend\ConnectionCollider.cs" />
     <Compile Include="Assets\Scripts\backend\enums\ControlDropdownOptionSets.cs" />
     <Compile Include="Assets\Scripts\backend\enums\Medal.cs" />
@@ -96,7 +98,9 @@
     <Compile Include="Assets\Scripts\backend\threat_modelling\Control_Dropdown_Option.cs" />
     <Compile Include="Assets\Scripts\backend\threat_modelling\Control_Dropdown_Option_Set.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour.cs" />
+    <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Captcha.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_ConnectionEncryption.cs" />
+    <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Sanitisation.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Table.cs" />
     <Compile Include="Assets\Scripts\game\Connection.cs" />
     <Compile Include="Assets\Scripts\game\Level.cs" />
@@ -110,6 +114,7 @@
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Field.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Slider.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Text.cs" />
+    <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Tickbox.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettingsWindow.cs" />
     <Compile Include="Assets\Scripts\gui\ControlDescriptionWindow.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu.cs" />

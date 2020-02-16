@@ -55,7 +55,8 @@ namespace DefaultNamespace{
         public NodeObject CreateNode(NodeSave nodeSave) {
             NodeObject result = CreateNode(nodeSave.nodeType, nodeSave.position.Vector2());
             result.GetNode().SetNodeID(nodeSave.id);
-            result.GetNode().GetBehaviour().SetFields(nodeSave.fields);
+            result.GetNode().GetBehaviour().SetFields(nodeSave);
+            result.GetNode().GetBehaviour().GetSelectedStartingThreats().SetOptionSet(result.GetNodeDefinition().GetStartingThreatsOptionSet());
             return result;
         }
 
@@ -96,12 +97,22 @@ namespace DefaultNamespace{
                 case NodeType.Encryption:
                     behaviour = new NodeBehaviour_ConnectionEncryption(node);
                     break;
+                case NodeType.Sanitisation:
+                    behaviour = new NodeBehaviour_Sanitisation(node);
+                    break;
+                case NodeType.CAPTCHA:
+                    behaviour = new NodeBehaviour_Captcha(node);
+                    break;
                 default:
                     behaviour = new NodeBehaviour(node);
                     break;
             }
             
             node.SetBehaviour(behaviour);
+
+            if (node.GetBehaviour().GetSelectedStartingThreats() == null) {
+                node.GetBehaviour().InitialiseStartingThreatSet();
+            }
         }
 
         public Control_Dropdown_Option_Set GetControlOptionSet(ControlDropdownOptionSets setName) {

@@ -10,6 +10,8 @@ namespace DefaultNamespace {
             
             fields[0] = new NodeField("Description", "Encrypts data sent along data connections");
             fields[1] = new NodeField("Encryption Type", 0, ControlDropdownOptionSets.Connection_Encryption_Types);
+            
+            base.InitialiseFields();
         }
 
         public override ThreatStatus Attack(Threat threat) {
@@ -18,11 +20,11 @@ namespace DefaultNamespace {
             Control_Dropdown_Option_Set encryptionTypes = fields[1].GetOptionSet();
             Control_Dropdown_Option chosenEncryption = encryptionTypes.options[(int)fields[1].GetValue()];
 
-            if (threatType == ThreatType.Interception) {
+            if (threatType == ThreatType.Interception_Data_Theft) {
                 int remainingHealth = chosenEncryption.health - threat.GetStrength();
 
                 if (remainingHealth <= 0) {
-                    return ThreatStatus.Evolve;
+                    return ThreatStatus.Propagate;
                 }
 
                 return ThreatStatus.Failure;

@@ -13,7 +13,9 @@ namespace DefaultNamespace.node {
         private int minValue;
         private int maxValue;
 
-        private ControlDropdownOptionSets optionSet = ControlDropdownOptionSets.None;
+        private ControlDropdownOptionSets optionSetName = ControlDropdownOptionSets.None;
+        [NonSerialized]
+        private Control_Dropdown_Option_Set optionSet;
 
         public NodeField(string fieldTitle, bool readOnly, object value) {
             this.fieldTitle = fieldTitle;
@@ -40,22 +42,33 @@ namespace DefaultNamespace.node {
             fieldType = NodeFieldType.integer_range;
         }
 
-        public NodeField(string fieldTitle, int value, ControlDropdownOptionSets optionSet) {
+        public NodeField(string fieldTitle, int value, ControlDropdownOptionSets optionSetName) {
             this.fieldTitle = fieldTitle;
             this.value = value;
             readOnly = false;
+            this.optionSetName = optionSetName;
+            fieldType = NodeFieldType.enumerable_single;
+        }
+        
+        public NodeField(string fieldTitle, ControlDropdownOptionSets optionSetName) {
+            this.fieldTitle = fieldTitle;
+            value = new char[GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName).options.Length];
+            readOnly = false;
+            this.optionSetName = optionSetName;
+            fieldType = NodeFieldType.enumerable_many;
+        }
+        
+        public NodeField(string fieldTitle, Control_Dropdown_Option_Set optionSet) {
+            this.fieldTitle = fieldTitle;
+            value = new char[optionSet.options.Length];
+            readOnly = false;
             this.optionSet = optionSet;
-
-            fieldType = NodeFieldType.enumerable;
+            fieldType = NodeFieldType.enumerable_many;
         }
         
         private void EstablishFieldType() {            
             if (value is int) {
                 fieldType = NodeFieldType.integer;
-            }
-
-            if (value is int && optionSet != ControlDropdownOptionSets.None) {
-                fieldType = NodeFieldType.enumerable;
             }
 
             if (value is string) {
@@ -91,8 +104,16 @@ namespace DefaultNamespace.node {
             this.value = value;
         }
 
+        public void SetOptionSet(Control_Dropdown_Option_Set optionSet) {
+            this.optionSet = optionSet;
+        }
+        
         public Control_Dropdown_Option_Set GetOptionSet() {
-            return GameManager.levelScene.nodeManager.GetControlOptionSet(optionSet);
+            if (optionSetName != ControlDropdownOptionSets.None) {
+                return GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName);
+            }
+   
+            return optionSet;
         }
 
     }

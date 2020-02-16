@@ -4549,6 +4549,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 07f759ea29189a248ad864776034baf5, type: 2}
   optionSets:
   - {fileID: 11400000, guid: 02ce71964fffb4044ad717e60bd6413c, type: 2}
+  - {fileID: 11400000, guid: 30cb638d9d48b9645becb1edc631e812, type: 2}
+  - {fileID: 11400000, guid: 49117d62edaa26b4c95bc2f2d4cac51a, type: 2}
 --- !u!114 &1680074018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5307,6 +5309,7 @@ GameObject:
   - component: {fileID: 1866758884}
   - component: {fileID: 1866758883}
   - component: {fileID: 1866758882}
+  - component: {fileID: 1866758885}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5380,6 +5383,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1866758885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866758881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1b8e01f948411386b5ad68f68d98e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1866758883}
+  cameraSizePerPixel: 0.03
 --- !u!224 &1975643340 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2684508435878552468, guid: 1dd60c3d91a455a4595943fec2e6e678,
@@ -6729,7 +6746,7 @@ PrefabInstance:
     - target: {fileID: 6916502908039495263, guid: 1dd60c3d91a455a4595943fec2e6e678,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6916502908039495263, guid: 1dd60c3d91a455a4595943fec2e6e678,
         type: 3}
@@ -6768,6 +6785,12 @@ PrefabInstance:
       propertyPath: positionOffset.x
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 6294465921227415302, guid: 1dd60c3d91a455a4595943fec2e6e678,
+        type: 3}
+      propertyPath: tickbox_prefab
+      value: 
+      objectReference: {fileID: 6352641068029021857, guid: e9aa420c79840cf4292913e462f6847a,
+        type: 3}
     - target: {fileID: 933891823456882674, guid: 1dd60c3d91a455a4595943fec2e6e678,
         type: 3}
       propertyPath: m_LocalPosition.x

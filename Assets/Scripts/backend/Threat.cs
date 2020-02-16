@@ -18,12 +18,13 @@ namespace backend {
             this.strength = strength;
 
             //GameManager.levelScene.threatManager.ThreatDebugLog(threatType+" appeared at "+node);
-            
+           
             Run();
         }
 
         private void Run() {
             ThreatStatus status = node.Attack(this);
+            ThreatStatus newStatus = status;
             
             switch (status) {
                 case ThreatStatus.Success:
@@ -31,11 +32,15 @@ namespace backend {
                     break;
                 case ThreatStatus.Evolve: node.EvolveThreat(this);
                     break;
-                case ThreatStatus.Success_On_Propagation: status = SucceedOnPropagation();
+                case ThreatStatus.Success_On_Propagation: newStatus = SucceedOnPropagation();
                     break;
             }
+
+            if (newStatus == ThreatStatus.Propagate && status == ThreatStatus.Success_On_Propagation) {
+                Propagate(status);
+            }
             
-            GameManager.levelScene.threatManager.SetThreatStatus(this, status);
+            GameManager.levelScene.threatManager.SetThreatStatus(this, newStatus);
         }
 
         private void Propagate(ThreatStatus status) {
@@ -62,21 +67,18 @@ namespace backend {
 
             Threat currentThreat = this;
             
+            // Go to the origin node
             do {
-                currentThreat = parentThreat;
+                if (currentThreat.parentThreat == null) {
+                    break;
+                }
+                
+                currentThreat = currentThreat.parentThreat;
 
                 if (currentThreat == null) {
                     break;
                 }
                 
-                // If the evolution step has been found
-                if (currentThreat.threatType == threatType && currentThreat.status == ThreatStatus.Evolve) {
-                    // If the evolution occurred at the same node
-                    if (currentThreat.node == node) {
-                        return ThreatStatus.Propagate;
-                    }
-                }
-
             } while (currentThreat.parentThreat != null);
 
             if (currentThreat.node == node) {

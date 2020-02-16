@@ -2,7 +2,8 @@ namespace DefaultNamespace {
     public enum NodeFieldType {
         integer,
         integer_range,
-        enumerable,
-        text
+        enumerable_single,
+        enumerable_many,
+        text,
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using backend;
+using DefaultNamespace.node;
 using UnityEngine;
 
 namespace DefaultNamespace {
@@ -24,8 +25,19 @@ namespace DefaultNamespace {
 
             foreach (Node n in nodes) {
                 NodeDefinition nodeDef = n.nodeObject.GetNodeDefinition();
+                NodeField startingThreats = n.GetBehaviour().GetSelectedStartingThreats();
 
-                foreach (ThreatType t in nodeDef.startingThreats) {
+                for (int i = 0; i < nodeDef.startingThreats.Length; i++) {
+
+                    char[] bitmask = (char[])startingThreats.GetValue();
+                    bool threatIsChosen = bitmask[i] == '1';
+
+                    if (!threatIsChosen) {
+                        continue;
+                    }
+
+                    ThreatType t = nodeDef.startingThreats[i];
+                    
                     CreateThreat(t, null, n);
                 }
             }

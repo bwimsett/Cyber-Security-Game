@@ -12,6 +12,7 @@ namespace backend.level_serialization {
         public int[] connectedNodes;
         public int id;
         public NodeField[] fields;
+        public NodeField selectedStartingThreats;
 
         public NodeSave(NodeObject nodeObject) {
             nodeFamily = nodeObject.GetNodeDefinition().nodeFamily;
@@ -20,6 +21,7 @@ namespace backend.level_serialization {
             connectedNodes = ParseConnectedNodes(nodeObject.GetNode().GetConnectedNodes());
             fields = nodeObject.GetNode().GetBehaviour().GetFields();
             id = nodeObject.GetNode().GetNodeID();
+            selectedStartingThreats = nodeObject.GetNode().GetBehaviour().GetSelectedStartingThreats();
         }
 
         private int[] ParseConnectedNodes(Node[] nodes) {

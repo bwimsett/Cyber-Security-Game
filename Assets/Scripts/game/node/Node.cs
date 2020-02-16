@@ -18,7 +18,6 @@ public class Node {
         
         // Set default behaviour
         behaviour = new NodeBehaviour(this);
-
     }
 
     public void AddConnection(NodeObject nodeObject) {

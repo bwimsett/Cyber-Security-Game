@@ -1,6 +1,8 @@
-using System;
 using backend;
+using backend.level_serialization;
+using backend.threat_modelling;
 using DefaultNamespace.node;
+using UnityEngine;
 
 /*
  * Classes implementing this interface are where the Attack() method is defined for each node type.
@@ -12,8 +14,9 @@ using DefaultNamespace.node;
 namespace DefaultNamespace {
     public class NodeBehaviour {
 
-        private Node node;
+        protected Node node;
         protected NodeField[] fields;
+        protected NodeField selectedStartingThreats;
         
         public NodeBehaviour(Node node) {
             this.node = node;
@@ -22,6 +25,11 @@ namespace DefaultNamespace {
 
         protected virtual void InitialiseFields() {
             
+        }
+        
+        public void InitialiseStartingThreatSet() {
+            Control_Dropdown_Option_Set optionSet = node.nodeObject.GetNodeDefinition().GetStartingThreatsOptionSet();
+            selectedStartingThreats = new NodeField("Starting Threats", optionSet);
         }
         
         public virtual ThreatStatus Attack(Threat threat) {
@@ -40,16 +48,22 @@ namespace DefaultNamespace {
             return node.GetThreatEffect(threat);
         }
 
-        public virtual NodeField[] GetFields() {
+        public NodeField[] GetFields() {
             return fields;
         }
-
-        public virtual void SetModifiableFields(NodeField[] values) {
-
+        
+        public void SetFields(NodeSave nodeSave) {
+            fields = nodeSave.fields;
+            selectedStartingThreats = nodeSave.selectedStartingThreats;
         }
 
-        public void SetFields(NodeField[] fields) {
-            this.fields = fields;
+        public virtual int GetTotalHealth() {
+            Debug.Log("GetTotalHealth method not implemented");
+            return 0;
+        }
+
+        public NodeField GetSelectedStartingThreats() {
+            return selectedStartingThreats;
         }
 
     }

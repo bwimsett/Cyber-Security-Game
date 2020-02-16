@@ -4,6 +4,10 @@ namespace DefaultNamespace {
         Data_Corruption,
         Data_Manipulation,
         Interception_Data_Theft,
-        Interception,
+        SQL_Injection_Form,
+        SQL_Injection_Cookie,
+        SQL_Injection_URL,
+        Spam_Email,
+        Spam_Accounts,
     }
 }

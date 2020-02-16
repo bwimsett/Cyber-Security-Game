@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using backend.threat_modelling;
 using DefaultNamespace;
 using DefaultNamespace.node;
 using gui;
@@ -15,11 +16,13 @@ public class ControlSettingsWindow : Window {
     public ControlSettings_Slider slider_prefab;
     public ControlSettings_Dropdown dropdown_prefab;
     public ControlSettings_Text text_prefab;
+    public ControlSettings_Tickbox tickbox_prefab;
 
     public Vector2 positionOffset;
     public RectTransform canvas;
     
     private ControlSettings_Field[] fieldObjects;
+    private ControlSettings_Field startingThreatsField;
     
     public void SetNode(Node node) {
         this.node = node;
@@ -39,21 +42,24 @@ public class ControlSettingsWindow : Window {
         
         NodeBehaviour behaviour = node.GetBehaviour();
         NodeField[] fields  = behaviour.GetFields();
+        List<ControlSettings_Field> fieldList = new List<ControlSettings_Field>();
 
         if (fields == null) {
+            GenerateLevelBuilderFields(fieldList);
+            fieldObjects = fieldList.ToArray();
             return;
         }
-        
-        fieldObjects = new ControlSettings_Field[fields.Length];
 
-        for (int i = 0; i < fields.Length; i++) {
-            NodeField f = fields[i];
-            fieldObjects[i] = GetFieldFromFieldType(f);
+        foreach (NodeField f in fields) {
+            fieldList.Add(GetFieldFromFieldType(f));
         }
-        
+
         settingContainerTransform.ForceUpdateRectTransforms();
         LayoutRebuilder.ForceRebuildLayoutImmediate(settingContainerTransform);
-
+        
+        GenerateLevelBuilderFields(fieldList);
+        
+        fieldObjects = fieldList.ToArray();
     }
 
     // Instantiates a field object and attaches it to the interface, based on the given fieldType
@@ -63,9 +69,11 @@ public class ControlSettingsWindow : Window {
         switch (nodeField.GetFieldType()) {
             case NodeFieldType.integer_range: prefab = slider_prefab.gameObject;
                 break;
-            case NodeFieldType.enumerable: prefab = dropdown_prefab.gameObject;
+            case NodeFieldType.enumerable_single: prefab = dropdown_prefab.gameObject;
                 break;
             case NodeFieldType.text: prefab = text_prefab.gameObject;
+                break;
+            case NodeFieldType.enumerable_many: prefab = tickbox_prefab.gameObject;
                 break;
         }
 
@@ -84,10 +92,22 @@ public class ControlSettingsWindow : Window {
         foreach (ControlSettings_Field f in fieldObjects) {
             Destroy(f.gameObject);
         }
+        
+        Destroy(startingThreatsField.gameObject);
 
         fieldObjects = null;
     }
 
+    private void GenerateLevelBuilderFields(List<ControlSettings_Field> fieldList) {
+        startingThreatsField = GetFieldFromFieldType(node.GetBehaviour().GetSelectedStartingThreats());
+        
+        if (!GameManager.currentLevel.IsEditMode()) {
+            startingThreatsField.gameObject.SetActive(false);
+        }
+        
+        fieldList.Add(startingThreatsField);
+    }
+    
     public void Close() {
         gameObject.SetActive(false);
     }
