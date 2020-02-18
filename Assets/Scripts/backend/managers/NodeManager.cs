@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using backend.level_serialization;
 using backend.threat_modelling;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace DefaultNamespace{
         public NodeDefinition[] nodeDefinitions;
 
         public Control_Dropdown_Option_Set[] optionSets;
+
+        public int maxNodes = 256;
         
         public Sprite GetNodeShapeSprite(NodeFamily family) {            
             switch (family) {
@@ -31,6 +34,11 @@ namespace DefaultNamespace{
         }
 
         public NodeObject CreateNode(NodeType nodeType, Vector2 position) {
+            if (GameManager.currentLevel.nodes.Count >= maxNodes) {
+                Debug.Log("Maximum nodes reached.");
+                return null;
+            }
+            
             NodeDefinition nodeDefinition = GetNodeScriptable(nodeType);
             
             if (!nodeDefinition) {
@@ -48,7 +56,10 @@ namespace DefaultNamespace{
 
         public NodeObject CreateNode(NodeType nodeType, Vector2 position, int ID) {
             NodeObject result = CreateNode(nodeType, position);
-            result.GetNode().SetNodeID(ID);
+            if (result) {
+                result.GetNode().SetNodeID(ID);
+            }
+
             return result;
         }
         
@@ -103,6 +114,9 @@ namespace DefaultNamespace{
                 case NodeType.CAPTCHA:
                     behaviour = new NodeBehaviour_Captcha(node);
                     break;
+                case NodeType.Antivirus:
+                    behaviour = new NodeBehaviour_Antivirus(node);
+                    break;
                 default:
                     behaviour = new NodeBehaviour(node);
                     break;
@@ -123,6 +137,28 @@ namespace DefaultNamespace{
             }
 
             return null;
+        }
+
+        public Vector4[] GetNodeScreenPositionsForShader() {
+            
+            
+            List<Node> nodes = GameManager.currentLevel.nodes;
+            Vector4[] vectorArray = new Vector4[maxNodes];
+            
+            for (int i = 0; i < nodes.Count; i++) {
+                // Get node position
+                Vector3 nodePos = Camera.main.WorldToScreenPoint(nodes[i].nodeObject.transform.position);
+                nodePos.y = Camera.main.pixelHeight - nodePos.y;
+                // Normalise to clip space (-1,1)
+                //nodePos = new Vector3(nodePos.x/Camera.main.pixelWidth*2-1, nodePos.y/Camera.main.pixelHeight*2-1);
+                
+                //Debug.Log(nodePos.x+" "+nodePos.y);
+                vectorArray[i] = new Vector4(nodePos.x, nodePos.y, 0, 0);
+            }
+
+            //Debug.Log("Vector positions output: "+vectorArray.Length);
+
+            return vectorArray;
         }
         
     }

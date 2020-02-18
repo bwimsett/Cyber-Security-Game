@@ -3,6 +3,9 @@ namespace DefaultNamespace {
         None,
         Connection_Encryption_Types,
         Sanitisation_Options,
-        Captcha_Types
+        Captcha_Types,
+        Antivirus_FileTypes,
+        Antivirus_ScanFrequency,
+        Antivirus_BlockMedia
     }
 }

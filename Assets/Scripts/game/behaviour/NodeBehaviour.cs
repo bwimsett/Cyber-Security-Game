@@ -1,3 +1,4 @@
+using System;
 using backend;
 using backend.level_serialization;
 using backend.threat_modelling;
@@ -57,9 +58,33 @@ namespace DefaultNamespace {
             selectedStartingThreats = nodeSave.selectedStartingThreats;
         }
 
-        public virtual int GetTotalHealth() {
-            Debug.Log("GetTotalHealth method not implemented");
-            return 0;
+        public int GetTotalHealth() {
+            int totalHealth = 0;
+            
+            foreach (NodeField f in fields) {
+                NodeFieldType fieldType = f.GetFieldType();
+                
+                // Health from dropdowns
+                if (fieldType == NodeFieldType.enumerable_single) {
+                    totalHealth += f.GetOptionSet().options[(int) f.GetValue()].health;
+                    continue;
+                }
+
+                // Health from tickboxes
+                if (fieldType == NodeFieldType.enumerable_many) {
+                    char[] bitmask = (char[]) f.GetValue();
+
+                    for(int i = 0; i < bitmask.Length; i++) {
+                        // Multiplies health of that option with the bitmask value of 1 or 0
+                        int bitValue = Int32.Parse(""+bitmask[i]);
+                        totalHealth += f.GetOptionSet().options[i].health * bitValue;
+                    }
+                }
+
+                continue;
+            }
+
+            return totalHealth;
         }
 
         public NodeField GetSelectedStartingThreats() {

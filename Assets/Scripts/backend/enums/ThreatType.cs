@@ -9,5 +9,11 @@ namespace DefaultNamespace {
         SQL_Injection_URL,
         Spam_Email,
         Spam_Accounts,
+        Virus_Trojan,
+        Virus_Ransomware,
+        Virus_Worm,
+        Data_Theft,
+        Privilege_Escalation,
+        Ransom,
     }
 }

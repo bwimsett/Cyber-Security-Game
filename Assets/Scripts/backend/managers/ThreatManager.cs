@@ -28,7 +28,8 @@ namespace DefaultNamespace {
                 NodeField startingThreats = n.GetBehaviour().GetSelectedStartingThreats();
 
                 for (int i = 0; i < nodeDef.startingThreats.Length; i++) {
-
+                    
+                    // Only simulate threats that have been chosen for the level
                     char[] bitmask = (char[])startingThreats.GetValue();
                     bool threatIsChosen = bitmask[i] == '1';
 

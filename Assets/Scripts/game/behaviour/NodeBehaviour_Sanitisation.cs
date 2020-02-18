@@ -44,26 +44,6 @@ namespace DefaultNamespace {
             
             return base.Attack(threat);
         }
-
-        public override int GetTotalHealth() {
-            int total = 0;
-            char[] bitmask = (char[])fields[1].GetValue();
-
-            Control_Dropdown_Option_Set optionSet =
-                GameManager.levelScene.nodeManager.GetControlOptionSet(ControlDropdownOptionSets.Sanitisation_Options);
-            
-            for(int i = 0; i < bitmask.Length; i++) {
-                char c = bitmask[i];
-                
-                if (c != '1') {
-                    continue;
-                }
-
-                total += optionSet.options[i].health;
-            }
-
-            return total;
-        }
         
     }
 }

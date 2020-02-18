@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using backend;
 using UnityEngine;
 
 namespace DefaultNamespace {
@@ -11,6 +12,7 @@ namespace DefaultNamespace {
         public string loadLevelCommand;
         public string clearLevelCommand;
         public string openAttackVisualiserCommand;
+        public string zoneShaderCommand;
         
         public void ParseInput(string input) {
             string[] commandList = ExtractCommandList(input);
@@ -71,6 +73,11 @@ namespace DefaultNamespace {
             // Attack visualiser debug panel
             if (command.Contains(openAttackVisualiserCommand.ToLower())) {
                 GameManager.levelScene.guiManager.OpenAttackVisualiserDebug();
+            }
+            
+            if (command.Contains(zoneShaderCommand.ToLower())) {
+                Camera.main.GetComponent<CameraController>().useZoneShader =
+                    GetBoolFromValue(GetValueFromCommand(command));
             }
         }
         
