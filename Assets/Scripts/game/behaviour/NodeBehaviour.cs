@@ -18,6 +18,7 @@ namespace DefaultNamespace {
         protected Node node;
         protected NodeField[] fields;
         protected NodeField selectedStartingThreats;
+        protected int startingHealth;
         
         public NodeBehaviour(Node node) {
             this.node = node;
@@ -33,8 +34,10 @@ namespace DefaultNamespace {
             selectedStartingThreats = new NodeField("Starting Threats", optionSet);
         }
         
-        public virtual ThreatStatus Attack(Threat threat) {
+        public virtual ThreatStatus Attack(Threat threat) {       
             Node[] connectedNodes = node.GetConnectedNodes();
+            
+            threat.SetNodeHealth(startingHealth);
             
             // Check if any of the logical nodes connected are effective against the threat
             foreach (Node n in connectedNodes) {

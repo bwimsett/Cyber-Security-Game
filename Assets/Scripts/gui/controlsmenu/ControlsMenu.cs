@@ -22,7 +22,18 @@ public class ControlsMenu : MonoBehaviour {
         NodeDefinition[] nodeDefinitions = GameManager.levelScene.nodeManager.nodeDefinitions;
         options = new ControlsMenu_Option[nodeDefinitions.Length];
 
+        bool editMode = GameManager.currentLevel.IsEditMode();
+        
         for (int i = 0; i < nodeDefinitions.Length; i++) {
+
+            NodeDefinition n = nodeDefinitions[i];
+
+            bool isControl = n.nodeFamily != NodeFamily.Base;
+
+            if (!editMode && !isControl) {
+                continue;
+            }
+            
             options[i] = Instantiate(optionPrefab, optionsContainer).GetComponent<ControlsMenu_Option>();
             options[i].SetNode(nodeDefinitions[i]);
         }
@@ -30,7 +41,9 @@ public class ControlsMenu : MonoBehaviour {
 
     public void ClearOptions() {
         foreach (ControlsMenu_Option option in options) {
-            Destroy(option.gameObject);
+            if (option) {
+                Destroy(option.gameObject);
+            }
         }
     }
 

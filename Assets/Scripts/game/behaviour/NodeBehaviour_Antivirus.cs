@@ -36,6 +36,8 @@ namespace DefaultNamespace {
                 return ThreatStatus.Failure;
             }
             
+            threat.SetNodeHealth(remainingHealth);
+            
             return base.Attack(threat);
         }
 

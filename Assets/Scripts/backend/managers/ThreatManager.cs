@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using backend;
+using backend.level;
 using DefaultNamespace.node;
 using UnityEngine;
 
@@ -84,6 +85,9 @@ namespace DefaultNamespace {
             if (total == activeThreatCount) {
                 PrintThreats(successfulThreats);
                 GameManager.levelScene.guiManager.AttackVisualiserDebugPanel.SetAttacks(successfulThreats.ToArray());
+                LevelScore score = new LevelScore(failedThreats.ToArray());
+                GameManager.levelScene.guiManager.levelSummaryWindow.SetScore(score);
+                Debug.Log(score);
                 return true;
             }
 

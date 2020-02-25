@@ -9,7 +9,13 @@ namespace DefaultNamespace {
         public TextMeshProUGUI budgetText;
         public ControlSettingsWindow controlSettingsWindow;
         public AttackVisualiserDebugPanel AttackVisualiserDebugPanel;
+        public ControlsMenu controlsMenu;
+        public LevelSummaryWindow levelSummaryWindow;
 
+        void Start() {
+            RefreshBudget();
+        }
+        
         public Vector2 GetMousePosition() {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             return mousePos;

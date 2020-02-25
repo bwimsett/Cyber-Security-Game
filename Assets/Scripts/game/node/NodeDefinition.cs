@@ -36,4 +36,18 @@ public class NodeDefinition : ScriptableObject
 
         return optionSet;
     }
+
+    public override bool Equals(object other) {
+        if (!(other is NodeDefinition)) {
+            return false;
+        }
+
+        NodeDefinition nd = (NodeDefinition) other;
+
+        if (nd.nodeFamily == nodeFamily && nd.nodeType == nodeType) {
+            return true;
+        }
+
+        return false;
+    }
 }

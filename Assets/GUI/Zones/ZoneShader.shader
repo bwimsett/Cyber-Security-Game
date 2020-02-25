@@ -4,9 +4,12 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         //_ZoneThreshold("ZoneThreshold", Float) = 0.5
-        _InColor ("InColor", Color) = (0,0,0,0)
-        _BlobRadius("BlobRadius", float) = 1000
-        _BlobThreshold("BlobThreshold", int) = 500
+        _BlobColour ("BlobColour", Color) = (0,0,0,0)
+        _OutlineColour ("OutlineColour", Color) = (0,0,0,0)
+        _BlobRadius ("BlobRadius", float) = 1000
+        _BlobThreshold ("BlobThreshold", int) = 500
+        _OutlineThreshold ("OutlineThreshold", int) = 20
+        _OutlineOn("OutlineOn", int) = 0
     }
     SubShader
     {
@@ -45,9 +48,12 @@
             sampler2D _MainTex;
             uniform int _NodeCount;
             uniform float4 _NodePositions[256];
-            float4 _InColor;
             float _BlobRadius;
             int _BlobThreshold;
+            float4 _BlobColour;
+            float4 _OutlineColour;
+            int _OutlineThreshold;
+            int _OutlineOn;
             
             fixed4 frag (v2f i) : SV_Target
             {
@@ -57,7 +63,7 @@
                 
                 float pixelHeat = 0; // A value of how close a pixel is to any number of nodes
                 
-                for(int pos = 0; pos < 256; pos++){
+                for(int pos = 0; pos < _NodeCount; pos++){
                     float2 objectPos = _NodePositions[pos].xy;
                     float distanceToNode = distance(screenPos, objectPos);
                     
@@ -76,11 +82,15 @@
                     }
                 }
                 
-                pixelHeat = min(_BlobRadius, pixelHeat);
+                //pixelHeat = min(_BlobRadius, pixelHeat);
                 float shade = _BlobRadius/pixelHeat;
                 
                 if(pixelHeat > _BlobThreshold) {
-                    col.r = shade;
+                    col = _BlobColour;
+                }
+                
+                if(pixelHeat > _OutlineThreshold && pixelHeat < _BlobThreshold && _OutlineOn == 1){
+                    col = _OutlineColour;
                 }
 
                 

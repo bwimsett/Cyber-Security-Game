@@ -8,5 +8,6 @@ namespace DefaultNamespace {
         public GUIManager guiManager;
         public ThreatManager threatManager;
         public AttackVisualiser attackVisualiser;
+        public LevelGrid grid;
     }
 }

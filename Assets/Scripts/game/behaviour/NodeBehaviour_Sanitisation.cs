@@ -37,6 +37,8 @@ namespace DefaultNamespace {
                     break; 
             }
 
+            threat.SetNodeHealth(totalHealth);
+            
             if (totalHealth >=  0 && threat.threatType == ThreatType.SQL_Injection) {
                 return ThreatStatus.Failure;
             }

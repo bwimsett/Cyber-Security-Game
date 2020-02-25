@@ -10,6 +10,7 @@ namespace backend {
         private Node node;
         private ThreatStatus status;
         private int strength;
+        private int nodeHealth;
         
         public Threat(ThreatType threatType, Threat parentThreat, Node node, int strength) {
             this.threatType = threatType;
@@ -140,8 +141,16 @@ namespace backend {
             return strength;
         }
 
+        public void ReduceStrength(int amount) {
+            strength -= amount;
+        }
+
         public Node GetNode() {
             return node;
+        }
+
+        public void SetNodeHealth(int nodeHealth) {
+            this.nodeHealth = nodeHealth;
         }
     }
 }

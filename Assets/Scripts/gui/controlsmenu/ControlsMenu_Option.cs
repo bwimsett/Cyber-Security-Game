@@ -37,6 +37,10 @@ public class ControlsMenu_Option : MonoBehaviour {
     }
 
     void OnMouseDown() {
+        if (GameManager.currentLevel.GetBudget() < node.nodeCost) {
+            return;
+        }
+        
         int nodeId = GameManager.currentLevel.GetNewNodeID();
         _clonedNodeObject = GameManager.levelScene.nodeManager.CreateNode(node.nodeType, GameManager.levelScene.guiManager.GetMousePosition(), nodeId);
     }
@@ -54,6 +58,14 @@ public class ControlsMenu_Option : MonoBehaviour {
     void OnMouseUp() {
         if (_clonedNodeObject) {
             _clonedNodeObject.nodeInteractor.OnMouseUp();
+            // Purchase
+            bool success = GameManager.currentLevel.PurchaseForAmount(_clonedNodeObject.GetNodeDefinition().nodeCost);
+            // Destroy node if not enough budget (this shouldn't be executed, but is a secondary check)
+            if (!success) {
+                Destroy(_clonedNodeObject.gameObject);
+            }
+
+            _clonedNodeObject = null;
         }
     }
 }

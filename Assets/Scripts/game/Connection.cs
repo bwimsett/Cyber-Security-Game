@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -14,6 +15,10 @@ public class Connection : MonoBehaviour {
     public ConnectionCollider connectionCollider;
     public Sprite duplexChevron;
     public Sprite simplexChevron;
+    
+    void Start(){
+        RefreshChevron();
+    }
     
     // True if data flows in both directions for this connection
     private bool duplex;
@@ -169,6 +174,15 @@ public class Connection : MonoBehaviour {
         RefreshChevron();
     }
 
+    public void SetDuplex(bool value) {
+        duplex = value;
+        RefreshChevron();
+    }
+
+    public bool IsDuplex() {
+        return duplex;
+    }
+    
     // Check whether data can flow from the start to the end along this connection.
     public bool FlowDirectionValid(Node start, Node end) {
         bool forward = (this.start == start && this.end == end);

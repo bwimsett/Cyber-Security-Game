@@ -8,7 +8,6 @@ namespace DefaultNamespace{
         public Sprite baseNodeShape;
         public Sprite logicalNodeShape;
         public Sprite connectionNodeShape;
-        public Sprite tableNodeShape;
 
         public GameObject defaultNode;
 
@@ -22,8 +21,6 @@ namespace DefaultNamespace{
             switch (family) {
                 case NodeFamily.Base:
                     return baseNodeShape;
-                case NodeFamily.Table:
-                    return tableNodeShape;
                 case NodeFamily.Logical:
                     return logicalNodeShape;
                 case NodeFamily.Connection:
@@ -148,7 +145,7 @@ namespace DefaultNamespace{
             for (int i = 0; i < nodes.Count; i++) {
                 // Get node position
                 Vector3 nodePos = Camera.main.WorldToScreenPoint(nodes[i].nodeObject.transform.position);
-                nodePos.y = Camera.main.pixelHeight - nodePos.y;
+                nodePos.y = /*Camera.main.pixelHeight - */nodePos.y;
                 // Normalise to clip space (-1,1)
                 //nodePos = new Vector3(nodePos.x/Camera.main.pixelWidth*2-1, nodePos.y/Camera.main.pixelHeight*2-1);
                 

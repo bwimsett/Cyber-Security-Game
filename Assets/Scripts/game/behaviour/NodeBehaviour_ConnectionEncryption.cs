@@ -22,6 +22,8 @@ namespace DefaultNamespace {
 
             if (threatType == ThreatType.Interception_Data_Theft) {
                 int remainingHealth = chosenEncryption.health - threat.GetStrength();
+                
+                threat.SetNodeHealth(remainingHealth);
 
                 if (remainingHealth <= 0) {
                     return ThreatStatus.Propagate;

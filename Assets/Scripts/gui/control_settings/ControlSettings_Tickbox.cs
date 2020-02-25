@@ -45,7 +45,7 @@ public class ControlSettings_Tickbox : ControlSettings_Field {
         
         nodeField.SetValue(bitmask);
 
-        Debug.Log("Bitmask updated: " + GetBitmaskString());
+        //Debug.Log("Bitmask updated: " + GetBitmaskString());
     }
 
     private void SetValue() {

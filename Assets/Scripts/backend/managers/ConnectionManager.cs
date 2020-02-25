@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using backend.level_serialization;
 using UnityEngine;
 
 namespace DefaultNamespace {
@@ -114,7 +115,15 @@ namespace DefaultNamespace {
             }
         }
 
+        public void CreateConnectionFromSave(ConnectionSave s) {
+            Node start = GameManager.levelScene.nodeManager.GetNodeByID(s.startNode);
+            Node end = GameManager.levelScene.nodeManager.GetNodeByID(s.endNode);
 
+            Connection connection = CreateAndAddConnection(start, end);
+            
+            connection.SetDuplex(s.duplex);
+        }
+        
         public Connection[] GetConnections() {
             if (connections == null) {
                 connections = new List<Connection>();

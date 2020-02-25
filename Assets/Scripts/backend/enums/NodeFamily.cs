@@ -3,6 +3,5 @@ namespace DefaultNamespace {
         Base,
         Logical,
         Connection,
-        Table
     }
 }

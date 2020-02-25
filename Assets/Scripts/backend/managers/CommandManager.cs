@@ -13,6 +13,10 @@ namespace DefaultNamespace {
         public string clearLevelCommand;
         public string openAttackVisualiserCommand;
         public string zoneShaderCommand;
+        public string snapToGridCommand;
+        public string goldBoundaryCommand;
+        public string silverBoundaryCommand;
+        public string bronzeBoundaryCommand;
         
         public void ParseInput(string input) {
             string[] commandList = ExtractCommandList(input);
@@ -76,8 +80,24 @@ namespace DefaultNamespace {
             }
             
             if (command.Contains(zoneShaderCommand.ToLower())) {
-                Camera.main.GetComponent<CameraController>().useZoneShader =
+                Camera.main.GetComponent<ZoneCamera>().useZoneShader =
                     GetBoolFromValue(GetValueFromCommand(command));
+            }
+            
+            if (command.Contains(snapToGridCommand.ToLower())) {
+                GameManager.levelScene.grid.snapToGrid = GetBoolFromValue(GetValueFromCommand(command));
+            }
+            
+            if (command.Contains(bronzeBoundaryCommand.ToLower())) {
+                GameManager.currentLevel.SetMedalBoundary(Medal.Bronze, GetIntFromValue(GetValueFromCommand(command)));
+            }
+            
+            if (command.Contains(silverBoundaryCommand.ToLower())) {
+                GameManager.currentLevel.SetMedalBoundary(Medal.Silver, GetIntFromValue(GetValueFromCommand(command)));
+            }
+            
+            if (command.Contains(goldBoundaryCommand.ToLower())) {
+                GameManager.currentLevel.SetMedalBoundary(Medal.Gold, GetIntFromValue(GetValueFromCommand(command)));
             }
         }
         
