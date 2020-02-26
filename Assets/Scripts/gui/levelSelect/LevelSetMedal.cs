@@ -21,6 +21,7 @@ namespace gui.levelSelect {
         public Sprite silver;
         public Sprite gold;
 
+        public Color noMedalColor;
         public Color bronzeColor;
         public Color silverColor;
         public Color goldColor;
@@ -28,6 +29,7 @@ namespace gui.levelSelect {
         public void SetLevel(LevelDescription levelDescription, int levelId) {
             this.levelDescription = levelDescription;
             this.levelId = levelId;
+            
             RefreshMedal();
         }
 
@@ -42,6 +44,9 @@ namespace gui.levelSelect {
                 GameManager.selectedLevelSave = levelSave;
             }
             
+            // Load level progress
+            GameManager.currentLevelScore = GameManager.currentSaveGame.GetLevelScore(levelId);
+            
             SceneManager.LoadScene(1);
         }
 
@@ -54,34 +59,15 @@ namespace gui.levelSelect {
                 case Medal.Bronze: medalImage.sprite = bronze; break;
                 case Medal.Silver: medalImage.sprite = silver; break;
                 case Medal.Gold: medalImage.sprite = gold; break;
-
             }
         }
 
-        public void RefreshConnector() {
-            Gradient gradient = new Gradient();
+        public Color GetMedalColor() {
+            Medal medal = GameManager.currentSaveGame.GetLevelMedal(levelId);
             
-            GradientColorKey[] colors = new GradientColorKey[2];
-            GradientAlphaKey[] alphas = new GradientAlphaKey[2];
-            
-            Medal currentMedal = GameManager.currentSaveGame.GetLevelMedal(levelId);
-            Medal nextMedal = GameManager.currentSaveGame.GetLevelMedal(levelId + 1);
-
-            Color currentColor = GetMedalColor(currentMedal);
-            Color nextColor = GetMedalColor(nextMedal);
-
-            colors[0] = new GradientColorKey(currentColor, 0);
-            colors[1] = new GradientColorKey(currentColor, 1);
-            
-            gradient.SetKeys(colors, alphas);
-
-            
-        }
-
-        private Color GetMedalColor(Medal medal) {
             switch (medal) {
-                case Medal.None: return new Color(0,0,0);
-                case Medal.Locked: return new Color(0,0,0);
+                case Medal.None: return noMedalColor;
+                case Medal.Locked: return noMedalColor;
                 case Medal.Bronze: return bronzeColor;
                 case Medal.Silver: return silverColor;
                 case Medal.Gold: return goldColor;

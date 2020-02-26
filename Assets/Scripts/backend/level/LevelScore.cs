@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using backend.level_serialization;
 using DefaultNamespace;
 
 namespace backend.level {
+    [System.Serializable]
     public class LevelScore {
 
         private const int SCORE_PER_HEALTHPOINT = 1;
@@ -18,9 +20,16 @@ namespace backend.level {
         public int score_firstattempt;
 
         public Medal medal;
-        
+
+        public LevelScore() {
+            medal = Medal.None;
+        }
 
         public LevelScore(Threat[] failedThreats) {
+            CalculateScore(failedThreats);
+        }
+
+        public void CalculateScore(Threat[] failedThreats) {
             score_budgetremaining = CalculateScore_Budget();
             score_controltypes = CalculateScore_ControlType();
             score_threatsdefended = CalculateScore_ThreatsDefended(failedThreats);
@@ -82,7 +91,7 @@ namespace backend.level {
         public int GetTotalScore() {
             return score_budgetremaining + score_controltypes + score_threatsdefended + score_firstattempt;
         }
-
+        
         public override string ToString() {
             string output = "";
 

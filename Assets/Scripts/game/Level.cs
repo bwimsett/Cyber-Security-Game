@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using backend;
+using backend.level;
 using backend.level_serialization;
+using backend.serialization;
 using gui.controlsmenu;
 using UnityEngine;
 
@@ -14,6 +18,8 @@ namespace DefaultNamespace {
         private int currentNodeId;
         private int attempts = 0;
 
+        private LevelScore levelScore;
+
         private int bronzeScore;
         private int silverScore;
         private int goldScore;
@@ -21,6 +27,32 @@ namespace DefaultNamespace {
         public Level() {
             currentNodeId = 0;
             nodes = new List<Node>();
+        }
+        
+        public Level(LevelScore levelScore) {
+            currentNodeId = 0;
+            nodes = new List<Node>();
+            this.levelScore = levelScore;
+        }
+
+        public void CalculateScore(Threat[] failedThreats) {
+            // Calculate score
+            GameManager.currentLevelScore.CalculateScore(failedThreats.ToArray());
+                
+            // Refresh level summary window
+            GameManager.levelScene.guiManager.levelSummaryWindow.Refresh();       
+                
+            // Save game
+            GameSerializer serializer = new GameSerializer(); 
+            serializer.SaveGame(GameManager.currentSaveGame);
+        }
+        
+        public void SetLevelScore(LevelScore levelScore) {
+            this.levelScore = levelScore;
+        }
+
+        public LevelScore GetLevelScore() {
+            return levelScore;
         }
 
         public void SetEditMode(bool value) {

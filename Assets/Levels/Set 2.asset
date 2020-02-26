@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 943ec5a418ad4179b25d7a8920c4fb49, type: 3}
   m_Name: Set 2
   m_EditorClassIdentifier: 
-  unlockCost: 0
+  setName: Two
+  unlockCost: 10
   levels:
   - {fileID: 11400000, guid: 84cfa4e6304c6714197cbce3e84c4136, type: 2}
   - {fileID: 11400000, guid: ad0f980d173af7d41a27d858a6774e56, type: 2}

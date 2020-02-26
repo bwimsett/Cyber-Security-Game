@@ -15,6 +15,7 @@ namespace backend {
             GameSerializer gs = new GameSerializer();
             GameManager.currentSaveGame = gs.GetMostRecentSave();
 
+            // Create a new save game if none exist
             if (GameManager.currentSaveGame == null) {
                 GameManager.currentSaveGame = new SaveGame(levelSelector.levelSets.Length*5);
             }

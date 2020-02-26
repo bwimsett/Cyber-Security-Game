@@ -72,18 +72,25 @@ public class NodeInteractor : MonoBehaviour {
     
     // Moves the node by the amount since the last dragging movement.
     public void DragNode() {
+
         Vector2 currentDragPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dragDifference = currentDragPos - dragStartPos;
-        
-        //_nodeObject.transform.Translate(dragDifference);
-        dragStartPos = currentDragPos;
 
-        Vector2 gridPos = GameManager.levelScene.grid.GetGridPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        _nodeObject.transform.position = gridPos;
+        dragStartPos = currentDragPos;
         
         if (dragDifference.magnitude > 0) {
             hasDragged = true;    
         }
+        
+        // Check node has actually been dragged
+        if (!hasDragged) {
+            return;
+        }  
+
+        Vector2 gridPos = GameManager.levelScene.grid.GetGridPos(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        _nodeObject.transform.position = gridPos;
+        
+        
         RefreshConnections();
     }
 

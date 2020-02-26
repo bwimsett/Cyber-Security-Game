@@ -1,36 +1,48 @@
 using System;
+using backend.level;
 using backend.level_serialization;
 using DefaultNamespace;
 
 namespace backend.serialization {
+    [Serializable]
     public class SaveGame {
-        private LevelProgress[] levelProgress;
+        private LevelScore[] levelScore;
         private DateTime saveTime;
 
         public SaveGame(int levelCount) {
-            levelProgress = new LevelProgress[levelCount];
+            levelScore = new LevelScore[levelCount];
 
-            for (int i = 0; i < levelProgress.Length; i++) {
-                levelProgress[i] = new LevelProgress();
+            for (int i = 0; i < levelScore.Length; i++) {
+                levelScore[i] = new LevelScore();
             }
         }
         
-        public void SetLevelProgress(int levelIndex, LevelProgress progress) {
-            if (levelIndex >= levelProgress.Length || levelIndex < 0) {
+        public void SetLevelProgress(int levelIndex, LevelScore progress) {
+            if (levelIndex >= levelScore.Length || levelIndex < 0) {
                 return;
             }
             
-            levelProgress[levelIndex] = progress;
+            levelScore[levelIndex] = progress;
         }
 
-        public Medal GetLevelMedal(int levelId) {
-            if (levelId >= levelProgress.Length) {
+        public Medal GetLevelMedal(int levelIndex) {
+            LevelScore prog = GetLevelScore(levelIndex);
+            
+            if (prog == null) {
                 return Medal.None;
             }
 
-            return levelProgress[levelId].GetMedal();
+            return prog.medal;
         }
-        
+
+        public LevelScore GetLevelScore(int levelIndex) {
+            if (levelIndex >= levelScore.Length) {
+                return null;
+            }
+
+            return levelScore[levelIndex];
+        }
+
         public void SetSaveTime(DateTime time) {
             saveTime = time;
         }

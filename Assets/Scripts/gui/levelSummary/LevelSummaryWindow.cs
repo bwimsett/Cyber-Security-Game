@@ -13,25 +13,18 @@ public class LevelSummaryWindow : Window {
     public LevelSummary_ScoreBreakdownField[] scoreBreakdown_Fields;
     public LevelSummary_Medals medals;
     
-    private LevelScore levelScore;
-
-
-    public void SetScore(LevelScore levelScore) {
-        this.levelScore = levelScore;
-        medals.SetMedal(levelScore.medal);
-        
-        Refresh();
-    }
 
     public void Refresh() {
-        gameObject.SetActive(true);
-        
+        gameObject.SetActive(true);       
         title.text = "Level Complete!";
-        scoreText.text = "Score: " + levelScore.GetTotalScore();
+        scoreText.text = "Score: " + GameManager.currentLevelScore.GetTotalScore();
         GenerateScoreBreakdown();
+        medals.SetMedal(GameManager.currentLevelScore.medal);
     }
 
     private void GenerateScoreBreakdown() {
+        LevelScore levelScore = GameManager.currentLevelScore;
+        
         scoreBreakdown_Fields[0].setScore("Health: ", levelScore.score_healthpoints);
         scoreBreakdown_Fields[1].setScore("Budget: ", levelScore.score_budgetremaining);
         scoreBreakdown_Fields[2].setScore("Controls: ",  levelScore.score_controltypes);

@@ -11,6 +11,15 @@ public class LevelSelector : MonoBehaviour {
     public GameObject levelSetComponentPrefab;
     public Transform levelGroupTransform;
     private LevelSetComponent[] levelSetComponents;
+
+    [Range(0,255)]
+    public int opacity;
+
+    void Update() {
+        foreach (LevelSetComponent c in levelSetComponents) {
+            c.UpdateConnectionOpacity(opacity);
+        }
+    }
     
     void Start() {
         Initialise();

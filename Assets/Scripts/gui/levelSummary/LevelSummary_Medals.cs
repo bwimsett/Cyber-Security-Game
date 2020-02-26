@@ -45,6 +45,7 @@ public class LevelSummary_Medals : MonoBehaviour {
             Vector3 targetPos = new Vector3(distanceFromMedal * medalSpacing, 0, 0);
             
             medals[i].SetTargets(targetPos, medalSizeFalloff, medalMoveSpeed, medalSnapTolerance, minMedalScale);
+            medals[i].transform.SetSiblingIndex(3-Mathf.Abs(distanceFromMedal));
     
             medals[i].SetText(currentLevel.GetMedalBoundary(medalTypes[i])+"+");
         }

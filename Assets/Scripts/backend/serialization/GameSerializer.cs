@@ -14,7 +14,7 @@ namespace backend.serialization {
             saveGame.SetSaveTime(DateTime.Now);
             
             BinaryFormatter bf = new BinaryFormatter();
-            String path = Application.persistentDataPath + "/" + DateTime.Now + saveGameExtension;
+            String path = Application.persistentDataPath + "/" + DateTime.Now.Day+""+DateTime.Now.Month+""+DateTime.Now.Year+""+ saveGameExtension;
             FileStream file = File.Create(path);
             bf.Serialize(file, saveGame);
             file.Close();
