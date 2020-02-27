@@ -15,6 +15,8 @@ namespace DefaultNamespace {
         private List<Threat> evolvedThreats;
         private int activeThreatCount = 0;
 
+        public ThreatSummariser threatSummariser;
+
         public void SimulateThreats() {
             
             successfulThreats = new List<Threat>();
@@ -97,6 +99,17 @@ namespace DefaultNamespace {
             foreach (Threat t in threats) {
                 Debug.Log(t.GetStringTrace());
             }
+        }
+
+        public Threat[] GetThreats(ThreatStatus status) {
+            switch (status) {
+                case ThreatStatus.Failure: return failedThreats.ToArray();
+                case ThreatStatus.Evolve: return evolvedThreats.ToArray();
+                case ThreatStatus.Success: return successfulThreats.ToArray();
+                case ThreatStatus.Propagate: return propagatedThreats.ToArray();
+            }
+
+            return null;
         }
         
         public void ThreatDebugLog(string output) {

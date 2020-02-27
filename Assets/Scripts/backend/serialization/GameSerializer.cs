@@ -11,6 +11,10 @@ namespace backend.serialization {
         private const string saveGameExtension = ".cyber";        
         
         public void SaveGame(SaveGame saveGame) {
+            if (saveGame == null) {
+                return;
+            }
+            
             saveGame.SetSaveTime(DateTime.Now);
             
             BinaryFormatter bf = new BinaryFormatter();

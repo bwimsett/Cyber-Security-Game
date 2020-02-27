@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using backend.level;
+using DefaultNamespace;
 using gui.levelSelect;
+using TMPro;
 using UnityEngine;
 
 public class LevelSelector : MonoBehaviour {
 
+    public TextMeshProUGUI tokenTotal;
+    public TextMeshProUGUI percentageCompletion;
+    
     public LevelSet[] levelSets;
 
     public GameObject levelSetComponentPrefab;
@@ -26,7 +31,7 @@ public class LevelSelector : MonoBehaviour {
     }
 
     private void Initialise() {
-        GenerateSets();
+        Refresh();
     }
 
     private void Clear() {
@@ -50,8 +55,14 @@ public class LevelSelector : MonoBehaviour {
         }
     }
 
+    private void RefreshTotals() {
+        tokenTotal.text = GameManager.currentSaveGame.GetTokens()+" Tokens";
+        percentageCompletion.text = GameManager.currentSaveGame.GetPercentageCompletion() + "% Complete";
+    }
+
     public void Refresh() {
         GenerateSets();
+        RefreshTotals();
     }
 
 }

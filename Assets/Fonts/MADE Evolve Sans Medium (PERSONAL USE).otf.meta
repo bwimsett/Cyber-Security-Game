@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 95fa229810bef4542bb9b7e553751be9
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: MADE Evolve Sans
+  fontNames:
+  - MADE Evolve Sans
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 52bd902ea4ca60340b696b5fcfbfaf1d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -58,7 +58,13 @@ namespace DefaultNamespace {
         
         public void SetFields(NodeSave nodeSave) {
             fields = nodeSave.fields;
-            selectedStartingThreats = nodeSave.selectedStartingThreats;
+
+            char[] selectedStartingThreatsMask = (char[]) nodeSave.selectedStartingThreats.GetValue();
+
+            // If the selected starting threats mask matches the number of options
+            if (selectedStartingThreatsMask.Length == selectedStartingThreats.GetOptionSet().options.Length) {
+                selectedStartingThreats = nodeSave.selectedStartingThreats;
+            }
         }
 
         public int GetTotalHealth() {

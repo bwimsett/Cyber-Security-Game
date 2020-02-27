@@ -20,9 +20,19 @@ namespace DefaultNamespace {
             if (selectedLevelSave != null) {
                 currentLevel.LoadLevel(selectedLevelSave);
             }
+
+            if (currentLevelScore == null) {
+                currentLevelScore = new LevelScore();
+            }
             
             Physics.queriesHitTriggers = true;
         }
 
+        public static void Save() {
+            GameSerializer gs = new GameSerializer();
+            
+            gs.SaveGame(currentSaveGame);
+        }
+        
     }
 }

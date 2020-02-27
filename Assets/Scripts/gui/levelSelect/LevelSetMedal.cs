@@ -25,6 +25,8 @@ namespace gui.levelSelect {
         public Color bronzeColor;
         public Color silverColor;
         public Color goldColor;
+
+        private bool isLocked;
         
         public void SetLevel(LevelDescription levelDescription, int levelId) {
             this.levelDescription = levelDescription;
@@ -51,6 +53,11 @@ namespace gui.levelSelect {
         }
 
         public void RefreshMedal() {
+            if (isLocked) {
+                medalImage.sprite = locked;
+                return;
+            }
+            
             Medal medal = GameManager.currentSaveGame.GetLevelMedal(levelId);
             
             switch (medal) {
@@ -62,6 +69,11 @@ namespace gui.levelSelect {
             }
         }
 
+        public void SetLock(bool isLocked) {
+            this.isLocked = isLocked;
+            RefreshMedal();
+        }
+        
         public Color GetMedalColor() {
             Medal medal = GameManager.currentSaveGame.GetLevelMedal(levelId);
             

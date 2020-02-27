@@ -7,6 +7,10 @@ namespace backend.level {
     [System.Serializable]
     public class LevelScore {
 
+        private const int TOKENS_GOLD = 3;
+        private const int TOKENS_SILVER = 2;
+        private const int TOKENS_BRONZE = 1;
+        
         private const int SCORE_PER_HEALTHPOINT = 1;
         private const int SCORE_PER_BUDGETPOINT = 250;
         private const int SCORE_PER_CONTROL_TYPE = 350;
@@ -90,6 +94,20 @@ namespace backend.level {
 
         public int GetTotalScore() {
             return score_budgetremaining + score_controltypes + score_threatsdefended + score_firstattempt;
+        }
+
+        public int GetTokens() {
+            switch (medal) {
+                case Medal.Bronze: return TOKENS_BRONZE;
+                case Medal.Silver: return TOKENS_SILVER;
+                case Medal.Gold: return TOKENS_GOLD;
+            }
+
+            return 0;
+        }
+
+        public int GetMaxTokens() {
+            return TOKENS_GOLD;
         }
         
         public override string ToString() {

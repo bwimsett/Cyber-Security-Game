@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc885ced06044f338712d55ea612af2b, type: 3}
+  m_Name: Interception Data Theft
+  m_EditorClassIdentifier: 
+  threatType: 3
+  startSentences:
+  - node: 1
+    summary: Data transmitted from the internet was intercepted
+  middleSentences: []
+  endSentences:
+  - node: 0
+    summary: on its way to a server
+  - node: 10
+    summary: on its way to a smartphone
+  - node: 11
+    summary: on its way to a pc
+  - node: 12
+    summary: on its way to a laptop

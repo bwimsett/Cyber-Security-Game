@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using backend.serialization;
+using DefaultNamespace;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
@@ -18,6 +20,11 @@ public class MainMenu : MonoBehaviour {
         mainMenuGroupAnimator.SetTrigger("fadeIn");
         levelSelectGroupAnimator.SetTrigger("fadeOut");
         mainMenuTitleAnimator.SetTrigger("grow");
+    }
+
+    public void Quit() {
+        GameManager.Save();
+        Application.Quit();
     }
 
 }

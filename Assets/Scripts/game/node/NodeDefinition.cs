@@ -11,6 +11,7 @@ public class NodeDefinition : ScriptableObject
 {
     public String nodeName;
     public int nodeCost;
+    public int nodeUnlockTokens;
     public NodeFamily nodeFamily;
     public NodeType nodeType;
     public Color nodeColor;

@@ -20,9 +20,9 @@ namespace DefaultNamespace {
 
         private LevelScore levelScore;
 
-        private int bronzeScore;
-        private int silverScore;
-        private int goldScore;
+        private int bronzeScore = 100;
+        private int silverScore = 750;
+        private int goldScore = 1000;
 
         public Level() {
             currentNodeId = 0;
@@ -37,7 +37,7 @@ namespace DefaultNamespace {
 
         public void CalculateScore(Threat[] failedThreats) {
             // Calculate score
-            GameManager.currentLevelScore.CalculateScore(failedThreats.ToArray());
+            GameManager.currentLevelScore.CalculateScore(failedThreats);
                 
             // Refresh level summary window
             GameManager.levelScene.guiManager.levelSummaryWindow.Refresh();       

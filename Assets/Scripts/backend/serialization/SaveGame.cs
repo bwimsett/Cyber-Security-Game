@@ -2,27 +2,28 @@ using System;
 using backend.level;
 using backend.level_serialization;
 using DefaultNamespace;
+using UnityEngine;
 
 namespace backend.serialization {
     [Serializable]
     public class SaveGame {
-        private LevelScore[] levelScore;
+        private LevelScore[] levelScores;
         private DateTime saveTime;
 
         public SaveGame(int levelCount) {
-            levelScore = new LevelScore[levelCount];
+            levelScores = new LevelScore[levelCount];
 
-            for (int i = 0; i < levelScore.Length; i++) {
-                levelScore[i] = new LevelScore();
+            for (int i = 0; i < levelScores.Length; i++) {
+                levelScores[i] = new LevelScore();
             }
         }
         
         public void SetLevelProgress(int levelIndex, LevelScore progress) {
-            if (levelIndex >= levelScore.Length || levelIndex < 0) {
+            if (levelIndex >= levelScores.Length || levelIndex < 0) {
                 return;
             }
             
-            levelScore[levelIndex] = progress;
+            levelScores[levelIndex] = progress;
         }
 
         public Medal GetLevelMedal(int levelIndex) {
@@ -36,11 +37,40 @@ namespace backend.serialization {
         }
 
         public LevelScore GetLevelScore(int levelIndex) {
-            if (levelIndex >= levelScore.Length) {
+            if (levelIndex >= levelScores.Length) {
                 return null;
             }
 
-            return levelScore[levelIndex];
+            return levelScores[levelIndex];
+        }
+
+        public int GetTokens() {
+            int total = 0;
+            
+            foreach (LevelScore score in levelScores) {
+                total += score.GetTokens();
+            }
+
+            return total;
+        }
+
+        public int GetMaxTokens() {
+            int max = 0;
+
+            foreach (LevelScore score in levelScores) {
+                max += score.GetMaxTokens();
+            }
+
+            return max;
+        }
+
+        public int GetPercentageCompletion() {
+            float totalTokens = GetTokens();
+            float maxTokens = GetMaxTokens();
+
+            int percentage = Mathf.RoundToInt(totalTokens / maxTokens * 100);
+
+            return percentage;
         }
 
         public void SetSaveTime(DateTime time) {

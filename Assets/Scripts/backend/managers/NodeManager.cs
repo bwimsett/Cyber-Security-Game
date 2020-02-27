@@ -114,6 +114,9 @@ namespace DefaultNamespace{
                 case NodeType.Antivirus:
                     behaviour = new NodeBehaviour_Antivirus(node);
                     break;
+                case NodeType.Password:
+                    behaviour = new NodeBehaviour_PasswordGate(node);
+                    break;
                 default:
                     behaviour = new NodeBehaviour(node);
                     break;

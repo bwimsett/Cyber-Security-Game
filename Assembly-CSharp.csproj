@@ -67,9 +67,6 @@
     <Compile Include="Assets\Scripts\backend\EvolutionNotDefinedException.cs" />
     <Compile Include="Assets\Scripts\backend\MainMenuLoader.cs" />
     <Compile Include="Assets\Scripts\backend\NodeInteractor_Logical.cs" />
-    <Compile Include="Assets\Scripts\backend\Threat.cs" />
-    <Compile Include="Assets\Scripts\backend\Threat_EffectPair.cs" />
-    <Compile Include="Assets\Scripts\backend\Threat_EvolutionPair.cs" />
     <Compile Include="Assets\Scripts\backend\camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\backend\camera\LevelGrid.cs" />
     <Compile Include="Assets\Scripts\backend\camera\ZoneCamera.cs" />
@@ -106,6 +103,7 @@
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Antivirus.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Captcha.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_ConnectionEncryption.cs" />
+    <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_PasswordGate.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Sanitisation.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Table.cs" />
     <Compile Include="Assets\Scripts\game\node\Node.cs" />
@@ -113,6 +111,12 @@
     <Compile Include="Assets\Scripts\game\node\NodeField.cs" />
     <Compile Include="Assets\Scripts\game\node\NodeInteractor.cs" />
     <Compile Include="Assets\Scripts\game\node\NodeObject.cs" />
+    <Compile Include="Assets\Scripts\game\threat\Threat.cs" />
+    <Compile Include="Assets\Scripts\game\threat\ThreatSummariser.cs" />
+    <Compile Include="Assets\Scripts\game\threat\ThreatSummary.cs" />
+    <Compile Include="Assets\Scripts\game\threat\ThreatSummaryContext.cs" />
+    <Compile Include="Assets\Scripts\game\threat\Threat_EffectPair.cs" />
+    <Compile Include="Assets\Scripts\game\threat\Threat_EvolutionPair.cs" />
     <Compile Include="Assets\Scripts\gui\AttackVisualiser.cs" />
     <Compile Include="Assets\Scripts\gui\AttackVisualiserDebugPanel.cs" />
     <Compile Include="Assets\Scripts\gui\ControlDescriptionWindow.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="Assets\Scripts\gui\levelSummary\LevelSummary_Medal.cs" />
     <Compile Include="Assets\Scripts\gui\levelSummary\LevelSummary_Medals.cs" />
     <Compile Include="Assets\Scripts\gui\levelSummary\LevelSummary_ScoreBreakdownField.cs" />
+    <Compile Include="Assets\Scripts\gui\levelSummary\LevelSummary_ThreatSummaryField.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Nodes\Descriptions\Sanitation Description.txt" />

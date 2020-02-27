@@ -1,5 +1,6 @@
 using System.Reflection.Emit;
 using backend.level;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 
@@ -42,13 +43,15 @@ namespace gui.levelSelect {
         public void Refresh() {
             Clear();
             medals = new LevelSetMedal[levelSet.levels.Length];
+
+            bool locked = GameManager.currentSaveGame.GetTokens() < levelSet.unlockCost;
             
             // Instantiate medal
-            for (int i = 0; i < levelSet.levels.Length; i++) {
-                
+            for (int i = 0; i < levelSet.levels.Length; i++) {     
                 medals[i] = Instantiate(medalPrefab, medalContainer).GetComponent<LevelSetMedal>();
                 medals[i].name = ""+i;
                 medals[i].SetLevel(levelSet.levels[i], levelSetPos*5+i);
+                medals[i].SetLock(locked);
             }
             
             connections = new LevelSetConnection[medals.Length-1];

@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: Server
   nodeCost: 0
+  nodeUnlockTokens: 0
   nodeFamily: 0
   nodeType: 0
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
   nodeIcon: {fileID: 21300000, guid: 50ea79e06da7ed343b33f0cf65b9f7da, type: 3}
   description: {fileID: 4900000, guid: d878d709f5977bb4188887cf519b57f4, type: 3}
-  startingThreats: 03000000
+  startingThreats: 030000000f000000
   threatResponses:
   - threatType: 0
     threatStatus: 4

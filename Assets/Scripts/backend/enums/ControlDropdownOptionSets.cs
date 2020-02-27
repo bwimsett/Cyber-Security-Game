@@ -6,6 +6,7 @@ namespace DefaultNamespace {
         Captcha_Types,
         Antivirus_FileTypes,
         Antivirus_ScanFrequency,
-        Antivirus_BlockMedia
+        Antivirus_BlockMedia,
+        Password_Addons
     }
 }

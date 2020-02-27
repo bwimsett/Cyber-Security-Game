@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using backend;
 using backend.level;
 using DefaultNamespace;
 using gui;
@@ -12,13 +13,17 @@ public class LevelSummaryWindow : Window {
     public TextMeshProUGUI scoreText;
     public LevelSummary_ScoreBreakdownField[] scoreBreakdown_Fields;
     public LevelSummary_Medals medals;
-    
+    public GameObject threatSummaryFieldPrefab;
+    public Transform threatSummaryContainer;
+    private LevelSummary_ThreatSummaryField[] threatSummaryFields;
 
+    
     public void Refresh() {
         gameObject.SetActive(true);       
         title.text = "Level Complete!";
         scoreText.text = "Score: " + GameManager.currentLevelScore.GetTotalScore();
         GenerateScoreBreakdown();
+        GenerateThreatSummaries();
         medals.SetMedal(GameManager.currentLevelScore.medal);
     }
 
@@ -31,6 +36,28 @@ public class LevelSummaryWindow : Window {
         scoreBreakdown_Fields[3].setScore("Threats: ", levelScore.score_threatsdefended);
         scoreBreakdown_Fields[4].setScore("First Attempt: ", levelScore.score_firstattempt);
         scoreBreakdown_Fields[5].setScore("Total: ", levelScore.GetTotalScore());
+    }
+
+    public void GenerateThreatSummaries() {
+        if (threatSummaryFields == null) {
+            threatSummaryFields = new LevelSummary_ThreatSummaryField[0];
+        }
+        
+        if (threatSummaryFields.Length > 0) {
+            foreach (LevelSummary_ThreatSummaryField field in threatSummaryFields) {
+                Destroy(field.gameObject);
+            }
+        }
+
+        Threat[] threats = GameManager.levelScene.threatManager.GetThreats(ThreatStatus.Success);
+
+        threatSummaryFields = new LevelSummary_ThreatSummaryField[threats.Length];
+
+        for (int i = 0; i < threats.Length; i++) {
+            threatSummaryFields[i] = Instantiate(threatSummaryFieldPrefab, threatSummaryContainer)
+                .GetComponent<LevelSummary_ThreatSummaryField>();
+            threatSummaryFields[i].SetThreat(threats[i]);
+        }
     }
 
 }

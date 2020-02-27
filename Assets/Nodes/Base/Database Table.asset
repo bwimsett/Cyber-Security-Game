@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: Table
   nodeCost: 0
+  nodeUnlockTokens: 0
   nodeFamily: 0
   nodeType: 2
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
@@ -25,4 +26,12 @@ MonoBehaviour:
     threatStatus: 0
   - threatType: 2
     threatStatus: 0
-  threatEvolutions: []
+  - threatType: 15
+    threatStatus: 4
+  threatEvolutions:
+  - threatType: 15
+    evolution: 13
+  - threatType: 15
+    evolution: 1
+  - threatType: 15
+    evolution: 2

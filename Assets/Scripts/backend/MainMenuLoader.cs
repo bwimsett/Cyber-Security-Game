@@ -13,7 +13,11 @@ namespace backend {
 
         public void InitialiseMostRecentSave() {
             GameSerializer gs = new GameSerializer();
-            GameManager.currentSaveGame = gs.GetMostRecentSave();
+            
+            // If the game has not already loaded a save game
+            if (GameManager.currentSaveGame == null) {
+                GameManager.currentSaveGame = gs.GetMostRecentSave();
+            }
 
             // Create a new save game if none exist
             if (GameManager.currentSaveGame == null) {
