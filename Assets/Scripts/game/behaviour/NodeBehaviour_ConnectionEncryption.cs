@@ -9,7 +9,7 @@ namespace DefaultNamespace {
             fields = new NodeField[2];
             
             fields[0] = new NodeField("Description", "Encrypts data sent along data connections");
-            fields[1] = new NodeField("Encryption Type", 0, ControlDropdownOptionSets.Connection_Encryption_Types);
+            fields[1] = new NodeField("Encryption Type", 0, false, ControlDropdownOptionSets.Connection_Encryption_Types);
             
             base.InitialiseFields();
         }

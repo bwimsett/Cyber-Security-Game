@@ -7,6 +7,7 @@ namespace DefaultNamespace {
         Antivirus_FileTypes,
         Antivirus_ScanFrequency,
         Antivirus_BlockMedia,
-        Password_Addons
+        Password_Addons,
+        Access
     }
 }

@@ -15,6 +15,9 @@ namespace DefaultNamespace {
         Data_Theft,
         Privilege_Escalation,
         Ransom,
-        Unauthorised_Access
+        Unauthorised_Access,
+        Denial_Of_Service,
+        Authorised_Access_Block,
+        Password_Crack
     }
 }

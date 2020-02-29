@@ -14,9 +14,6 @@ public class Node {
     public Node(NodeObject nodeObject) {
         this.nodeObject = nodeObject;
         connectedNodes = new List<Node>();
-        
-        // Set default behaviour
-        behaviour = new NodeBehaviour(this);
     }
 
     public void AddConnection(NodeObject nodeObject) {

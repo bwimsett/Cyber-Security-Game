@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc885ced06044f338712d55ea612af2b, type: 3}
-  m_Name: SQL Injection Form
+  m_Name: Authorised Access Block
   m_EditorClassIdentifier: 
-  threatType: 4
+  threatType: 17
   startSentences:
-  - node: 14
-    summary: SQL Injection from a web form
+  - node: 5
+    summary: A password gate
   middleSentences: []
-  endSentences: []
+  endSentences:
+  - node: 2
+    summary: locked someone out of a database they were authorised to view!

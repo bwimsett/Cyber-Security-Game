@@ -3,5 +3,6 @@ namespace DefaultNamespace {
         Base,
         Logical,
         Connection,
+        Zone
     }
 }

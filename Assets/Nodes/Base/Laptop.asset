@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: Laptop
   nodeCost: 0
+  nodeUnlockTokens: 0
   nodeFamily: 0
   nodeType: 12
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
   nodeIcon: {fileID: 0}
   description: {fileID: 0}
-  startingThreats: 03000000
+  startingThreats: 0300000009000000
   threatResponses:
   - threatType: 3
     threatStatus: 1

@@ -11,21 +11,53 @@ using UnityEngine;
 public class ControlSettings_Dropdown : ControlSettings_Field {
 
     public TMP_Dropdown dropdown;
+    public Gradient optionColours;
+    private bool colourOptions;
+    public TextMeshProUGUI selectedItem;
+
+    void Update() {
+        Refresh();
+    }
     
     protected override void Initialise() {
         fieldTitle.text = nodeField.GetFieldTitle();
         dropdown.options = GenerateOptionData();
         dropdown.value = (int) nodeField.GetValue();
+        ColourOptions(nodeField.IsColourOptions());
     }
 
     public override void Refresh() {
-        
+        if (!colourOptions) {
+            return;
+        }
+
+        Transform listTransform = dropdown.transform.Find("Dropdown List");
+        selectedItem.color = optionColours.Evaluate((float) dropdown.value / dropdown.options.Count);
+
+        if (!listTransform) {
+            return;
+        }
+
+        NodeField_Dropdown_Item[] options = listTransform.GetComponentsInChildren<NodeField_Dropdown_Item>();
+
+        for (int i = 0; i < options.Length; i++) {
+            NodeField_Dropdown_Item item = options[i];
+
+            float colourPos = (float)i /options.Length;
+
+            item.text.color = optionColours.Evaluate(colourPos);
+        }   
     }
 
     public override void OnValueChanged() {
         nodeField.SetValue(dropdown.value);
     }
 
+    public void ColourOptions(bool colourOptions) {
+        this.colourOptions = colourOptions;
+        Refresh();
+    }
+    
     private List<TMP_Dropdown.OptionData> GenerateOptionData() {
         Control_Dropdown_Option_Set options = nodeField.GetOptionSet();
         

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc885ced06044f338712d55ea612af2b, type: 3}
-  m_Name: SQL Injection Form
+  m_Name: Spam Accounts
   m_EditorClassIdentifier: 
-  threatType: 4
+  threatType: 8
   startSentences:
   - node: 14
-    summary: SQL Injection from a web form
+    summary: Repeated account form submission
   middleSentences: []
   endSentences: []

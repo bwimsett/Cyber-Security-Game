@@ -63,6 +63,7 @@
     <Compile Include="Assets\Control_Toggle.cs" />
     <Compile Include="Assets\LevelGUIBackground.cs" />
     <Compile Include="Assets\MainMenu.cs" />
+    <Compile Include="Assets\NodeField_Dropdown_Item.cs" />
     <Compile Include="Assets\Scripts\backend\ConnectionCollider.cs" />
     <Compile Include="Assets\Scripts\backend\EvolutionNotDefinedException.cs" />
     <Compile Include="Assets\Scripts\backend\MainMenuLoader.cs" />

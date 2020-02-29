@@ -58,6 +58,13 @@ namespace DefaultNamespace {
         public void SetEditMode(bool value) {
             editMode = value;
             GameManager.levelScene.guiManager.controlsMenu.RefreshOptions();
+            RefreshNodeEditMode();
+        }
+
+        private void RefreshNodeEditMode() {
+            foreach (Node n in nodes) {
+                n.nodeObject.RefreshEditMode();
+            }
         }
 
         public bool IsEditMode() {

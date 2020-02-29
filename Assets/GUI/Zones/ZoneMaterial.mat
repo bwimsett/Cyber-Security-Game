@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BlobRadius: 10000
+    - _BlobRadius: 7500
     - _BlobThreshold: 200
     - _BlobWidth: 9951.8
     - _BumpScale: 1
@@ -72,7 +72,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineOn: 0
-    - _OutlineThreshold: 74
+    - _OutlineThreshold: 219.2
     - _OutlineWidth: 20
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -87,5 +87,5 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _InColor: {r: 0, g: 0, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _OutlineColour: {r: 0.16470589, g: 0.16470589, b: 0.16470589, a: 1}
+    - _OutlineColour: {r: 1, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}

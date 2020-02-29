@@ -28,29 +28,20 @@ namespace DefaultNamespace {
             Node[] nodes = GameManager.currentLevel.nodes.ToArray();
 
             foreach (Node n in nodes) {
-                NodeDefinition nodeDef = n.nodeObject.GetNodeDefinition();
-                NodeField startingThreats = n.GetBehaviour().GetSelectedStartingThreats();
+                Threat[] threats = n.GetBehaviour().GenerateThreats();
 
-                for (int i = 0; i < nodeDef.startingThreats.Length; i++) {
-                    
-                    // Only simulate threats that have been chosen for the level
-                    char[] bitmask = (char[])startingThreats.GetValue();
-                    bool threatIsChosen = bitmask[i] == '1';
-
-                    if (!threatIsChosen) {
-                        continue;
-                    }
-
-                    ThreatType t = nodeDef.startingThreats[i];
-                    
-                    CreateThreat(t, null, n);
+                foreach (Threat t in threats) {
+                    t.Run();
                 }
+
+                activeThreatCount += threats.Length;
             }
         }
 
         public Threat CreateThreat(ThreatType t, Threat parent, Node n) {
             activeThreatCount++;
             Threat threat = new Threat(t, parent, n, 100);
+            threat.Run();
             return threat;
         }
 

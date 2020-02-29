@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc885ced06044f338712d55ea612af2b, type: 3}
-  m_Name: SQL Injection Form
+  m_Name: Denial Of Service
   m_EditorClassIdentifier: 
-  threatType: 4
-  startSentences:
-  - node: 14
-    summary: SQL Injection from a web form
+  threatType: 16
+  startSentences: []
   middleSentences: []
-  endSentences: []
+  endSentences:
+  - node: 0
+    summary: caused a server to crash
+  - node: 0
+    summary: caused a server to freeze
+  - node: 0
+    summary: made a server unresponsive

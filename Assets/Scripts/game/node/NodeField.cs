@@ -17,6 +17,8 @@ namespace DefaultNamespace.node {
         [NonSerialized]
         private Control_Dropdown_Option_Set optionSet;
 
+        private bool colourOptions;
+
         public NodeField(string fieldTitle, bool readOnly, object value) {
             this.fieldTitle = fieldTitle;
             this.value = value;
@@ -42,11 +44,12 @@ namespace DefaultNamespace.node {
             fieldType = NodeFieldType.integer_range;
         }
 
-        public NodeField(string fieldTitle, int value, ControlDropdownOptionSets optionSetName) {
+        public NodeField(string fieldTitle, int value, bool colourOptions, ControlDropdownOptionSets optionSetName) {
             this.fieldTitle = fieldTitle;
             this.value = value;
             readOnly = false;
             this.optionSetName = optionSetName;
+            this.colourOptions = colourOptions;
             fieldType = NodeFieldType.enumerable_single;
         }
         
@@ -88,6 +91,10 @@ namespace DefaultNamespace.node {
             return readOnly;
         }
 
+        public bool IsColourOptions() {
+            return colourOptions;
+        }
+
         public int GetMinValue() {
             return minValue;
         }
@@ -106,6 +113,10 @@ namespace DefaultNamespace.node {
 
         public void SetOptionSet(Control_Dropdown_Option_Set optionSet) {
             this.optionSet = optionSet;
+        }
+
+        public ControlDropdownOptionSets GetOptionSetName() {
+            return optionSetName;
         }
         
         public Control_Dropdown_Option_Set GetOptionSet() {

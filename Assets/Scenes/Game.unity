@@ -3421,6 +3421,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 927d7a66dbfb2c8479318fb0ca431102, type: 2}
   - {fileID: 11400000, guid: 3a1cdbc5e502a6346b94f8caa4cb7c7c, type: 2}
   - {fileID: 11400000, guid: 07f759ea29189a248ad864776034baf5, type: 2}
+  - {fileID: 11400000, guid: 636dac3828106604fb3c533dbe7b36b6, type: 2}
+  - {fileID: 11400000, guid: f4418d2e06dae094ba2c4c7b1eb19fac, type: 2}
+  - {fileID: 11400000, guid: 0e829168e22e7324496f1bdf392f20f2, type: 2}
+  - {fileID: 11400000, guid: df5f7703a71cb554d85b4d6dd97ef134, type: 2}
   optionSets:
   - {fileID: 11400000, guid: 02ce71964fffb4044ad717e60bd6413c, type: 2}
   - {fileID: 11400000, guid: 30cb638d9d48b9645becb1edc631e812, type: 2}
@@ -3429,6 +3433,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1701829f5a6e65489c5b1e644b8f5fd, type: 2}
   - {fileID: 11400000, guid: f2e442767157e4649aba0584e98da55e, type: 2}
   - {fileID: 11400000, guid: 00aa0455ecf622a40a3e74e252337d35, type: 2}
+  - {fileID: 11400000, guid: e19a2d8e0e816b9428d6677db65614b7, type: 2}
   maxNodes: 256
 --- !u!114 &1680074018
 MonoBehaviour:
@@ -3511,6 +3516,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f51f2607c34e944d97da3e954c44fa0, type: 2}
   - {fileID: 11400000, guid: 969728d769aa80542b402b09d8b5335e, type: 2}
   - {fileID: 11400000, guid: b07e782d465818546b0080681ddcc545, type: 2}
+  - {fileID: 11400000, guid: f0244cf13b15bb24c958ed2b9e5e8525, type: 2}
   evolutionAdjectives:
   - became
   - evolved into

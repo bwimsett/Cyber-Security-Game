@@ -14,6 +14,10 @@ namespace DefaultNamespace {
         Antivirus,
         Smartphone,
         PC,
-        Laptop
+        Laptop,
+        WebApp,
+        Form,
+        Zone,
+        Login_System
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using backend;
 using backend.level_serialization;
 using backend.threat_modelling;
@@ -19,9 +20,11 @@ namespace DefaultNamespace {
         protected NodeField[] fields;
         protected NodeField selectedStartingThreats;
         protected int startingHealth;
+        protected int[] threatStrengths;
         
         public NodeBehaviour(Node node) {
             this.node = node;
+            threatStrengths = new int[node.nodeObject.GetNodeDefinition().GetStartingThreatsOptionSet().options.Length];
             InitialiseFields();
         }
 
@@ -29,7 +32,7 @@ namespace DefaultNamespace {
             
         }
         
-        public void InitialiseStartingThreatSet() {
+        public virtual void InitialiseStartingThreatSet() {
             Control_Dropdown_Option_Set optionSet = node.nodeObject.GetNodeDefinition().GetStartingThreatsOptionSet();
             selectedStartingThreats = new NodeField("Starting Threats", optionSet);
         }
@@ -67,6 +70,38 @@ namespace DefaultNamespace {
             }
         }
 
+        public virtual Threat[] GenerateThreats() {
+            char[] selectedThreats = (char[])selectedStartingThreats.GetValue();
+            
+            List<Threat> outputThreats = new List<Threat>();
+
+            ThreatType[] threatTypes = node.nodeObject.GetNodeDefinition().startingThreats;
+            
+            for(int i = 0; i < selectedThreats.Length; i++) {
+                if (selectedThreats[i] != '1') {
+                    continue;
+                }
+                
+                Threat t = new Threat(threatTypes[i], null, node, threatStrengths[i]);
+                outputThreats.Add(t);
+            }
+
+            return outputThreats.ToArray();
+        }
+
+        public NodeField GetFieldWithSet(ControlDropdownOptionSets set) {
+            foreach(NodeField n in fields) {
+
+                Control_Dropdown_Option_Set optionSet = n.GetOptionSet();
+
+                if (n.GetOptionSetName() == set) {
+                    return n;
+                }   
+            }
+
+            return null;
+        }
+        
         public int GetTotalHealth() {
             int totalHealth = 0;
             

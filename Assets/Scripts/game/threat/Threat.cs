@@ -11,19 +11,16 @@ namespace backend {
         private ThreatStatus status;
         private int strength;
         private int nodeHealth;
+        private int accessLevel;
         
         public Threat(ThreatType threatType, Threat parentThreat, Node node, int strength) {
             this.threatType = threatType;
             this.parentThreat = parentThreat;
             this.node = node;
             this.strength = strength;
-
-            //GameManager.levelScene.threatManager.ThreatDebugLog(threatType+" appeared at "+node);
-           
-            Run();
         }
 
-        private void Run() {
+        public void Run() {
             ThreatStatus status = node.Attack(this);
             ThreatStatus newStatus = status;
             
@@ -164,6 +161,14 @@ namespace backend {
 
         public Threat GetParent() {
             return parentThreat;
+        }
+
+        public int GetAccessLevel() {
+            return accessLevel;
+        }
+
+        public void SetAccessLevel(int level) {
+            this.accessLevel = level;
         }
 
         public ThreatStatus GetStatus() {

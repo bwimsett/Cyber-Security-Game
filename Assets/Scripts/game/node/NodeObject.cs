@@ -34,6 +34,7 @@ public class NodeObject : MonoBehaviour {
     
     void Start() {
         GameManager.levelScene.connectionManager.CreateConnectionsForNode(node);
+        RefreshEditMode();
     }
     
     public void SetNodeDefinition(NodeDefinition nodeDefinition) {
@@ -42,6 +43,17 @@ public class NodeObject : MonoBehaviour {
         Refresh();
     }
 
+    public void RefreshEditMode() {
+        if (GameManager.currentLevel.IsEditMode() && nodeDefinition.nodeFamily == NodeFamily.Zone) {
+            centerRenderer.enabled = true;
+            outlineRenderer.enabled = true;
+        }
+        else if(nodeDefinition.nodeFamily == NodeFamily.Zone){
+            centerRenderer.enabled = false;
+            outlineRenderer.enabled = false;
+        }
+    }
+    
     public void SetTempColor(Color color) {
         this.color = color;
         Refresh();

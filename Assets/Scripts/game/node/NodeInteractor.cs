@@ -72,6 +72,14 @@ public class NodeInteractor : MonoBehaviour {
     
     // Moves the node by the amount since the last dragging movement.
     public void DragNode() {
+        bool isEditMode = GameManager.currentLevel.IsEditMode();
+        bool isMovable = _nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Logical ||
+                         _nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Connection;
+
+        if (!isEditMode && !isMovable) {
+            return;
+        }
+        
 
         Vector2 currentDragPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dragDifference = currentDragPos - dragStartPos;

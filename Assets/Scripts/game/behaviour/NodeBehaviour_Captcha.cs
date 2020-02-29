@@ -11,7 +11,7 @@ namespace DefaultNamespace {
             fields = new NodeField[2];
             
             fields[0] = new NodeField("Node Description", "Verifies whether a user is human");
-            fields[1] = new NodeField("CAPTCHA Type", 0, ControlDropdownOptionSets.Captcha_Types);
+            fields[1] = new NodeField("CAPTCHA Type", 0, true, ControlDropdownOptionSets.Captcha_Types);
             base.InitialiseFields();
         }
 

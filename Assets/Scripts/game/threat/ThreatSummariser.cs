@@ -24,7 +24,6 @@ namespace backend {
             summary += GetStartSummary(threat);
             //summary += GetMiddleSummary(threat);
             summary += GetEndSummary(threat);
-            summary += ".";
             return summary;
         }
 

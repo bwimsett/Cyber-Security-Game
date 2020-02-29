@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f1edd7f81d6d674fa997bd43704027b, type: 3}
-  m_Name: Internet
+  m_Name: Login Tracker
   m_EditorClassIdentifier: 
-  nodeName: Internet
+  nodeName: Login System
   nodeCost: 0
   nodeUnlockTokens: 0
   nodeFamily: 0
-  nodeType: 1
-  nodeColor: {r: 0.7830189, g: 0.29178533, b: 0.29178533, a: 1}
-  nodeIcon: {fileID: 21300000, guid: 0545cb9c8b83fb540b48745f63ae4f9a, type: 3}
-  description: {fileID: 4900000, guid: 42c5ad94772fb3d43bd4e7d764730d12, type: 3}
-  startingThreats: 0000000003000000040000000500000006000000090000000a0000000b000000
-  threatResponses:
-  - threatType: 3
-    threatStatus: 1
+  nodeType: 16
+  nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
+  nodeIcon: {fileID: 21300000, guid: 43df4e4e403f2f3498e402799e46ccf0, type: 3}
+  description: {fileID: 0}
+  startingThreats: 05000000
+  threatResponses: []
   threatEvolutions: []

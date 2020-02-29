@@ -19,6 +19,7 @@ namespace DefaultNamespace{
         
         public Sprite GetNodeShapeSprite(NodeFamily family) {            
             switch (family) {
+                case NodeFamily.Zone:
                 case NodeFamily.Base:
                     return baseNodeShape;
                 case NodeFamily.Logical:
@@ -128,7 +129,7 @@ namespace DefaultNamespace{
                 node.GetBehaviour().InitialiseStartingThreatSet();
             }
         }
-
+        
         public Control_Dropdown_Option_Set GetControlOptionSet(ControlDropdownOptionSets setName) {
             foreach (Control_Dropdown_Option_Set set in optionSets) {
                 if (set.setName == setName) {
@@ -146,6 +147,10 @@ namespace DefaultNamespace{
             Vector4[] vectorArray = new Vector4[maxNodes];
             
             for (int i = 0; i < nodes.Count; i++) {
+                if (nodes[i].nodeObject.GetNodeDefinition().nodeFamily != NodeFamily.Zone) {
+                    continue;
+                }
+                
                 // Get node position
                 Vector3 nodePos = Camera.main.WorldToScreenPoint(nodes[i].nodeObject.transform.position);
                 nodePos.y = /*Camera.main.pixelHeight - */nodePos.y;
