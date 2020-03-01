@@ -20,6 +20,7 @@ public class ControlSettings_Tickbox : ControlSettings_Field {
         GenerateOptions();
         bitmask = (char[])nodeField.GetValue();
         SetValue();
+        GetComponent<RectTransform>().ForceUpdateRectTransforms();
     }
 
     private void ClearOptions() {
@@ -48,10 +49,15 @@ public class ControlSettings_Tickbox : ControlSettings_Field {
         //Debug.Log("Bitmask updated: " + GetBitmaskString());
     }
 
+    public void OnTextFieldValueChanged(int pos, int value) {
+        nodeField.SetThreatStrength(pos, value);
+    }
+    
     private void SetValue() {
         for(int i = 0; i < tickboxes.Length; i++) {
             bool value = bitmask[i] == '1';
             tickboxes[i].SetValue(value);
+            tickboxes[i].SetThreatStrength(nodeField.GetThreatStrength(i));
         }
     }
     

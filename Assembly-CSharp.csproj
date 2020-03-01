@@ -60,10 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AttackOption.cs" />
-    <Compile Include="Assets\Control_Toggle.cs" />
     <Compile Include="Assets\LevelGUIBackground.cs" />
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\NodeField_Dropdown_Item.cs" />
+    <Compile Include="Assets\NodeHealthBar.cs" />
     <Compile Include="Assets\Scripts\backend\ConnectionCollider.cs" />
     <Compile Include="Assets\Scripts\backend\EvolutionNotDefinedException.cs" />
     <Compile Include="Assets\Scripts\backend\MainMenuLoader.cs" />
@@ -104,6 +104,7 @@
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Antivirus.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Captcha.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_ConnectionEncryption.cs" />
+    <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Form.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_PasswordGate.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Sanitisation.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Table.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Slider.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Text.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Tickbox.cs" />
+    <Compile Include="Assets\Scripts\gui\control_settings\Control_Toggle.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu_InfoButton.cs" />
     <Compile Include="Assets\Scripts\gui\controlsmenu\ControlsMenu_Option.cs" />

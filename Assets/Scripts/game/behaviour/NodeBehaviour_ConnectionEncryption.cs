@@ -21,7 +21,7 @@ namespace DefaultNamespace {
             Control_Dropdown_Option chosenEncryption = encryptionTypes.options[(int)fields[1].GetValue()];
 
             if (threatType == ThreatType.Interception_Data_Theft) {
-                int remainingHealth = chosenEncryption.health - threat.GetStrength();
+                int remainingHealth = GetTotalHealth() - threat.GetStrength();
                 
                 threat.SetNodeHealth(remainingHealth);
 

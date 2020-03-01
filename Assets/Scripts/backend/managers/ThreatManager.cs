@@ -40,7 +40,7 @@ namespace DefaultNamespace {
 
         public Threat CreateThreat(ThreatType t, Threat parent, Node n) {
             activeThreatCount++;
-            Threat threat = new Threat(t, parent, n, 100);
+            Threat threat = new Threat(t, parent, n, parent.GetStrength());
             threat.Run();
             return threat;
         }

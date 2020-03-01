@@ -51,7 +51,7 @@ public class ControlsMenu_Option : MonoBehaviour {
             mousePos.z = 0;
             
             _clonedNodeObject.nodeInteractor.DragNode();
-            _clonedNodeObject.transform.position = mousePos;
+            //_clonedNodeObject.transform.position = mousePos;
         }
     }
 

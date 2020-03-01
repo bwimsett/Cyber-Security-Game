@@ -118,6 +118,9 @@ namespace DefaultNamespace{
                 case NodeType.Password:
                     behaviour = new NodeBehaviour_PasswordGate(node);
                     break;
+                case NodeType.Form:
+                    behaviour = new NodeBehaviour_Form(node);
+                    break;
                 default:
                     behaviour = new NodeBehaviour(node);
                     break;

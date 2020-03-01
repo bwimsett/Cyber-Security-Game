@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: PC
   nodeCost: 0
+  nodeUnlockTokens: 0
   nodeFamily: 0
   nodeType: 11
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
@@ -23,4 +24,6 @@ MonoBehaviour:
   threatResponses:
   - threatType: 3
     threatStatus: 1
+  - threatType: 10
+    threatStatus: 0
   threatEvolutions: []

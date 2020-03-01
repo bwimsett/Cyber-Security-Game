@@ -42,8 +42,8 @@ namespace DefaultNamespace {
             fields = new NodeField[3];
             
             fields[0] = new NodeField("Description", "Protects against unauthorised access.");
-            fields[1] = new NodeField("Additions", ControlDropdownOptionSets.Password_Addons);
-            fields[2] = new NodeField("Access Level", 0, true, ControlDropdownOptionSets.Access);
+            fields[1] = new NodeField("Access Level", 0, true, ControlDropdownOptionSets.Access);
+            fields[2] = new NodeField("Additions", ControlDropdownOptionSets.Password_Addons);       
             
             base.InitialiseFields();
         }

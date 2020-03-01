@@ -150,6 +150,10 @@ namespace backend {
             this.nodeHealth = nodeHealth;
         }
 
+        public int GetNodeHealth() {
+            return nodeHealth;
+        }
+
         // Returns the threat which originated this one
         public Threat GetRoot() {
             if (parentThreat == null) {
@@ -173,6 +177,13 @@ namespace backend {
 
         public ThreatStatus GetStatus() {
             return status;
+        }
+
+        public override string ToString() {
+
+            return "" + threatType + " " + node + " " + strength;
+            
+            return base.ToString();
         }
     }
 }

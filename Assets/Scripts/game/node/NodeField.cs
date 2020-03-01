@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using backend.threat_modelling;
+using Debug = UnityEngine.Debug;
 
 namespace DefaultNamespace.node {
     [Serializable]
@@ -8,6 +10,7 @@ namespace DefaultNamespace.node {
         private NodeFieldType fieldType;
         private string fieldTitle;
         private object value;
+        private int[] threatStrengths;
         private bool readOnly;
 
         private int minValue;
@@ -61,13 +64,20 @@ namespace DefaultNamespace.node {
             fieldType = NodeFieldType.enumerable_many;
         }
         
-        public NodeField(string fieldTitle, Control_Dropdown_Option_Set optionSet) {
+        public NodeField(string fieldTitle, Control_Dropdown_Option_Set optionSet, bool threats) {
             this.fieldTitle = fieldTitle;
             value = new char[optionSet.options.Length];
             readOnly = false;
             this.optionSet = optionSet;
             fieldType = NodeFieldType.enumerable_many;
+
+            if (threats) {
+                fieldType = NodeFieldType.threat;
+                threatStrengths = new int[optionSet.options.Length];
+            }
         }
+        
+        
         
         private void EstablishFieldType() {            
             if (value is int) {
@@ -109,6 +119,23 @@ namespace DefaultNamespace.node {
 
         public void SetValue(object value) {
             this.value = value;
+        }
+
+        public void SetThreatStrength(int pos, int threatStrength) {
+            threatStrengths[pos] = threatStrength;
+            Debug.Log("Threat strength set to: "+threatStrengths[pos]);
+        }
+
+        public int GetThreatStrength(int pos) {
+            if (threatStrengths == null) {
+                return 0;
+            }
+            
+            if (pos < 0 || pos >= threatStrengths.Length) {
+                return 0;
+            }
+            
+            return threatStrengths[pos];
         }
 
         public void SetOptionSet(Control_Dropdown_Option_Set optionSet) {

@@ -13,7 +13,10 @@ namespace backend {
             currentTrace = threat.GetTrace();
 
             foreach (Threat t in currentTrace) {
-                t.GetNode().nodeObject.SetTempColor(attackColor);
+                NodeObject nodeObject = t.GetNode().nodeObject;
+                nodeObject.SetTempColor(attackColor);
+                nodeObject.healthBar.SetHealth(t.GetNodeHealth(), nodeObject.GetNode().GetBehaviour().GetTotalHealth());
+                nodeObject.healthBar.SetVisible(true);
             }    
             
             Debug.Log(threat.GetStringTrace());
@@ -30,6 +33,7 @@ namespace backend {
             
             foreach (Threat t in currentTrace) {
                 t.GetNode().nodeObject.ResetColor();
+                t.GetNode().nodeObject.healthBar.SetVisible(false);
             }
         }
         

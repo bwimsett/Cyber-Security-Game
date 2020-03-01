@@ -12,26 +12,32 @@ using UnityEngine.UI;
 public class ControlSettingsWindow : Window {
     private Node node;
 
-    public RectTransform settingContainerTransform;
+    public RectTransform scrollRectTransform;
+    public RectTransform settingsContainer;
     public ControlSettings_Slider slider_prefab;
     public ControlSettings_Dropdown dropdown_prefab;
     public ControlSettings_Text text_prefab;
     public ControlSettings_Tickbox tickbox_prefab;
+    public ControlSettings_Tickbox tickbox_threat_prefab;
 
     public Vector2 positionOffset;
     public RectTransform canvas;
     
     private ControlSettings_Field[] fieldObjects;
     private ControlSettings_Field startingThreatsField;
+
+    void Update() {
+        settingsContainer.ForceUpdateRectTransforms();
+        scrollRectTransform.ForceUpdateRectTransforms();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRectTransform);
+        Canvas.ForceUpdateCanvases();
+    }
     
     public void SetNode(Node node) {
         this.node = node;
         title.text = node.nodeObject.GetNodeDefinition().nodeName;
 
-        Vector3 canvasOffset = canvas.rect.size*0.5f;
-        Vector2 position = Camera.main.WorldToScreenPoint(node.nodeObject.gameObject.transform.position) - canvasOffset;
-
-        transform.localPosition = position+positionOffset;
+        RefreshPosition();
         
         GenerateFields();
     }
@@ -54,9 +60,6 @@ public class ControlSettingsWindow : Window {
             fieldList.Add(GetFieldFromFieldType(f));
         }
 
-        settingContainerTransform.ForceUpdateRectTransforms();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(settingContainerTransform);
-        
         GenerateLevelBuilderFields(fieldList);
         
         fieldObjects = fieldList.ToArray();
@@ -75,10 +78,14 @@ public class ControlSettingsWindow : Window {
                 break;
             case NodeFieldType.enumerable_many: prefab = tickbox_prefab.gameObject;
                 break;
+            case NodeFieldType.threat: prefab = tickbox_threat_prefab.gameObject;
+                break;
         }
 
-        ControlSettings_Field field = Instantiate(prefab, settingContainerTransform).GetComponent<ControlSettings_Field>();
+        ControlSettings_Field field = Instantiate(prefab, settingsContainer).GetComponent<ControlSettings_Field>();
         field.SetNodeField(nodeField);
+        
+        field.GetComponent<RectTransform>().ForceUpdateRectTransforms();
 
         return field;
     }
@@ -110,6 +117,29 @@ public class ControlSettingsWindow : Window {
     
     public void Close() {
         gameObject.SetActive(false);
+    }
+
+    public void RefreshPosition() {
+
+        RectTransform rect = GetComponent<RectTransform>();
+
+        // Find min and max positions to ensure it stays fully on the screen
+
+        float xMin = 0;
+        float xMax = Screen.width - (rect.rect.width);
+        float yMin = rect.rect.height;
+        float yMax = Screen.height;
+              
+        Vector2 position = Camera.main.WorldToScreenPoint(node.nodeObject.gameObject.transform.position);
+
+        position.x = Mathf.Max(position.x, xMin);
+        position.y = Mathf.Max(position.y, yMin);
+        position.x = Mathf.Min(position.x, xMax);
+        position.y = Mathf.Min(position.y, yMax);
+
+        rect.anchoredPosition = position;
+
+
     }
 
 }

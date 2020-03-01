@@ -20,11 +20,9 @@ namespace DefaultNamespace {
         protected NodeField[] fields;
         protected NodeField selectedStartingThreats;
         protected int startingHealth;
-        protected int[] threatStrengths;
         
         public NodeBehaviour(Node node) {
             this.node = node;
-            threatStrengths = new int[node.nodeObject.GetNodeDefinition().GetStartingThreatsOptionSet().options.Length];
             InitialiseFields();
         }
 
@@ -34,7 +32,7 @@ namespace DefaultNamespace {
         
         public virtual void InitialiseStartingThreatSet() {
             Control_Dropdown_Option_Set optionSet = node.nodeObject.GetNodeDefinition().GetStartingThreatsOptionSet();
-            selectedStartingThreats = new NodeField("Starting Threats", optionSet);
+            selectedStartingThreats = new NodeField("Starting Threats", optionSet, true);
         }
         
         public virtual ThreatStatus Attack(Threat threat) {       
@@ -81,8 +79,12 @@ namespace DefaultNamespace {
                 if (selectedThreats[i] != '1') {
                     continue;
                 }
+
+                int strength = selectedStartingThreats.GetThreatStrength(i);
                 
-                Threat t = new Threat(threatTypes[i], null, node, threatStrengths[i]);
+                Threat t = new Threat(threatTypes[i], null, node, strength);
+                Debug.Log(t);
+                
                 outputThreats.Add(t);
             }
 
@@ -104,6 +106,10 @@ namespace DefaultNamespace {
         
         public int GetTotalHealth() {
             int totalHealth = 0;
+
+            if (fields == null) {
+                return 0;
+            }
             
             foreach (NodeField f in fields) {
                 NodeFieldType fieldType = f.GetFieldType();

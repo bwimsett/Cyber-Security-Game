@@ -5,5 +5,6 @@ namespace DefaultNamespace {
         enumerable_single,
         enumerable_many,
         text,
+        threat
     }
 }

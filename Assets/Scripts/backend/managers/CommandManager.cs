@@ -13,7 +13,7 @@ namespace DefaultNamespace {
         public string clearLevelCommand;
         public string openAttackVisualiserCommand;
         public string zoneShaderCommand;
-        public string snapToGridCommand;
+        //public string snapToGridCommand;
         public string goldBoundaryCommand;
         public string silverBoundaryCommand;
         public string bronzeBoundaryCommand;
@@ -84,9 +84,9 @@ namespace DefaultNamespace {
                     GetBoolFromValue(GetValueFromCommand(command));
             }
             
-            if (command.Contains(snapToGridCommand.ToLower())) {
+            /*if (command.Contains(snapToGridCommand.ToLower())) {
                 GameManager.levelScene.grid.snapToGrid = GetBoolFromValue(GetValueFromCommand(command));
-            }
+            }*/
             
             if (command.Contains(bronzeBoundaryCommand.ToLower())) {
                 GameManager.currentLevel.SetMedalBoundary(Medal.Bronze, GetIntFromValue(GetValueFromCommand(command)));

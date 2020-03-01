@@ -37,6 +37,14 @@ public class NodeInteractor : MonoBehaviour {
         MoveConnectionNodeIntoPlace();
     }
 
+    public void OnMouseOver() {
+        _nodeObject.nodeNameTextAnimator.SetBool("Visible", true);
+    }
+
+    public void OnMouseExit() {
+        _nodeObject.nodeNameTextAnimator.SetBool("Visible", false);
+    }
+
     private void MoveConnectionNodeIntoPlace() {
         // Check node family
         if (_nodeObject.GetNodeDefinition().nodeFamily != NodeFamily.Connection) {

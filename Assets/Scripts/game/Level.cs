@@ -38,13 +38,15 @@ namespace DefaultNamespace {
         public void CalculateScore(Threat[] failedThreats) {
             // Calculate score
             GameManager.currentLevelScore.CalculateScore(failedThreats);
-                
-            // Refresh level summary window
-            GameManager.levelScene.guiManager.levelSummaryWindow.Refresh();       
-                
-            // Save game
-            GameSerializer serializer = new GameSerializer(); 
-            serializer.SaveGame(GameManager.currentSaveGame);
+
+            if (!IsEditMode()) {
+                // Refresh level summary window
+                GameManager.levelScene.guiManager.levelSummaryWindow.Refresh();
+
+                // Save game
+                GameSerializer serializer = new GameSerializer();
+                serializer.SaveGame(GameManager.currentSaveGame);
+            }
         }
         
         public void SetLevelScore(LevelScore levelScore) {

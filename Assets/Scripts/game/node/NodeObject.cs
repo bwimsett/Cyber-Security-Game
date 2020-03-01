@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace;
+using TMPro;
 using UnityEngine;
 
 
@@ -9,6 +10,10 @@ public class NodeObject : MonoBehaviour {
     public SpriteRenderer icon;
     public SpriteRenderer outline;
 
+    public TextMeshProUGUI nodeNameText;
+    public Animator nodeNameTextAnimator;
+    public NodeHealthBar healthBar;
+    
     public SpriteMask outlineMask;
     public SpriteRenderer outlineRenderer;
     public SpriteRenderer centerRenderer;
@@ -74,8 +79,10 @@ public class NodeObject : MonoBehaviour {
 
     public void Refresh() {
         icon.sprite = nodeDefinition.nodeIcon;
-        outline.color = icon.color = color;
+        outline.color = icon.color = nodeNameText.color = color;
         nodeInteractor.RefreshConnections();
+        nodeNameText.text = nodeDefinition.nodeName;
+        healthBar.SetHealth(50,100);
         outlineMask.sprite = outlineRenderer.sprite = centerRenderer.sprite =
             GameManager.levelScene.nodeManager.GetNodeShapeSprite(nodeDefinition.nodeFamily);
     }

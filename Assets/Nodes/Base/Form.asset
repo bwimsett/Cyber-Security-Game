@@ -21,5 +21,13 @@ MonoBehaviour:
   nodeIcon: {fileID: 21300000, guid: 0f3b2adb1de797f4bbc790c4f1589a3b, type: 3}
   description: {fileID: 0}
   startingThreats: 040000000700000008000000
-  threatResponses: []
-  threatEvolutions: []
+  threatResponses:
+  - threatType: 17
+    threatStatus: 0
+  - threatType: 15
+    threatStatus: 0
+  - threatType: 18
+    threatStatus: 4
+  threatEvolutions:
+  - threatType: 18
+    evolution: 15

@@ -1,13 +1,15 @@
+using DefaultNamespace;
 using UnityEngine;
 
 namespace backend {
     public class LevelGrid : MonoBehaviour {
         public float gridScale;
-        public bool snapToGrid;
 
 
         public Vector2 GetGridPos(Vector2 position) {
-            if (!snapToGrid) {
+            
+            // Only snap in edit mode
+            if (!GameManager.currentLevel.IsEditMode()) {
                 return position;
             }
             
