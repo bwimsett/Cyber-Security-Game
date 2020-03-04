@@ -11,6 +11,7 @@ namespace backend {
 
         
         public ThreatType threatType;
+        public string threatName;
 
         public ThreatSummaryContext[] startSentences; // Used when this threat is the root
         public ThreatSummaryContext[] middleSentences;

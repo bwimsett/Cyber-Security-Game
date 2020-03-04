@@ -10,8 +10,6 @@ namespace DefaultNamespace {
             
             fields[0] = new NodeField("Description", "Encrypts data sent along data connections");
             fields[1] = new NodeField("Encryption Type", 0, false, ControlDropdownOptionSets.Connection_Encryption_Types);
-            
-            base.InitialiseFields();
         }
 
         public override ThreatStatus Attack(Threat threat) {

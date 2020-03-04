@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Data Corruption
   m_EditorClassIdentifier: 
   threatType: 1
+  threatName: Data Corruption
   startSentences: []
   middleSentences: []
   endSentences:

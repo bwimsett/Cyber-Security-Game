@@ -16,8 +16,6 @@ namespace DefaultNamespace {
             fields[1] = new NodeField("Scanned File Types", 0, false,ControlDropdownOptionSets.Antivirus_FileTypes);
             fields[2] = new NodeField("Scan Frequency", 0, false, ControlDropdownOptionSets.Antivirus_ScanFrequency);
             fields[3] = new NodeField("", ControlDropdownOptionSets.Antivirus_BlockMedia);
-            
-            base.InitialiseFields();
         }
 
         public override ThreatStatus Attack(Threat threat) {

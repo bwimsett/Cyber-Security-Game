@@ -12,8 +12,6 @@ namespace DefaultNamespace {
 
             fields[0] = new NodeField("Description", "Strips any escaped data from input");
             fields[1] = new NodeField("Sanitise against", ControlDropdownOptionSets.Sanitisation_Options);
-            
-            base.InitialiseFields();
         }
 
         public override ThreatStatus Attack(Threat threat) {

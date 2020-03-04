@@ -10,7 +10,8 @@ namespace backend.level {
         private const int TOKENS_GOLD = 3;
         private const int TOKENS_SILVER = 2;
         private const int TOKENS_BRONZE = 1;
-        
+
+        private const int SCORE_PER_THREAT_FAILED = -350;
         private const int SCORE_PER_HEALTHPOINT = 1;
         private const int SCORE_PER_BUDGETPOINT = 250;
         private const int SCORE_PER_CONTROL_TYPE = 350;
@@ -21,6 +22,7 @@ namespace backend.level {
         public int score_budgetremaining;
         public int score_controltypes;
         public int score_threatsdefended;
+        public int score_threatsfailed;
         public int score_firstattempt;
 
         public Medal medal;
@@ -29,20 +31,25 @@ namespace backend.level {
             medal = Medal.None;
         }
 
-        public LevelScore(Threat[] failedThreats) {
-            CalculateScore(failedThreats);
+        public LevelScore(Threat[] successfulThreats, Threat[] failedThreats) {
+            CalculateScore(successfulThreats, failedThreats);
         }
 
-        public void CalculateScore(Threat[] failedThreats) {
+        public void CalculateScore(Threat[] successfulThreats, Threat[] failedThreats) {
             score_budgetremaining = CalculateScore_Budget();
             score_controltypes = CalculateScore_ControlType();
             score_threatsdefended = CalculateScore_ThreatsDefended(failedThreats);
+            score_threatsfailed = CalculateScore_FailedThreats(successfulThreats);
             score_firstattempt = CalculateScore_FirstAttempt();
             medal = ClassifyMedal(GetTotalScore());
         }
 
+        private int CalculateScore_FailedThreats(Threat[] successfulThreats) {
+            return successfulThreats.Length * SCORE_PER_THREAT_FAILED;
+        }
+        
         private int CalculateScore_Budget() {
-            int budgetRemaining = GameManager.currentLevel.GetBudget();
+            int budgetRemaining = GameManager.currentLevel.GetRemainingBudget();
             return budgetRemaining * SCORE_PER_BUDGETPOINT;
         }
 
@@ -52,7 +59,7 @@ namespace backend.level {
             foreach (Node n in GameManager.currentLevel.nodes) {
                 NodeDefinition def = n.nodeObject.GetNodeDefinition();
 
-                bool isControl = def.nodeFamily != NodeFamily.Base;
+                bool isControl = def.nodeFamily != NodeFamily.Base && def.nodeFamily != NodeFamily.Zone;
                 
                 if (!controlTypes.Contains(def) && isControl) {
                     controlTypes.Add(def);
@@ -93,7 +100,7 @@ namespace backend.level {
         }
 
         public int GetTotalScore() {
-            return score_budgetremaining + score_controltypes + score_threatsdefended + score_firstattempt;
+            return score_budgetremaining + score_controltypes + score_threatsdefended + score_threatsfailed +score_firstattempt;
         }
 
         public int GetTokens() {

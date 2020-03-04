@@ -10,9 +10,6 @@ namespace DefaultNamespace {
             
             fields[0] = new NodeField("Description", "[BLANK]");
             fields[1] = new NodeField("Access Level", 0, true, ControlDropdownOptionSets.Access);
-            
-            
-            base.InitialiseFields();
         }
     }
 }

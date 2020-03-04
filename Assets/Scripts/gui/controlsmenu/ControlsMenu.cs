@@ -28,7 +28,7 @@ public class ControlsMenu : MonoBehaviour {
 
             NodeDefinition n = nodeDefinitions[i];
 
-            bool isControl = n.nodeFamily != NodeFamily.Base;
+            bool isControl = n.nodeFamily != NodeFamily.Base && n.nodeFamily != NodeFamily.Zone;
 
             if (!editMode && !isControl) {
                 continue;

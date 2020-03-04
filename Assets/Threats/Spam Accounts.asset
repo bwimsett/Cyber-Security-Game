@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Spam Accounts
   m_EditorClassIdentifier: 
   threatType: 8
+  threatName: Account Spam
   startSentences:
   - node: 14
     summary: Repeated account form submission

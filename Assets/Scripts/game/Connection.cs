@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using DefaultNamespace;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -10,11 +11,22 @@ public class Connection : MonoBehaviour {
     public Node start;
     public Node end;
     public float defaultLineThickness;
+    public float maxLineThickness;
     public float colliderThickness;
     public LineRenderer lineRenderer;
     public ConnectionCollider connectionCollider;
     public Sprite duplexChevron;
     public Sprite simplexChevron;
+
+    private bool simulatingThreat;
+    private float threatSimulationPercentComplete;
+    private Node threatSimulationStartNode;
+    private const float THREAT_SIMULATION_SPEED = 1.4f; // Percent of connection covered per second
+    public bool threatSimulationComplete;
+
+    void Update() {
+        UpdateThreatSimulation();
+    }
     
     void Start(){
         RefreshChevron();
@@ -33,6 +45,8 @@ public class Connection : MonoBehaviour {
     
     // Refreshes the positions of the two ends of the line
     public void RefreshPosition() {
+        lineRenderer.positionCount = 2;
+        
         if (lineRenderer == null) {
             Debug.Log("Null line renderer: "+this);
             return;
@@ -45,6 +59,7 @@ public class Connection : MonoBehaviour {
         }
 
         lineRenderer.SetPosition(0, startPos);
+        
         lineRenderer.startWidth = defaultLineThickness;
         connectionCollider.Refresh();
         
@@ -53,6 +68,10 @@ public class Connection : MonoBehaviour {
     
     // Refreshes the gradient of the line
     public void RefreshGradient() {
+
+        if (threatSimulationComplete) {
+            return;
+        }
 
         Color startColor = start.nodeObject.GetCurrentColor();
         
@@ -93,8 +112,8 @@ public class Connection : MonoBehaviour {
 
         connectionChevron.color = GetColorAtPoint(0.5f);
 
-        Vector2 pos = Vector2.Lerp(pos1, pos2, 0.5f);
-        connectionChevron.transform.localPosition = pos;
+        Vector3 pos = Vector2.Lerp(pos1, pos2, 0.5f);
+        connectionChevron.transform.localPosition = pos-GameManager.levelScene.transform.position;
 
         if (duplex) {
             connectionChevron.sprite = duplexChevron;
@@ -203,5 +222,106 @@ public class Connection : MonoBehaviour {
         }
 
         return false;
+    }
+
+    public void TriggerThreatSimulation(Node startNode) {
+        if (startNode != start && startNode != end) {
+            return;
+        }
+
+        if (simulatingThreat) {
+            return;
+        }
+
+        simulatingThreat = true;
+        threatSimulationStartNode = startNode;
+        threatSimulationPercentComplete = 0;
+        threatSimulationComplete = false;
+    }
+
+    public void ResetThreatSimulation() {
+        simulatingThreat = false;
+        threatSimulationComplete = false;
+    }
+    
+    private void UpdateThreatSimulation() {
+        if (!simulatingThreat) {
+            return;
+        }
+        
+        // Get the start and end points of the line
+        Vector2 newPos = Vector2.zero;
+        Vector2 lineStart = lineRenderer.GetPosition(0);
+        Vector2 lineEnd = lineRenderer.GetPosition(1);
+
+        if (lineRenderer.positionCount == 3) {
+            lineStart = lineRenderer.GetPosition(0);
+            lineEnd = lineRenderer.GetPosition(2);
+        }
+        
+        lineRenderer.positionCount = 3;
+             
+        // Recalculate percentage complete (multiplied by Time.deltaTime to account for framerate differences)
+        threatSimulationPercentComplete += THREAT_SIMULATION_SPEED * Time.deltaTime;
+
+        if (threatSimulationPercentComplete > 1) {
+            threatSimulationPercentComplete = 1;
+        }
+        
+        float threatSimulationTime = threatSimulationPercentComplete;
+            
+        // Calculate position of new line vertex at percentage
+        if (threatSimulationStartNode == start) {
+            newPos = Vector2.Lerp(lineStart, lineEnd, threatSimulationPercentComplete);
+        }
+        else {
+            newPos = Vector2.Lerp(lineEnd, lineStart, threatSimulationPercentComplete);
+            threatSimulationTime = 1 - threatSimulationPercentComplete;
+        }
+        
+        // Create line vertex at the calculated position
+        Vector3[] positions = new Vector3[3];
+            positions[0] = lineStart;
+            positions[1] = newPos;
+            positions[2] = lineEnd;
+            lineRenderer.SetPositions(positions);
+        
+        // Set the colour of the gradient at the calculated position
+        GradientColorKey[] colourKey = new GradientColorKey[3];
+            colourKey[0] = new GradientColorKey(start.nodeObject.GetCurrentColor(), 0);
+            colourKey[1] = new GradientColorKey(GameManager.levelScene.threatManager.threatColor, threatSimulationTime+0.001f);
+            colourKey[2] = new GradientColorKey(end.nodeObject.GetCurrentColor(), 1);
+            GradientAlphaKey[] alphaKey = new GradientAlphaKey[1];
+            alphaKey[0] = new GradientAlphaKey(1,0);
+        
+            Gradient gradient = new Gradient();
+            gradient.mode = GradientMode.Fixed;
+            gradient.SetKeys(colourKey, alphaKey);
+
+            lineRenderer.colorGradient = gradient;
+        
+        // Increase line thickness up to gradient position
+        Keyframe[] lineThickness = new Keyframe[3];
+            lineThickness[0] = new Keyframe(0, defaultLineThickness);
+            lineThickness[1] = new Keyframe(threatSimulationTime, CalculateLineThickness(threatSimulationTime));
+            lineThickness[2] = new Keyframe(1, defaultLineThickness);
+            lineRenderer.widthCurve = new AnimationCurve(lineThickness);
+
+        if (threatSimulationPercentComplete >= 1) {
+            simulatingThreat = false;
+            threatSimulationPercentComplete = 0;
+            threatSimulationStartNode = null;
+            threatSimulationComplete = true;
+        }
+    }
+
+    // Interpolates between default and max line thickness depending on distance from centre of line
+    private float CalculateLineThickness(float time) {
+        float distanceFromCenter = 1-(2*Mathf.Abs(0.5f - time));
+        float differenceBetweenSizes = maxLineThickness - defaultLineThickness;
+        float sizeToAdd = distanceFromCenter * differenceBetweenSizes;
+        float newSize = defaultLineThickness + sizeToAdd;
+
+        return newSize;
     }
 }

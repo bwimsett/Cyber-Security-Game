@@ -1,14 +1,19 @@
+using System.Collections.Generic;
 using backend.level;
 using backend.level_serialization;
 using backend.serialization;
 using UnityEngine;
 
 namespace DefaultNamespace {
-    public class GameManager : MonoBehaviour{
+    public class GameManager : MonoBehaviour {
 
+        public int scrambledLevelNameCount;
+        
         public static LevelScene levelScene;
         public static Level currentLevel;
         public static LevelSave selectedLevelSave;
+        public static string levelName;
+        public static string levelNumber;
         public static SaveGame currentSaveGame;
         public static LevelScore currentLevelScore;
 
@@ -26,6 +31,7 @@ namespace DefaultNamespace {
             }
             
             Physics.queriesHitTriggers = true;
+
         }
 
         public static void Save() {
@@ -33,6 +39,7 @@ namespace DefaultNamespace {
             
             gs.SaveGame(currentSaveGame);
         }
+
         
     }
 }

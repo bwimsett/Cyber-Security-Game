@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using backend.threat_modelling;
+using DefaultNamespace;
 using gui.control_settings;
 using UnityEditor;
 using UnityEngine;
@@ -46,6 +47,7 @@ public class ControlSettings_Tickbox : ControlSettings_Field {
         
         nodeField.SetValue(bitmask);
 
+        GameManager.currentLevel.RecalculateBudget();
         //Debug.Log("Bitmask updated: " + GetBitmaskString());
     }
 

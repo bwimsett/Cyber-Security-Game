@@ -44,8 +44,6 @@ namespace DefaultNamespace {
             fields[0] = new NodeField("Description", "Protects against unauthorised access.");
             fields[1] = new NodeField("Access Level", 0, true, ControlDropdownOptionSets.Access);
             fields[2] = new NodeField("Additions", ControlDropdownOptionSets.Password_Addons);       
-            
-            base.InitialiseFields();
         }
 
         public override void InitialiseStartingThreatSet() {
@@ -72,7 +70,7 @@ namespace DefaultNamespace {
             }
 
             if (threat.threatType == ThreatType.Authorised_Access_Block) {
-                if (threat.GetAccessLevel() > (int) fields[2].GetValue()) {
+                if (threat.GetAccessLevel() >= (int) fields[1].GetValue()) {
                     return ThreatStatus.Failure;
                 }
             }

@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Sanitisation.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Table.cs" />
     <Compile Include="Assets\Scripts\game\node\Node.cs" />
+    <Compile Include="Assets\Scripts\game\node\NodeAttackAnimationMonitor.cs" />
     <Compile Include="Assets\Scripts\game\node\NodeDefinition.cs" />
     <Compile Include="Assets\Scripts\game\node\NodeField.cs" />
     <Compile Include="Assets\Scripts\game\node\NodeInteractor.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Scripts\gui\AttackVisualiserDebugPanel.cs" />
     <Compile Include="Assets\Scripts\gui\ControlDescriptionWindow.cs" />
     <Compile Include="Assets\Scripts\gui\DeveloperConsole.cs" />
+    <Compile Include="Assets\Scripts\gui\LevelNameText.cs" />
     <Compile Include="Assets\Scripts\gui\Window.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettingsWindow.cs" />
     <Compile Include="Assets\Scripts\gui\control_settings\ControlSettings_Dropdown.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Assets\Scripts\gui\levelSummary\LevelSummary_Medals.cs" />
     <Compile Include="Assets\Scripts\gui\levelSummary\LevelSummary_ScoreBreakdownField.cs" />
     <Compile Include="Assets\Scripts\gui\levelSummary\LevelSummary_ThreatSummaryField.cs" />
+    <Compile Include="Assets\ThreatSummaryScreen.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Nodes\Descriptions\Sanitation Description.txt" />

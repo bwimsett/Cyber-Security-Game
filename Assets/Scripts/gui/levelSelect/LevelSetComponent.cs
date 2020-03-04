@@ -50,7 +50,8 @@ namespace gui.levelSelect {
             for (int i = 0; i < levelSet.levels.Length; i++) {     
                 medals[i] = Instantiate(medalPrefab, medalContainer).GetComponent<LevelSetMedal>();
                 medals[i].name = ""+i;
-                medals[i].SetLevel(levelSet.levels[i], levelSetPos*5+i);
+                string levelNumberString = (levelSetPos + 1) + "." + (i + 1);
+                medals[i].SetLevel(levelSet.levels[i], levelSetPos*5+i, levelNumberString);
                 medals[i].SetLock(locked);
             }
             

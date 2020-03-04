@@ -16,6 +16,13 @@ public class LevelSummaryWindow : Window {
     public GameObject threatSummaryFieldPrefab;
     public Transform threatSummaryContainer;
     private LevelSummary_ThreatSummaryField[] threatSummaryFields;
+    public Animator animator;
+
+    public void SetVisible(bool visible) {
+        if (visible) {
+            animator.SetTrigger("swipein");
+        }
+    }
 
     
     public void Refresh() {
@@ -30,12 +37,12 @@ public class LevelSummaryWindow : Window {
     private void GenerateScoreBreakdown() {
         LevelScore levelScore = GameManager.currentLevelScore;
         
-        scoreBreakdown_Fields[0].setScore("Health: ", levelScore.score_healthpoints);
-        scoreBreakdown_Fields[1].setScore("Budget: ", levelScore.score_budgetremaining);
-        scoreBreakdown_Fields[2].setScore("Controls: ",  levelScore.score_controltypes);
-        scoreBreakdown_Fields[3].setScore("Threats: ", levelScore.score_threatsdefended);
-        scoreBreakdown_Fields[4].setScore("First Attempt: ", levelScore.score_firstattempt);
-        scoreBreakdown_Fields[5].setScore("Total: ", levelScore.GetTotalScore());
+        scoreBreakdown_Fields[0].setScore("Health: ", levelScore.score_healthpoints, false);
+        scoreBreakdown_Fields[1].setScore("Budget: ", levelScore.score_budgetremaining, false);
+        scoreBreakdown_Fields[2].setScore("Controls: ",  levelScore.score_controltypes, false);
+        scoreBreakdown_Fields[3].setScore("Threats: ", levelScore.score_threatsdefended, false);
+        scoreBreakdown_Fields[4].setScore("Threats Failed: ", levelScore.score_threatsfailed, false);
+        scoreBreakdown_Fields[5].setScore("Total: ", levelScore.GetTotalScore(), true);
     }
 
     public void GenerateThreatSummaries() {

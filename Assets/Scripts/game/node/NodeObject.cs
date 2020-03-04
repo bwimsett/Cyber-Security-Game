@@ -1,18 +1,23 @@
-﻿using DefaultNamespace;
+﻿using backend;
+using DefaultNamespace;
+using DefaultNamespace.node;
 using TMPro;
 using UnityEngine;
 
 
 public class NodeObject : MonoBehaviour {
     
-    
     public NodeInteractor nodeInteractor;
     public SpriteRenderer icon;
     public SpriteRenderer outline;
-
+    
+    [Range(0,1)]
+    public float threatColorMix;
     public TextMeshProUGUI nodeNameText;
     public Animator nodeNameTextAnimator;
+    public Animator nodeAnimator;
     public NodeHealthBar healthBar;
+    public NodeAttackAnimationMonitor nodeAttackMonitor;
     
     public SpriteMask outlineMask;
     public SpriteRenderer outlineRenderer;
@@ -29,6 +34,7 @@ public class NodeObject : MonoBehaviour {
     private Vector2 targetPos;
 
     void Update() {
+        SetTempColor(Color.Lerp(nodeDefinition.nodeColor, GameManager.levelScene.threatManager.threatColor, threatColorMix));
         Move();
     }
     
@@ -52,10 +58,14 @@ public class NodeObject : MonoBehaviour {
         if (GameManager.currentLevel.IsEditMode() && nodeDefinition.nodeFamily == NodeFamily.Zone) {
             centerRenderer.enabled = true;
             outlineRenderer.enabled = true;
+            GetComponent<CircleCollider2D>().enabled = true;
+            nodeInteractor.GetComponent<CircleCollider2D>().enabled = true;
         }
         else if(nodeDefinition.nodeFamily == NodeFamily.Zone){
             centerRenderer.enabled = false;
             outlineRenderer.enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false;
+            nodeInteractor.GetComponent<CircleCollider2D>().enabled = false;
         }
     }
     
@@ -64,8 +74,14 @@ public class NodeObject : MonoBehaviour {
         Refresh();
     }
 
-    public void ResetColor() {
+    public void SimulateAttack() {
+        nodeAnimator.SetBool("attacked", true);
+    }
+    
+    public void ResetThreatSimulation() {
+        nodeAnimator.SetBool("attacked", false);
         color = nodeDefinition.nodeColor;
+        nodeAttackMonitor.Reset();
         Refresh();
     }
     

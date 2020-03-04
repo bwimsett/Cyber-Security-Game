@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Encryption
   m_EditorClassIdentifier: 
   nodeName: Encryption
-  nodeCost: 0
+  nodeCost: 2
+  nodeUnlockTokens: 0
   nodeFamily: 2
   nodeType: 8
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}

@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SQL Injection
   m_EditorClassIdentifier: 
   threatType: 0
+  threatName: SQL Injection
   startSentences:
   - node: 1
     summary: SQL Injection from a web page
+  middleSentences: []
+  endSentences: []

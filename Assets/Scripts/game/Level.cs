@@ -5,6 +5,7 @@ using backend;
 using backend.level;
 using backend.level_serialization;
 using backend.serialization;
+using DefaultNamespace.node;
 using gui.controlsmenu;
 using UnityEngine;
 
@@ -13,10 +14,12 @@ namespace DefaultNamespace {
     public class Level {
 
         private int budget;
+        private int remainingBudget;
         private bool editMode = true;
         public List<Node> nodes;
         private int currentNodeId;
         private int attempts = 0;
+        private string levelName;
 
         private LevelScore levelScore;
 
@@ -35,9 +38,9 @@ namespace DefaultNamespace {
             this.levelScore = levelScore;
         }
 
-        public void CalculateScore(Threat[] failedThreats) {
+        public void CalculateScore(Threat[] successfulThreats, Threat[] failedThreats) {
             // Calculate score
-            GameManager.currentLevelScore.CalculateScore(failedThreats);
+            GameManager.currentLevelScore.CalculateScore(successfulThreats, failedThreats);
 
             if (!IsEditMode()) {
                 // Refresh level summary window
@@ -76,7 +79,7 @@ namespace DefaultNamespace {
         public void SetBudget(int amount) {
             if (editMode) {
                 budget = amount;
-                GameManager.levelScene.guiManager.SetBudgetText(budget);
+                RecalculateBudget();
             }
         }
 
@@ -84,20 +87,48 @@ namespace DefaultNamespace {
             return budget;
         }
 
+        public int GetRemainingBudget() {
+            return remainingBudget;
+        }
+
+        public void SetRemainingBudget(int amount) {
+            remainingBudget = amount;
+            GameManager.levelScene.guiManager.SetBudgetText(amount);
+        }
+
         public int GetAttempts() {
             return attempts;
         }
 
-        public bool PurchaseForAmount(int amount) {
-            if (amount > budget) {
+        public bool CanPurchaseForAmount(int amount) {
+            if (remainingBudget < amount && !editMode) {
                 return false;
             }
 
-            budget -= amount;
-
-            GameManager.levelScene.guiManager.RefreshBudget();
-            
             return true;
+        }
+
+        public void RecalculateBudget() {
+
+            int totalCost = 0;
+            
+            foreach (Node n in nodes) {
+                int nodeCost = 0;
+                
+                // Get cost of node
+                totalCost += n.nodeObject.GetNodeDefinition().nodeCost;
+                
+                // Get cost of node config
+                NodeField[] fields = n.GetBehaviour().GetFields();
+
+                foreach (NodeField f in fields) {
+                    nodeCost += f.GetCost();
+                }
+
+                totalCost += nodeCost;
+            }
+            
+            SetRemainingBudget(budget - totalCost);
         }
 
         public int GetNewNodeID() {
@@ -161,6 +192,8 @@ namespace DefaultNamespace {
             bronzeScore = levelSave.bronzeScore;
             silverScore = levelSave.silverScore;
             goldScore = levelSave.goldScore;
+
+            SetEditMode(false);
         }
 
         public void SetMedalBoundary(Medal medalType, int value) {

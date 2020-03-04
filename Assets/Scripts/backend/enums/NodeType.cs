@@ -18,6 +18,7 @@ namespace DefaultNamespace {
         WebApp,
         Form,
         Zone,
-        Login_System
+        Login_System,
+        Mail_Scanner
     }
 }

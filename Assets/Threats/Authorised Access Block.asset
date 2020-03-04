@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Authorised Access Block
   m_EditorClassIdentifier: 
   threatType: 17
+  threatName: Blocked Acccess
   startSentences:
   - node: 5
     summary: A password gate

@@ -144,11 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultLineThickness: 0.5
+  maxLineThickness: 3
   colliderThickness: 5
   lineRenderer: {fileID: 1230916103888320158}
   connectionCollider: {fileID: 642485401956589659}
   duplexChevron: {fileID: 21300000, guid: c71d3ffb5c66886459958bbea532a084, type: 3}
   simplexChevron: {fileID: 21300000, guid: e1273f1365b5e61449d01ea772c44341, type: 3}
+  threatSimulationComplete: 0
   connectionChevron: {fileID: 7107726636849653543}
 --- !u!1 &3515011730520693530
 GameObject:

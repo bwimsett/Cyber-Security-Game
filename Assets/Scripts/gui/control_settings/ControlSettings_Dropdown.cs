@@ -51,6 +51,7 @@ public class ControlSettings_Dropdown : ControlSettings_Field {
 
     public override void OnValueChanged() {
         nodeField.SetValue(dropdown.value);
+        GameManager.currentLevel.RecalculateBudget();
     }
 
     public void ColourOptions(bool colourOptions) {

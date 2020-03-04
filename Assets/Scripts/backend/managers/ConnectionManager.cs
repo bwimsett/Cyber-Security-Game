@@ -123,6 +123,12 @@ namespace DefaultNamespace {
             
             connection.SetDuplex(s.duplex);
         }
+
+        public void ResetAttackSimulations() {
+            foreach (Connection c in connections) {
+                c.ResetThreatSimulation();
+            }
+        }
         
         public Connection[] GetConnections() {
             if (connections == null) {

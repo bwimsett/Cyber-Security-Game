@@ -27,6 +27,9 @@ namespace DefaultNamespace {
         }
 
         protected virtual void InitialiseFields() {
+            fields = new NodeField[1];
+            
+            fields[0] = new NodeField("Description", "[BLANK]");
             
         }
         
@@ -83,7 +86,7 @@ namespace DefaultNamespace {
                 int strength = selectedStartingThreats.GetThreatStrength(i);
                 
                 Threat t = new Threat(threatTypes[i], null, node, strength);
-                Debug.Log(t);
+                //Debug.Log(t);
                 
                 outputThreats.Add(t);
             }

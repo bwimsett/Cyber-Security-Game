@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SQL Injection Form
   m_EditorClassIdentifier: 
   threatType: 4
+  threatName: Form SQL Injection
   startSentences:
   - node: 14
     summary: SQL Injection from a web form

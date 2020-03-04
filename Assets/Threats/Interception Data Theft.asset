@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Interception Data Theft
   m_EditorClassIdentifier: 
   threatType: 3
+  threatName: Interception
   startSentences:
   - node: 1
     summary: Data transmitted from the internet was intercepted

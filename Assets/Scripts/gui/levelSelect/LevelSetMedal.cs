@@ -13,6 +13,8 @@ namespace gui.levelSelect {
 
         public Image connector;
 
+        public string levelNumberString;
+        
         private int levelId;
         
         public Sprite locked;
@@ -28,9 +30,10 @@ namespace gui.levelSelect {
 
         private bool isLocked;
         
-        public void SetLevel(LevelDescription levelDescription, int levelId) {
+        public void SetLevel(LevelDescription levelDescription, int levelId, string levelNumberString) {
             this.levelDescription = levelDescription;
             this.levelId = levelId;
+            this.levelNumberString = levelNumberString;
             
             RefreshMedal();
         }
@@ -48,6 +51,11 @@ namespace gui.levelSelect {
             
             // Load level progress
             GameManager.currentLevelScore = GameManager.currentSaveGame.GetLevelScore(levelId);
+            
+            // Set level name and number        
+            GameManager.levelName = levelNumberString+" "+levelDescription.levelName;
+            GameManager.levelNumber = levelNumberString;
+           
             
             SceneManager.LoadScene(1);
         }

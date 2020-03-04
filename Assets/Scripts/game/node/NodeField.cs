@@ -52,13 +52,15 @@ namespace DefaultNamespace.node {
             this.value = value;
             readOnly = false;
             this.optionSetName = optionSetName;
+            optionSet =  GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName);
             this.colourOptions = colourOptions;
             fieldType = NodeFieldType.enumerable_single;
         }
         
         public NodeField(string fieldTitle, ControlDropdownOptionSets optionSetName) {
             this.fieldTitle = fieldTitle;
-            value = new char[GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName).options.Length];
+            optionSet = GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName);
+            value = new char[optionSet.options.Length];
             readOnly = false;
             this.optionSetName = optionSetName;
             fieldType = NodeFieldType.enumerable_many;
@@ -111,6 +113,16 @@ namespace DefaultNamespace.node {
 
         public int GetMaxValue() {
             return maxValue;
+        }
+
+        public int GetCost() {
+            if (optionSet == null) {
+                return 0;
+            }
+
+            int cost = optionSet.options[(int) value].cost;
+
+            return cost;
         }
 
         public object GetValue() {

@@ -80,6 +80,10 @@ namespace backend {
             return " "+GetStringFromSummary(threat, summary, SummaryPosition.End);
         }
 
+        public string GetThreatName(Threat threat) {
+            return GetSummary(threat).threatName;
+        }
+
         private ThreatSummary GetSummary(Threat threat) {
             foreach (ThreatSummary s in threatSummaries) {
                 if (s.threatType == threat.threatType) {

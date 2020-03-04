@@ -17,6 +17,8 @@ namespace DefaultNamespace {
 
         public ThreatSummariser threatSummariser;
 
+        public Color threatColor;
+
         public void SimulateThreats() {
             
             successfulThreats = new List<Threat>();
@@ -77,9 +79,11 @@ namespace DefaultNamespace {
             //Debug.Log("Completed Threats: "+total+"/"+activeThreatCount);
             
             if (total == activeThreatCount) {
-                PrintThreats(successfulThreats);
-                GameManager.levelScene.guiManager.AttackVisualiserDebugPanel.SetAttacks(successfulThreats.ToArray()); 
-                GameManager.currentLevel.CalculateScore(failedThreats.ToArray());
+                //PrintThreats(successfulThreats);
+                GameManager.levelScene.guiManager.SetThreatsForSummary(successfulThreats.ToArray());
+                //GameManager.levelScene.connectionManager.TriggerAttackSimulations();
+                //GameManager.levelScene.guiManager.AttackVisualiserDebugPanel.SetAttacks(successfulThreats.ToArray());
+                //GameManager.currentLevel.CalculateScore(successfulThreats.ToArray(), failedThreats.ToArray());
                 return true;
             }
 

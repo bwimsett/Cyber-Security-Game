@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Data Manipulation
   m_EditorClassIdentifier: 
   threatType: 2
+  threatName: Data Manipulation
   startSentences: []
   middleSentences: []
   endSentences:

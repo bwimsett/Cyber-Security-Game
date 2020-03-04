@@ -1,3 +1,4 @@
+using backend;
 using gui;
 using TMPro;
 using UnityEngine;
@@ -11,7 +12,10 @@ namespace DefaultNamespace {
         public AttackVisualiserDebugPanel AttackVisualiserDebugPanel;
         public ControlsMenu controlsMenu;
         public LevelSummaryWindow levelSummaryWindow;
-
+        public LevelNameText levelNameText;
+        public ThreatSummaryScreen threatSummaryScreen;
+        public Animator levelSceneAnimator;
+        
         void Start() {
             RefreshBudget();
         }
@@ -22,7 +26,7 @@ namespace DefaultNamespace {
         }
 
         public void RefreshBudget() {
-            SetBudgetText(GameManager.currentLevel.GetBudget());
+            SetBudgetText(GameManager.currentLevel.GetRemainingBudget());
         }
 
         public void SetBudgetText(int value) {
@@ -45,6 +49,19 @@ namespace DefaultNamespace {
         public void OpenAttackVisualiserDebug() {
             AttackVisualiserDebugPanel.gameObject.SetActive(true);
         }
+
+        public void SetThreatsForSummary(Threat[] threats) {
+            levelNameText.gameObject.SetActive(false);
+            threatSummaryScreen.gameObject.SetActive(true);
+            threatSummaryScreen.SetThreats(threats);
+        }
+
+        public void DisplayLevelSummary() {
+            levelSummaryWindow.SetVisible(true);
+            levelSceneAnimator.SetTrigger("swipeout");
+            levelSummaryWindow.Refresh();
+        }
+        
     }
     
 }

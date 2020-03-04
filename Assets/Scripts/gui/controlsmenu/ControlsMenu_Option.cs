@@ -37,7 +37,7 @@ public class ControlsMenu_Option : MonoBehaviour {
     }
 
     void OnMouseDown() {
-        if (GameManager.currentLevel.GetBudget() < node.nodeCost) {
+        if (GameManager.currentLevel.GetRemainingBudget() < node.nodeCost) {
             return;
         }
         
@@ -59,13 +59,15 @@ public class ControlsMenu_Option : MonoBehaviour {
         if (_clonedNodeObject) {
             _clonedNodeObject.nodeInteractor.OnMouseUp();
             // Purchase
-            bool success = GameManager.currentLevel.PurchaseForAmount(_clonedNodeObject.GetNodeDefinition().nodeCost);
+            bool success = GameManager.currentLevel.CanPurchaseForAmount(_clonedNodeObject.GetNodeDefinition().nodeCost);
             // Destroy node if not enough budget (this shouldn't be executed, but is a secondary check)
             if (!success) {
                 Destroy(_clonedNodeObject.gameObject);
             }
 
             _clonedNodeObject = null;
+            
+            GameManager.currentLevel.RecalculateBudget();
         }
     }
 }

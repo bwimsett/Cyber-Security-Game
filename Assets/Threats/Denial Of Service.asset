@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Denial Of Service
   m_EditorClassIdentifier: 
   threatType: 16
+  threatName: Denial of Service
   startSentences: []
   middleSentences: []
   endSentences:
