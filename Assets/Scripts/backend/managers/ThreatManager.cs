@@ -32,12 +32,14 @@ namespace DefaultNamespace {
             foreach (Node n in nodes) {
                 Threat[] threats = n.GetBehaviour().GenerateThreats();
 
+                activeThreatCount += threats.Length;
+                
                 foreach (Threat t in threats) {
                     t.Run();
                 }
-
-                activeThreatCount += threats.Length;
             }
+
+            CheckForSimulationCompletion();
         }
 
         public Threat CreateThreat(ThreatType t, Threat parent, Node n) {
@@ -64,8 +66,6 @@ namespace DefaultNamespace {
                     propagatedThreats.Add(threat);
                     break;
             }
-
-            CheckForSimulationCompletion();
         }
 
         private bool CheckForSimulationCompletion() {
@@ -79,8 +79,8 @@ namespace DefaultNamespace {
             //Debug.Log("Completed Threats: "+total+"/"+activeThreatCount);
             
             if (total == activeThreatCount) {
-                //PrintThreats(successfulThreats);
-                GameManager.levelScene.guiManager.SetThreatsForSummary(successfulThreats.ToArray());
+                PrintThreats(successfulThreats);
+                GameManager.levelScene.guiManager.OpenThreatSummary();
                 //GameManager.levelScene.connectionManager.TriggerAttackSimulations();
                 //GameManager.levelScene.guiManager.AttackVisualiserDebugPanel.SetAttacks(successfulThreats.ToArray());
                 //GameManager.currentLevel.CalculateScore(successfulThreats.ToArray(), failedThreats.ToArray());

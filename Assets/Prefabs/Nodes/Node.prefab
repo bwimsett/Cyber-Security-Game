@@ -1267,6 +1267,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7327081150199751955, guid: 976f7290e6b456f4db974b4d0f705372,
+        type: 3}
+      propertyPath: connectionBreakDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8389868071552288582, guid: 976f7290e6b456f4db974b4d0f705372,
         type: 3}
       propertyPath: m_LocalPosition.x

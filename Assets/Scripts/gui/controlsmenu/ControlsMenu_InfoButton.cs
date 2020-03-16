@@ -9,8 +9,13 @@ namespace gui.controlsmenu {
         private NodeDefinition node;
         public TextMeshProUGUI text;
         public Image outline;
+        public Color lockedColor;
         
         void OnMouseEnter() {
+            if (GameManager.currentSaveGame.GetTokens() < node.nodeUnlockTokens) {
+                return;
+            }
+            
             if (Input.GetMouseButton(0)) {
                 return;
             }
@@ -27,6 +32,10 @@ namespace gui.controlsmenu {
             this.node = node;
             text.color = node.nodeColor;
             outline.color = node.nodeColor;
+
+            if (GameManager.currentSaveGame.GetTokens() < node.nodeUnlockTokens) {
+                text.color = outline.color = lockedColor;
+            }
         }
         
     }

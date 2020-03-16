@@ -48,27 +48,7 @@ public class Node {
     }
 
     public void EvolveThreat(Threat threat) {
-        List<ThreatType> possibleEvolutions = new List<ThreatType>();
-        Threat_EvolutionPair[] evolutionList = nodeObject.GetNodeDefinition().threatEvolutions;
-        
-        // Add any possible evolutions to the possibleEvolutions list
-        foreach (Threat_EvolutionPair evolution in evolutionList) {
-            if (evolution.threatType == threat.threatType) {
-                possibleEvolutions.Add(evolution.evolution);
-            }
-        }
-        
-        //Pick an evolution at random
-        if (possibleEvolutions.Count == 0) {
-            throw new EvolutionNotDefinedException("Evolution not defined for "+threat.threatType+" at "+nodeObject.GetNodeDefinition().nodeName);
-        }
-        
-        int chosenIndex = Random.Range(0, possibleEvolutions.Count);
-
-        ThreatType chosenEvolution = possibleEvolutions[chosenIndex];
-        
-        // Create threat
-        Threat newThreat = GameManager.levelScene.threatManager.CreateThreat(chosenEvolution, threat, this);
+        behaviour.EvolveThreat(threat);
     }
     
     public ThreatStatus GetThreatEffect(Threat threat) {
@@ -83,6 +63,11 @@ public class Node {
         return ThreatStatus.Propagate;
     }
 
+    public bool IsControl() {
+        return nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Logical ||
+               nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Connection;
+    }
+    
     public override string ToString() {
         return nodeObject.GetNodeDefinition().nodeName;
     }

@@ -9,7 +9,7 @@ namespace backend.serialization {
     public class SaveGame {
         private LevelScore[] levelScores;
         private DateTime saveTime;
-
+        
         public SaveGame(int levelCount) {
             levelScores = new LevelScore[levelCount];
 
@@ -44,6 +44,14 @@ namespace backend.serialization {
             return levelScores[levelIndex];
         }
 
+        public int GetLevelTokens(int levelIndex) {
+            if (levelIndex < 0 || levelIndex >= levelScores.Length) {
+                return 0;
+            }
+
+            return levelScores[levelIndex].GetTokens();
+        }
+        
         public int GetTokens() {
             int total = 0;
             

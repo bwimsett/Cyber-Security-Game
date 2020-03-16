@@ -39,9 +39,14 @@ namespace backend {
             if (currentTrace.Length == 0) {
                 return;
             }
+
+            playingThreat = false;
             
             foreach (Threat t in currentTrace) {
                 Node n = t.GetNode();
+                if (n.nodeObject == null) {
+                    continue;
+                }
                 t.GetNode().nodeObject.ResetThreatSimulation();
                 t.GetNode().nodeObject.healthBar.SetVisible(false);
             }
@@ -54,7 +59,6 @@ namespace backend {
             currentTrace = threat.GetTrace();
             tracePosition = 0;
             playingThreat = true;
-            GameManager.levelScene.guiManager.levelNameText.SetText(GameManager.levelScene.threatManager.threatSummariser.SummariseThreat(threat));
         }
 
         public void UpdateAttackAnimation() {

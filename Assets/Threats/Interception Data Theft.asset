@@ -17,6 +17,8 @@ MonoBehaviour:
   startSentences:
   - node: 1
     summary: Data transmitted from the internet was intercepted
+  - node: 0
+    summary: Data transmitted by a server was intercepted
   middleSentences: []
   endSentences:
   - node: 0
@@ -27,3 +29,5 @@ MonoBehaviour:
     summary: on its way to a pc
   - node: 12
     summary: on its way to a laptop
+  - node: 13
+    summary: on its way to a web app.

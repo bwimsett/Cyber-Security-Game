@@ -36,21 +36,34 @@ namespace backend.level {
         }
 
         public void CalculateScore(Threat[] successfulThreats, Threat[] failedThreats) {
-            score_budgetremaining = CalculateScore_Budget();
+            score_budgetremaining = CalculateScore_Budget(successfulThreats);
             score_controltypes = CalculateScore_ControlType();
             score_threatsdefended = CalculateScore_ThreatsDefended(failedThreats);
             score_threatsfailed = CalculateScore_FailedThreats(successfulThreats);
             score_firstattempt = CalculateScore_FirstAttempt();
-            medal = ClassifyMedal(GetTotalScore());
+
+            Medal newMedal = ClassifyMedal(GetTotalScore());
+
+            // Only overwrite medal if it is better than previous attempts
+            if (MedalToInt(newMedal) > MedalToInt(medal)) {
+                medal = newMedal;
+            }
         }
 
         private int CalculateScore_FailedThreats(Threat[] successfulThreats) {
             return successfulThreats.Length * SCORE_PER_THREAT_FAILED;
         }
         
-        private int CalculateScore_Budget() {
+        private int CalculateScore_Budget(Threat[] successfulThreats) {
             int budgetRemaining = GameManager.currentLevel.GetRemainingBudget();
-            return budgetRemaining * SCORE_PER_BUDGETPOINT;
+
+            int score = budgetRemaining * SCORE_PER_BUDGETPOINT;
+
+            if (successfulThreats.Length > 0) {
+                score = 0;
+            }
+            
+            return score;
         }
 
         private int CalculateScore_ControlType() {
@@ -69,8 +82,24 @@ namespace backend.level {
             return controlTypes.Count * SCORE_PER_CONTROL_TYPE;
         }
 
+        public Medal CalculateMedalFromCurrentScore() {
+            return ClassifyMedal(GetTotalScore());
+        }
+        
         private int CalculateScore_ThreatsDefended(Threat[] failedThreats) {
-            return failedThreats.Length * SCORE_PER_THREAT_DEFENDED;
+
+            // Ignore authorised access block as a scoring threat
+            int validThreats = 0;
+
+            foreach (Threat t in failedThreats) {
+                if (t.threatType == ThreatType.Authorised_Access_Block) {
+                    continue;
+                }
+
+                validThreats++;
+            }
+            
+            return validThreats * SCORE_PER_THREAT_DEFENDED;
         }
 
         private int CalculateScore_FirstAttempt() {
@@ -116,6 +145,18 @@ namespace backend.level {
         public int GetMaxTokens() {
             return TOKENS_GOLD;
         }
+        
+        public static int MedalToInt(Medal medal) {
+            switch (medal) {
+                case Medal.Gold: return 3;
+                case Medal.Silver: return 2;
+                case Medal.Bronze: return 1;
+                case Medal.None: return 0;
+            }
+
+            return 0;
+        }
+
         
         public override string ToString() {
             string output = "";

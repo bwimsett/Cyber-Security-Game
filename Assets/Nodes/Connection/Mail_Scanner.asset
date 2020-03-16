@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: Mail Scanner
   nodeCost: 2
-  nodeUnlockTokens: 0
+  nodeUnlockTokens: 25
   nodeFamily: 2
   nodeType: 17
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
   nodeIcon: {fileID: 21300000, guid: b47c71288266d5740b16df8c3d548f38, type: 3}
-  description: {fileID: 0}
+  description: {fileID: 4900000, guid: 2b7b4624f075722448f70bb35bb715f0, type: 3}
   startingThreats: 
   threatResponses: []
   threatEvolutions: []

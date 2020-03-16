@@ -47,29 +47,29 @@ namespace DefaultNamespace.node {
             fieldType = NodeFieldType.integer_range;
         }
 
-        public NodeField(string fieldTitle, int value, bool colourOptions, ControlDropdownOptionSets optionSetName) {
+        public NodeField(string fieldTitle, int value, bool colourOptions, ControlDropdownOptionSets optionSetName, bool isReadOnly) {
+            readOnly = isReadOnly;
             this.fieldTitle = fieldTitle;
             this.value = value;
-            readOnly = false;
             this.optionSetName = optionSetName;
             optionSet =  GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName);
             this.colourOptions = colourOptions;
             fieldType = NodeFieldType.enumerable_single;
         }
         
-        public NodeField(string fieldTitle, ControlDropdownOptionSets optionSetName) {
+        public NodeField(string fieldTitle, ControlDropdownOptionSets optionSetName, bool isReadOnly) {
+            readOnly = isReadOnly;
             this.fieldTitle = fieldTitle;
             optionSet = GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName);
             value = new char[optionSet.options.Length];
-            readOnly = false;
             this.optionSetName = optionSetName;
             fieldType = NodeFieldType.enumerable_many;
         }
         
-        public NodeField(string fieldTitle, Control_Dropdown_Option_Set optionSet, bool threats) {
+        public NodeField(string fieldTitle, Control_Dropdown_Option_Set optionSet, bool threats, bool isReadOnly) {
+            readOnly = isReadOnly;
             this.fieldTitle = fieldTitle;
             value = new char[optionSet.options.Length];
-            readOnly = false;
             this.optionSet = optionSet;
             fieldType = NodeFieldType.enumerable_many;
 
@@ -78,9 +78,7 @@ namespace DefaultNamespace.node {
                 threatStrengths = new int[optionSet.options.Length];
             }
         }
-        
-        
-        
+            
         private void EstablishFieldType() {            
             if (value is int) {
                 fieldType = NodeFieldType.integer;
@@ -117,6 +115,10 @@ namespace DefaultNamespace.node {
 
         public int GetCost() {
             if (optionSet == null) {
+                return 0;
+            }
+
+            if (fieldType != NodeFieldType.enumerable_single) {
                 return 0;
             }
 

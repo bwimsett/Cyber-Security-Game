@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: CAPTCHA
   nodeCost: 2
-  nodeUnlockTokens: 0
+  nodeUnlockTokens: 10
   nodeFamily: 2
   nodeType: 4
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
   nodeIcon: {fileID: 21300000, guid: 2aabc1eb22547bf4daebe3fc84933897, type: 3}
-  description: {fileID: 0}
+  description: {fileID: 4900000, guid: a26a7cf71bb6c4a4aad1a9886ecec1fa, type: 3}
   startingThreats: 
   threatResponses: []
   threatEvolutions: []

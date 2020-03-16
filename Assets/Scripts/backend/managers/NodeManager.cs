@@ -45,7 +45,7 @@ namespace DefaultNamespace{
             }
                       
             NodeObject newNodeObject = Instantiate(defaultNode, GameManager.levelScene.transform).GetComponent<NodeObject>();
-            newNodeObject.transform.position = new Vector3(position.x, position.y, 0);
+            newNodeObject.transform.localPosition = new Vector3(position.x, position.y, 0);
             newNodeObject.SetNodeDefinition(nodeDefinition);
             GameManager.currentLevel.nodes.Add(newNodeObject.GetNode());
             AssignNodeBehaviour(newNodeObject);
@@ -69,6 +69,25 @@ namespace DefaultNamespace{
             return result;
         }
 
+        public void DeleteNode(Node node) {
+            if (node == null) {
+                return;
+            }
+
+            //Destroy connections
+            Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(node);
+
+            foreach (Connection c in connections) {
+                GameManager.levelScene.connectionManager.RemoveConnection(c);
+            }
+            
+            // Destroy nodeObject
+            Destroy(node.nodeObject.gameObject);
+
+            // Remove node
+            GameManager.currentLevel.nodes.Remove(node);
+        }
+        
         private NodeDefinition GetNodeScriptable(NodeType nodeType) {
             foreach (NodeDefinition nodeSc in nodeDefinitions) {
                 if (nodeSc.nodeType == nodeType) {

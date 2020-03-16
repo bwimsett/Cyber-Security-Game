@@ -9,6 +9,7 @@ public class ControlsMenu : MonoBehaviour {
     public GameObject optionPrefab;
     public Transform optionsContainer;
     private ControlsMenu_Option[] options;
+    public CanvasGroup canvasGroup;
     
     void Start() {
         RefreshOptions();
@@ -30,12 +31,41 @@ public class ControlsMenu : MonoBehaviour {
 
             bool isControl = n.nodeFamily != NodeFamily.Base && n.nodeFamily != NodeFamily.Zone;
 
-            if (!editMode && !isControl) {
-                continue;
-            }
+            
             
             options[i] = Instantiate(optionPrefab, optionsContainer).GetComponent<ControlsMenu_Option>();
             options[i].SetNode(nodeDefinitions[i]);
+            
+            if (!editMode && !isControl) {
+                options[i].gameObject.SetActive(false);
+            }
+        }
+        
+        SortOptions();
+    }
+
+    public void SortOptions() {
+        bool sorted = true;
+
+        do {
+            
+            sorted = true;
+            
+            for (int i = 0; i < options.Length - 1; i++) {
+                // Swap this option with the next if it is more expensive
+                if (options[i].GetNode().nodeUnlockTokens > options[i + 1].GetNode().nodeUnlockTokens) {
+                    ControlsMenu_Option thisOption = options[i];
+                    options[i] = options[i + 1];
+                    options[i + 1] = thisOption;
+                    sorted = false;
+                }
+            }
+            
+        } while (!sorted);
+        
+        // Now sort them in the hierarchy
+        for (int i = 0; i < options.Length; i++) {
+            options[i].transform.SetSiblingIndex(i);
         }
     }
 
@@ -51,6 +81,17 @@ public class ControlsMenu : MonoBehaviour {
     public void Toggle() {
         animator.SetTrigger("Trigger");
         animator.SetBool("Hidden", !animator.GetBool("Hidden"));
+    }
+
+    public void Hide() {
+        if (!animator.GetBool("Hidden")) {
+            animator.SetTrigger("Trigger");
+            animator.SetBool("Hidden", true);
+        }
+    }
+
+    public void SetInteractable(bool interactable) {
+        canvasGroup.interactable = interactable;
     }
     
 }

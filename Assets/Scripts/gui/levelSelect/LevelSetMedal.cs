@@ -39,6 +39,11 @@ namespace gui.levelSelect {
         }
 
         public void OnClick() {
+            if (isLocked) {
+                return;
+            }
+            
+            
             Level level = new Level();
             
             LevelSerializer ls = new LevelSerializer();
@@ -46,14 +51,13 @@ namespace gui.levelSelect {
             LevelSave levelSave = ls.GetLevelSave(levelDescription.levelFile);
 
             if (levelSave != null) {
-                GameManager.selectedLevelSave = levelSave;
+                GameManager.selectedLevelDescription = levelDescription;
             }
             
             // Load level progress
             GameManager.currentLevelScore = GameManager.currentSaveGame.GetLevelScore(levelId);
             
             // Set level name and number        
-            GameManager.levelName = levelNumberString+" "+levelDescription.levelName;
             GameManager.levelNumber = levelNumberString;
            
             

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: Sanitisation
   nodeCost: 2
-  nodeUnlockTokens: 0
+  nodeUnlockTokens: 15
   nodeFamily: 2
   nodeType: 3
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}

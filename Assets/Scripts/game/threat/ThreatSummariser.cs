@@ -81,7 +81,12 @@ namespace backend {
         }
 
         public string GetThreatName(Threat threat) {
-            return GetSummary(threat).threatName;
+            ThreatSummary threatSummary = GetSummary(threat);
+            if (threatSummary) {
+                return GetSummary(threat).threatName;
+            }
+
+            return "";
         }
 
         private ThreatSummary GetSummary(Threat threat) {

@@ -320,6 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 6223742000306101762}
   outline: {fileID: 6223741999503871880}
+  lockedColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
 --- !u!61 &7811593524380971016
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -862,9 +863,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlName: {fileID: 6223741999469425595}
   controlCost: {fileID: 6223741999798186446}
+  lockedColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
   controlImageOutline: {fileID: 6223741999922614647}
   controlImageBackground: {fileID: 6223742000715393790}
   controlIcon: {fileID: 6223742000461198564}
+  lockedIcon: {fileID: 21300000, guid: 85d51a98a6143a4438e4d29fff1863a5, type: 3}
   infoButton: {fileID: 5491201958549542301}
 --- !u!61 &4297656125840779489
 BoxCollider2D:

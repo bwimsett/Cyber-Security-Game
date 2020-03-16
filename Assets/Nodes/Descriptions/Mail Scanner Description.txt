@@ -1,0 +1,1 @@
+Mail Scanning can be a useful tool for stopping threats before they reach a device. Emails are a major source of malware, and spam can lead to denial of service if servers receive high volumes of requests.

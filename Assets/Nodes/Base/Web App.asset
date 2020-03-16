@@ -20,6 +20,8 @@ MonoBehaviour:
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
   nodeIcon: {fileID: 21300000, guid: 12faf1be212b0a24da0436f850d11acf, type: 3}
   description: {fileID: 0}
-  startingThreats: 0600000005000000
-  threatResponses: []
+  startingThreats: 060000000500000003000000
+  threatResponses:
+  - threatType: 3
+    threatStatus: 1
   threatEvolutions: []

@@ -1,5 +1,6 @@
 ﻿using DefaultNamespace;
 using gui.controlsmenu;
+using GameAnalyticsSDK.Setup;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +9,11 @@ public class ControlsMenu_Option : MonoBehaviour {
 
     public TextMeshProUGUI controlName;
     public TextMeshProUGUI controlCost;
+    public Color lockedColor;
     public Image controlImageOutline;
     public Image controlImageBackground;
     public Image controlIcon;
+    public Sprite lockedIcon;
     public ControlsMenu_InfoButton infoButton;
     
     private NodeDefinition node;
@@ -23,17 +26,24 @@ public class ControlsMenu_Option : MonoBehaviour {
     }
 
     // Refreshes all the information displayed in the option
-    public void Refresh() {
+    public void Refresh() {  
         controlName.text = node.nodeName;
         controlCost.text = node.nodeCost+" hrs";
 
         Sprite shape = GameManager.levelScene.nodeManager.GetNodeShapeSprite(node.nodeFamily);
 
         controlImageOutline.sprite = controlImageBackground.sprite = shape;
-        controlIcon.sprite = node.nodeIcon;
-
+        
         controlImageOutline.color = controlIcon.color = node.nodeColor;
         infoButton.SetNode(node);
+
+        controlIcon.sprite = node.nodeIcon;
+        
+        if (GameManager.currentSaveGame.GetTokens() < node.nodeUnlockTokens) {
+            controlCost.text = node.nodeUnlockTokens + " Tokens";
+            controlIcon.sprite = lockedIcon;
+            controlIcon.color = controlImageOutline.color = lockedColor;
+        }
     }
 
     void OnMouseDown() {
@@ -69,5 +79,10 @@ public class ControlsMenu_Option : MonoBehaviour {
             
             GameManager.currentLevel.RecalculateBudget();
         }
+    }
+
+
+    public NodeDefinition GetNode() {
+        return node;
     }
 }

@@ -7,6 +7,8 @@ using backend.level_serialization;
 using backend.serialization;
 using DefaultNamespace.node;
 using gui.controlsmenu;
+using GameAnalyticsSDK;
+using GameAnalyticsSDK.Setup;
 using UnityEngine;
 
 namespace DefaultNamespace {
@@ -47,8 +49,7 @@ namespace DefaultNamespace {
                 GameManager.levelScene.guiManager.levelSummaryWindow.Refresh();
 
                 // Save game
-                GameSerializer serializer = new GameSerializer();
-                serializer.SaveGame(GameManager.currentSaveGame);
+                GameManager.Save();
             }
         }
         
@@ -77,10 +78,8 @@ namespace DefaultNamespace {
         }
 
         public void SetBudget(int amount) {
-            if (editMode) {
-                budget = amount;
-                RecalculateBudget();
-            }
+            budget = amount;
+            RecalculateBudget();
         }
 
         public int GetBudget() {
@@ -152,7 +151,7 @@ namespace DefaultNamespace {
             for (int i = nodes.Count - 1; i >= 0; i--) {
                 nodes[i].nodeObject.Destroy();
             }
-            
+
             nodes = new List<Node>();
         }
         
@@ -167,9 +166,7 @@ namespace DefaultNamespace {
                 return;
             }
 
-
             ClearLevel();
-
 
             // Set budget
             SetBudget(levelSave.budget);
@@ -192,8 +189,27 @@ namespace DefaultNamespace {
             bronzeScore = levelSave.bronzeScore;
             silverScore = levelSave.silverScore;
             goldScore = levelSave.goldScore;
+            
+            GameManager.levelScene.guiManager.HideThreatSummary();
+            GameManager.levelScene.guiManager.RefreshBudget();
+            
 
             SetEditMode(false);
+        }
+
+        public void LoadLevel(LevelDescription levelDescription) {
+            // Set game manager level description to new level
+            GameManager.selectedLevelDescription = levelDescription;
+            
+            // Set game manager level progress
+            GameManager.currentLevelScore = GameManager.currentSaveGame.GetLevelScore(levelDescription.levelIndex);
+            
+            // Extract save file
+            LevelSerializer levelSerializer = new LevelSerializer();
+            LevelSave levelSave = levelSerializer.GetLevelSave(levelDescription.levelFile);
+            
+            // Load level
+            LoadLevel(levelSave);
         }
 
         public void SetMedalBoundary(Medal medalType, int value) {

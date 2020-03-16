@@ -17,33 +17,18 @@ namespace DefaultNamespace {
                     continue;
                 }
 
-                // Loop through all the connected nodes
-                foreach (Node n in node.connectedNodes) {
-                        
-                    // Get the connection to the node
-                    Connection c = GameManager.levelScene.connectionManager.GetConnection(node, n);
-                        
-                    // If the other node is the end of the connection, set access level to match
-                    if (c.end != node) {
-                        NodeField accessSet =
-                            c.end.GetBehaviour().GetFieldWithSet(ControlDropdownOptionSets.Access);
-                            
-                        if (accessSet != null) {
-                            t.SetAccessLevel((int)accessSet.GetValue());    
-                        }
-                    }
-                }
+                t.SetAccessLevel((int)fields[1].GetValue());
             }
 
             return threats;
         }
 
         protected override void InitialiseFields() {
-            fields = new NodeField[3];
+            fields = new NodeField[2];
             
             fields[0] = new NodeField("Description", "Protects against unauthorised access.");
-            fields[1] = new NodeField("Access Level", 0, true, ControlDropdownOptionSets.Access);
-            fields[2] = new NodeField("Additions", ControlDropdownOptionSets.Password_Addons);       
+            fields[1] = new NodeField("Access Level", 0, true, ControlDropdownOptionSets.Access, false);
+            //fields[2] = new NodeField("Additions", ControlDropdownOptionSets.Password_Addons, false);       
         }
 
         public override void InitialiseStartingThreatSet() {
@@ -69,10 +54,14 @@ namespace DefaultNamespace {
                 }
             }
 
-            if (threat.threatType == ThreatType.Authorised_Access_Block) {
+            /*if (threat.threatType == ThreatType.Authorised_Access_Block) {
                 if (threat.GetAccessLevel() >= (int) fields[1].GetValue()) {
                     return ThreatStatus.Failure;
                 }
+            }*/
+
+            if (threat.threatType == ThreatType.Unauthorised_Access) {
+                threat.SetAccessLevel((int)fields[1].GetValue());
             }
             
 

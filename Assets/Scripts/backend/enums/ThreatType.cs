@@ -18,6 +18,10 @@ namespace DefaultNamespace {
         Unauthorised_Access,
         Denial_Of_Service,
         Authorised_Access_Block,
-        Password_Crack
+        Password_Crack,
+        Unauthorised_Access_Low,
+        Unauthorised_Access_Medium,
+        Unauthorised_Access_High,
+        Unauthorised_Access_VeryHigh,
     }
 }

@@ -1,0 +1,5 @@
+Encryption is the process of encoding data in a way which only authorised parties can access.
+
+Different protocols for Encryption exist for different applications, network protocols such as SSL (and the more modern standard now in use, TLS) have been the backbone of technologies such as HTTPS, and therefore secure transmission over the web.
+
+This is vital for any transmission of data that could be intercepted, particularly sensitive data.

@@ -1,0 +1,7 @@
+Captchas are an excellent way to identify fake users.
+
+They are usually designed as a task for a user to complete in order for data to be sent, typically from a form. A good captcha is difficult for a bot to complete, but simple for a human to complete.
+
+Examples include word distortion puzzles, image grids, and honeypots which are hidden fields on a page which only a bot would see and fill in.
+
+CAPTCHA stands for "Completely Automated Public Turing test for telling Computers and Humans Apart".

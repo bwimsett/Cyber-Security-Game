@@ -62,6 +62,10 @@ namespace DefaultNamespace {
         public Connection GetConnection(Node end1, Node end2) {            
             foreach (Connection connection in connections) {
 
+                if (connection.isDisabled()) {
+                    continue;
+                }
+                
                 bool start_end1 = connection.start == end1;
                 bool start_end2 = connection.start == end2;
                 bool end_end1 = connection.end == end1;
@@ -93,6 +97,14 @@ namespace DefaultNamespace {
             //Debug.Log(output);
 
         }
+
+        public void RemoveAllConnectionsToNode(Node n) {
+            for (int i = connections.Count - 1; i >= 0; i--) {
+                if (connections[i].end == n || connections[i].start == n) {
+                    RemoveConnection(connections[i]);
+                }
+            }
+        }
         
         // Returns all the connections to a particular Node
         public Connection[] GetConnectionsToNode(Node node) {
@@ -100,7 +112,7 @@ namespace DefaultNamespace {
             
             foreach (Node neighbour in node.connectedNodes) {
                 Connection c = GetConnection(node, neighbour);
-                if (c) {
+                if (c && !c.isDisabled()) {
                     nodeConnections.Add(c);
                 }
             }

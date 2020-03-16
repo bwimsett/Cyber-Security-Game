@@ -171,6 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: {fileID: 0}
   value: {fileID: 0}
+  negativeColor: {r: 0, g: 0, b: 0, a: 0}
+  positiveColor: {r: 0, g: 0, b: 0, a: 0}
   score: 0
 --- !u!1 &2042813807457469807
 GameObject:
@@ -223,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   summaryField: {fileID: 2119087135705484709}
+  summaryButton: {fileID: 4043010451160833692}
 --- !u!1 &2635588135478932003
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +238,7 @@ GameObject:
   - component: {fileID: 6813439878998746912}
   - component: {fileID: 2963367006565084923}
   - component: {fileID: 3086752301755478208}
+  - component: {fileID: 4043010451160833692}
   m_Layer: 5
   m_Name: Replay Button
   m_TagString: Untagged
@@ -340,7 +344,30 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2963367006565084923}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4043010451160833692}
+        m_MethodName: ReplayThreat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4043010451160833692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635588135478932003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1588e5c7604644b8e44027c7046c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7060689740857076315
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7440003d06f34bfeb311f57941621fdc, type: 3}
   m_Name: Level 4
   m_EditorClassIdentifier: 
-  levelName: 
-  levelFile: {fileID: 4900000, guid: 9109a37ae4b919a47b845a6e729fe42e, type: 3}
+  levelIndex: 3
+  levelName: Lock Pick
+  levelFile: {fileID: 4900000, guid: d0756b8ed5fe4e44f9eb72b1fd79f28c, type: 3}
+  unlockTokens: 0
+  nextLevel: {fileID: 11400000, guid: 9b611bc8df3d0dd499cab93c89fc5fe0, type: 2}

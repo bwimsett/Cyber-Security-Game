@@ -17,6 +17,7 @@ namespace DefaultNamespace {
         public string goldBoundaryCommand;
         public string silverBoundaryCommand;
         public string bronzeBoundaryCommand;
+        public string deleteCommand;
         
         public void ParseInput(string input) {
             string[] commandList = ExtractCommandList(input);
@@ -98,6 +99,12 @@ namespace DefaultNamespace {
             
             if (command.Contains(goldBoundaryCommand.ToLower())) {
                 GameManager.currentLevel.SetMedalBoundary(Medal.Gold, GetIntFromValue(GetValueFromCommand(command)));
+            }
+            
+            if (command.Contains(deleteCommand.ToLower())) {
+                Node node = GameManager.levelScene.guiManager.controlSettingsWindow.GetNode();
+                GameManager.levelScene.nodeManager.DeleteNode(node);
+                GameManager.levelScene.guiManager.controlSettingsWindow.SetNode(null);
             }
         }
         

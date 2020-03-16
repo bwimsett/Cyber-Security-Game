@@ -7,6 +7,8 @@ using UnityEngine;
 namespace gui {
     public class LevelNameText : MonoBehaviour {
         private string text;
+
+        public bool triggerRefresh;
         
         public TextMeshProUGUI textField;
         public int lettersUnscrambledPerIteration;
@@ -22,6 +24,11 @@ namespace gui {
         private string[] scrambledStrings;
 
         void Update() {
+            if (triggerRefresh) {
+                animator.SetTrigger("scramble");
+                triggerRefresh = false;
+            }           
+            
             int numberOfScrambleStrings = scrambledStrings.Length-1;
             int percentagePos = Mathf.FloorToInt(scramblePercentage * numberOfScrambleStrings);
 
@@ -35,8 +42,10 @@ namespace gui {
         }
         
         void Awake() {
-            text = GameManager.levelName;
-            GenerateScrambledLevelTitleStrings();
+            if (GameManager.selectedLevelDescription != null) {
+                text = GameManager.selectedLevelDescription.levelName;
+                GenerateScrambledLevelTitleStrings();
+            }
         }
 
         public void GenerateScrambledLevelTitleStrings() {

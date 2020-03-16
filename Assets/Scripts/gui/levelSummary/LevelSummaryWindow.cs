@@ -5,8 +5,10 @@ using backend.level;
 using DefaultNamespace;
 using gui;
 using gui.levelSummary;
+using GameAnalyticsSDK.Setup;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelSummaryWindow : Window {
 
@@ -18,12 +20,14 @@ public class LevelSummaryWindow : Window {
     private LevelSummary_ThreatSummaryField[] threatSummaryFields;
     public Animator animator;
 
+    public Button nextLevelButton;
+    public TextMeshProUGUI nextLevelButtonText;
+
     public void SetVisible(bool visible) {
         if (visible) {
             animator.SetTrigger("swipein");
         }
     }
-
     
     public void Refresh() {
         gameObject.SetActive(true);       
@@ -31,7 +35,23 @@ public class LevelSummaryWindow : Window {
         scoreText.text = "Score: " + GameManager.currentLevelScore.GetTotalScore();
         GenerateScoreBreakdown();
         GenerateThreatSummaries();
-        medals.SetMedal(GameManager.currentLevelScore.medal);
+        medals.SetMedal(GameManager.currentLevelScore.CalculateMedalFromCurrentScore());
+
+        nextLevelButton.interactable = true;
+
+        int tokensRequired = GameManager.selectedLevelDescription.nextLevel.unlockTokens -
+                             GameManager.currentSaveGame.GetTokens();
+        nextLevelButtonText.text = "Next";
+        
+        // Update next button
+        if (tokensRequired > 0) {
+            nextLevelButton.interactable = false;
+            string buttonText = tokensRequired + " Token";
+            if (tokensRequired > 1) {
+                buttonText += "s";
+            }
+            nextLevelButtonText.text = buttonText;
+        }
     }
 
     private void GenerateScoreBreakdown() {
@@ -63,8 +83,25 @@ public class LevelSummaryWindow : Window {
         for (int i = 0; i < threats.Length; i++) {
             threatSummaryFields[i] = Instantiate(threatSummaryFieldPrefab, threatSummaryContainer)
                 .GetComponent<LevelSummary_ThreatSummaryField>();
-            threatSummaryFields[i].SetThreat(threats[i]);
+            threatSummaryFields[i].SetThreat(threats[i], i);
         }
+    }
+
+    public void NextLevel() {
+        AnalyticsManager.EndLevel(GameManager.currentLevelScore.GetTotalScore(), GameManager.currentLevelScore.medal);
+        AnalyticsManager.StartLevel();
+        
+        GameManager.currentLevel.LoadLevel(GameManager.selectedLevelDescription.nextLevel);
+            
+        animator.SetTrigger("swipeout");
+        GameManager.levelScene.guiManager.DisplayLevelScene(false);
+        GameManager.levelScene.guiManager.levelNameText.textField.enabled = true;
+        
+        
+    }
+
+    public void Retry() {
+        GameManager.levelScene.guiManager.DisplayLevelScene(true);
     }
 
 }

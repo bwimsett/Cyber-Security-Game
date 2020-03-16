@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threatType: 16
   threatName: Denial of Service
-  startSentences: []
+  startSentences:
+  - node: 14
+    summary: Spam form submission
   middleSentences: []
   endSentences:
   - node: 0

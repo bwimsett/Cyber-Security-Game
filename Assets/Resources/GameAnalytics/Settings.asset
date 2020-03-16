@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f78192cec1344d83a177ac5e6139ab3, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: 
+  TotalMessagesSubmitted: 0
+  TotalMessagesFailed: 0
+  DesignMessagesSubmitted: 0
+  DesignMessagesFailed: 0
+  QualityMessagesSubmitted: 0
+  QualityMessagesFailed: 0
+  ErrorMessagesSubmitted: 0
+  ErrorMessagesFailed: 0
+  BusinessMessagesSubmitted: 0
+  BusinessMessagesFailed: 0
+  UserMessagesSubmitted: 0
+  UserMessagesFailed: 0
+  CustomArea: 
+  gameKey:
+  - 010818e53cbc2eede89a3944d5e74d21
+  secretKey:
+  - 4169b815b2262ae1394e834bfcc933e3d1f6c41b
+  Build:
+  - 0.1
+  SelectedPlatformStudio:
+  - bwdev
+  SelectedPlatformGame:
+  - Cyber Security Game
+  SelectedPlatformGameID: e9760100
+  SelectedStudio: 01000000
+  SelectedGame: 01000000
+  NewVersion: 
+  Changes: 
+  SignUpOpen: 0
+  StudioName: 
+  GameName: 
+  EmailGA: bwimsett1@sheffield.ac.uk
+  IntroScreen: 0
+  InfoLogEditor: 1
+  InfoLogBuild: 1
+  VerboseLogBuild: 0
+  UseManualSessionHandling: 0
+  SendExampleGameDataToMyGame: 0
+  UseIMEI: 0
+  InternetConnectivity: 0
+  CustomDimensions01:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  CustomDimensions02: []
+  CustomDimensions03: []
+  ResourceItemTypes: []
+  ResourceCurrencies: []
+  LastCreatedGamePlatform: -1
+  Platforms: 02000000
+  CurrentInspectorState: 1
+  ClosedHints: 
+  DisplayHints: 0
+  DisplayHintsScrollState: {x: 0, y: 0}
+  Logo: {fileID: 2800000, guid: 98df8f9c5678a4e5d964caa1244e8958, type: 3}
+  UpdateIcon: {fileID: 0}
+  InfoIcon: {fileID: 0}
+  DeleteIcon: {fileID: 0}
+  GameIcon: {fileID: 0}
+  HomeIcon: {fileID: 0}
+  InstrumentIcon: {fileID: 0}
+  QuestionIcon: {fileID: 0}
+  UserIcon: {fileID: 0}
+  AmazonIcon: {fileID: 0}
+  GooglePlayIcon: {fileID: 0}
+  iosIcon: {fileID: 0}
+  macIcon: {fileID: 0}
+  windowsPhoneIcon: {fileID: 0}
+  UsePlayerSettingsBuildNumber: 0
+  SubmitErrors: 1
+  MaxErrorCount: 10
+  SubmitFpsAverage: 1
+  SubmitFpsCritical: 1
+  IncludeGooglePlay: 1
+  FpsCriticalThreshold: 20
+  FpsCirticalSubmitInterval: 1
+  PlatformFoldOut: 01
+  CustomDimensions01FoldOut: 1
+  CustomDimensions02FoldOut: 0
+  CustomDimensions03FoldOut: 0
+  ResourceItemTypesFoldOut: 0
+  ResourceCurrenciesFoldOut: 0

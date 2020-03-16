@@ -18,6 +18,9 @@ namespace backend {
             this.parentThreat = parentThreat;
             this.node = node;
             this.strength = strength;
+            if (parentThreat != null) {
+                accessLevel = parentThreat.GetAccessLevel();
+            }
         }
 
         public void Run() {
@@ -180,10 +183,7 @@ namespace backend {
         }
 
         public override string ToString() {
-
             return "" + threatType + " " + node + " " + strength;
-            
-            return base.ToString();
         }
     }
 }

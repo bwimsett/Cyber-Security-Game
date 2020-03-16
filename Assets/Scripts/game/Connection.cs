@@ -24,6 +24,13 @@ public class Connection : MonoBehaviour {
     private const float THREAT_SIMULATION_SPEED = 1.4f; // Percent of connection covered per second
     public bool threatSimulationComplete;
 
+    private bool disabled = false;
+    
+    // True if data flows in both directions for this connection
+    private bool duplex;
+    
+    public SpriteRenderer connectionChevron;
+    
     void Update() {
         UpdateThreatSimulation();
     }
@@ -32,11 +39,6 @@ public class Connection : MonoBehaviour {
         RefreshChevron();
     }
     
-    // True if data flows in both directions for this connection
-    private bool duplex;
-    
-    public SpriteRenderer connectionChevron;
-
     public void Refresh() {
         RefreshPosition();
         RefreshGradient();
@@ -200,6 +202,22 @@ public class Connection : MonoBehaviour {
 
     public bool IsDuplex() {
         return duplex;
+    }
+
+    public void Disable() {
+        lineRenderer.enabled = false;
+        connectionChevron.enabled = false;
+        disabled = true;
+    }
+
+    public void Enable() {
+        lineRenderer.enabled = true;
+        connectionChevron.enabled = true;
+        disabled = false;
+    }
+
+    public bool isDisabled() {
+        return disabled;
     }
     
     // Check whether data can flow from the start to the end along this connection.

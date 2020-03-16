@@ -1,6 +1,7 @@
 ﻿using backend;
 using DefaultNamespace;
 using DefaultNamespace.node;
+using GameAnalyticsSDK.Setup;
 using TMPro;
 using UnityEngine;
 
@@ -123,6 +124,8 @@ public class NodeObject : MonoBehaviour {
 
     // Mouse functions for drawing new connections
     void OnMouseDown() {
+        
+        
         if (!GameManager.currentLevel.IsEditMode()) {
             return;
         }
@@ -139,6 +142,7 @@ public class NodeObject : MonoBehaviour {
     }
 
     void OnMouseDrag() {
+        
         if (!tempConnection) {
             return;
         }
@@ -149,6 +153,8 @@ public class NodeObject : MonoBehaviour {
     }
 
     void OnMouseUp() {
+        
+        
         if (!tempConnection) {
             return;
         }

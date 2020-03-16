@@ -34,6 +34,8 @@ MonoBehaviour:
     threatStatus: 4
   - threatType: 8
     threatStatus: 4
+  - threatType: 7
+    threatStatus: 4
   - threatType: 16
     threatStatus: 0
   threatEvolutions:
@@ -48,4 +50,6 @@ MonoBehaviour:
   - threatType: 6
     evolution: 0
   - threatType: 8
+    evolution: 16
+  - threatType: 7
     evolution: 16

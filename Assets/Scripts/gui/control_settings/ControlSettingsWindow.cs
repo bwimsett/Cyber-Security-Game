@@ -34,6 +34,11 @@ public class ControlSettingsWindow : Window {
     }
     
     public void SetNode(Node node) {
+        if (node == null) {
+            GameManager.levelScene.guiManager.CloseControlSettingsWindow();
+            return;
+        }
+        
         this.node = node;
         title.text = node.nodeObject.GetNodeDefinition().nodeName;
 
@@ -117,6 +122,10 @@ public class ControlSettingsWindow : Window {
     
     public void Close() {
         gameObject.SetActive(false);
+    }
+
+    public Node GetNode() {
+        return node;
     }
 
     public void RefreshPosition() {

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7440003d06f34bfeb311f57941621fdc, type: 3}
+  m_Name: Level 10
+  m_EditorClassIdentifier: 
+  levelIndex: 9
+  levelName: Open Ring
+  levelFile: {fileID: 4900000, guid: 40f2af94a9d6017409896e3a32a0ae75, type: 3}
+  unlockTokens: 10
+  nextLevel: {fileID: 11400000, guid: 82438ff22a95382448c03ad6d84e2e3a, type: 2}

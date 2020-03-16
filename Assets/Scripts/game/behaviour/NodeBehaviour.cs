@@ -5,6 +5,7 @@ using backend.level_serialization;
 using backend.threat_modelling;
 using DefaultNamespace.node;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /*
  * Classes implementing this interface are where the Attack() method is defined for each node type.
@@ -35,7 +36,7 @@ namespace DefaultNamespace {
         
         public virtual void InitialiseStartingThreatSet() {
             Control_Dropdown_Option_Set optionSet = node.nodeObject.GetNodeDefinition().GetStartingThreatsOptionSet();
-            selectedStartingThreats = new NodeField("Starting Threats", optionSet, true);
+            selectedStartingThreats = new NodeField("Starting Threats", optionSet, true , true);
         }
         
         public virtual ThreatStatus Attack(Threat threat) {       
@@ -56,12 +57,40 @@ namespace DefaultNamespace {
             return node.GetThreatEffect(threat);
         }
 
+        public virtual void EvolveThreat(Threat threat) {
+            List<ThreatType> possibleEvolutions = new List<ThreatType>();
+            Threat_EvolutionPair[] evolutionList = node.nodeObject.GetNodeDefinition().threatEvolutions;
+        
+            // Add any possible evolutions to the possibleEvolutions list
+            foreach (Threat_EvolutionPair evolution in evolutionList) {
+                if (evolution.threatType == threat.threatType) {
+                    possibleEvolutions.Add(evolution.evolution);
+                }
+            }
+        
+            //Pick an evolution at random
+            if (possibleEvolutions.Count == 0) {
+                throw new EvolutionNotDefinedException("Evolution not defined for "+threat.threatType+" at "+node.nodeObject.GetNodeDefinition().nodeName);
+            }
+        
+            int chosenIndex = Random.Range(0, possibleEvolutions.Count);
+
+            ThreatType chosenEvolution = possibleEvolutions[chosenIndex];
+        
+            // Create threat
+            Threat newThreat = GameManager.levelScene.threatManager.CreateThreat(chosenEvolution, threat, node);
+        }
+
         public NodeField[] GetFields() {
             return fields;
         }
         
         public void SetFields(NodeSave nodeSave) {
-            fields = nodeSave.fields;
+            InitialiseFields();
+
+            for(int i = 0; i < fields.Length; i++) {
+                fields[i].SetValue(nodeSave.fields[i].GetValue());
+            }
 
             char[] selectedStartingThreatsMask = (char[]) nodeSave.selectedStartingThreats.GetValue();
 

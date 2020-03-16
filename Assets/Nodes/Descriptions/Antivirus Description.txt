@@ -1,0 +1,1 @@
+Antivirus is an extremely useful tool for scanning incoming data, and data already stored in a system. Malware and other threats hidden in files can be found and removed safely using antivirus, when they would otherwise cause widespread damage to a system.

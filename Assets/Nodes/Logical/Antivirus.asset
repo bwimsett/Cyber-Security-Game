@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: Antivirus
   nodeCost: 0
+  nodeUnlockTokens: 10
   nodeFamily: 1
   nodeType: 9
   nodeColor: {r: 0.42168033, g: 0.8070729, b: 0.8679245, a: 1}
   nodeIcon: {fileID: 21300000, guid: 6f6b6f40e0b2cca4b8c85d925600ec37, type: 3}
-  description: {fileID: 0}
+  description: {fileID: 4900000, guid: 2c8c5952091be974190f71951759d321, type: 3}
   startingThreats: 
   threatResponses: []
   threatEvolutions: []

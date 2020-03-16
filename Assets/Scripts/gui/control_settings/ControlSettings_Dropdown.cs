@@ -17,6 +17,9 @@ public class ControlSettings_Dropdown : ControlSettings_Field {
 
     void Update() {
         Refresh();
+
+        // Disable dropdown for access
+
     }
     
     protected override void Initialise() {
@@ -24,6 +27,14 @@ public class ControlSettings_Dropdown : ControlSettings_Field {
         dropdown.options = GenerateOptionData();
         dropdown.value = (int) nodeField.GetValue();
         ColourOptions(nodeField.IsColourOptions());
+        if (nodeField.isReadOnly()) {
+            if (GameManager.currentLevel.IsEditMode()) {
+                dropdown.interactable = true;
+            }
+            else {
+                dropdown.interactable = false;
+            }
+        }
     }
 
     public override void Refresh() {

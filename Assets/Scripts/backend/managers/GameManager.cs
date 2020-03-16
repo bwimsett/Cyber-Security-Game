@@ -11,8 +11,7 @@ namespace DefaultNamespace {
         
         public static LevelScene levelScene;
         public static Level currentLevel;
-        public static LevelSave selectedLevelSave;
-        public static string levelName;
+        public static LevelDescription selectedLevelDescription;
         public static string levelNumber;
         public static SaveGame currentSaveGame;
         public static LevelScore currentLevelScore;
@@ -22,8 +21,10 @@ namespace DefaultNamespace {
 
             currentLevel = new Level();
 
-            if (selectedLevelSave != null) {
-                currentLevel.LoadLevel(selectedLevelSave);
+            if (selectedLevelDescription != null) {
+                LevelSerializer levelSerializer = new LevelSerializer();
+                LevelSave levelSave = levelSerializer.GetLevelSave(selectedLevelDescription.levelFile);
+                currentLevel.LoadLevel(levelSave);
             }
 
             if (currentLevelScore == null) {
@@ -32,6 +33,11 @@ namespace DefaultNamespace {
             
             Physics.queriesHitTriggers = true;
 
+        }
+
+        public void SetSelectedLevelDescription(LevelDescription levelDescription) {
+            selectedLevelDescription = levelDescription;
+            currentLevelScore = new LevelScore();
         }
 
         public static void Save() {

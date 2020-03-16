@@ -26,8 +26,20 @@ namespace gui.levelSelect {
             this.levelSet = levelSet;
             this.levelSetPos = levelSetPos;
             levelSetTitle.text = levelSet.setName;
-            levelSetUnlockRequirements.text = levelSet.unlockCost+" tokens";
+            levelSetUnlockRequirements.text = levelSet.unlockCost+" tokens required";
+            levelSetTokens.text = CalculateLevelSetTokens() + "/15 tokens earned";
             Refresh();
+        }
+
+        public int CalculateLevelSetTokens() {
+            int total = 0;
+ 
+            for (int i = 0; i < levelSet.levels.Length; i++) {
+                int levelIndex = levelSetPos * 5 + i;
+                total += GameManager.currentSaveGame.GetLevelTokens(levelIndex);
+            }
+
+            return total;
         }
 
         private void Clear() {

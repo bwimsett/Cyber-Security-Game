@@ -8,6 +8,7 @@ namespace DefaultNamespace {
     public class GUIManager : MonoBehaviour {
         public ControlDescriptionWindow controlDescriptionWindow;
         public TextMeshProUGUI budgetText;
+        public TextMeshProUGUI tokensText;
         public ControlSettingsWindow controlSettingsWindow;
         public AttackVisualiserDebugPanel AttackVisualiserDebugPanel;
         public ControlsMenu controlsMenu;
@@ -15,6 +16,7 @@ namespace DefaultNamespace {
         public LevelNameText levelNameText;
         public ThreatSummaryScreen threatSummaryScreen;
         public Animator levelSceneAnimator;
+        public Animator trashAnimator;
         
         void Start() {
             RefreshBudget();
@@ -26,7 +28,10 @@ namespace DefaultNamespace {
         }
 
         public void RefreshBudget() {
+            GameManager.currentLevel.RecalculateBudget();
+            
             SetBudgetText(GameManager.currentLevel.GetRemainingBudget());
+            tokensText.text = GameManager.currentSaveGame.GetTokens() + " Tokens";
         }
 
         public void SetBudgetText(int value) {
@@ -50,17 +55,66 @@ namespace DefaultNamespace {
             AttackVisualiserDebugPanel.gameObject.SetActive(true);
         }
 
-        public void SetThreatsForSummary(Threat[] threats) {
-            levelNameText.gameObject.SetActive(false);
+        public void OpenThreatSummary() {
+            levelNameText.textField.enabled = false;
             threatSummaryScreen.gameObject.SetActive(true);
-            threatSummaryScreen.SetThreats(threats);
+            threatSummaryScreen.SetThreats(GameManager.levelScene.threatManager.GetThreats(ThreatStatus.Success));
+        }
+
+        public void HideThreatSummary() {
+            threatSummaryScreen.gameObject.SetActive(false);
+            levelNameText.textField.enabled = true;
         }
 
         public void DisplayLevelSummary() {
+            RefreshBudget();
+            Threat[] failedThreats = GameManager.levelScene.threatManager.GetThreats(ThreatStatus.Failure);
+            Threat[] successfulThreats = GameManager.levelScene.threatManager.GetThreats(ThreatStatus.Success);
+            GameManager.currentLevel.CalculateScore(successfulThreats, failedThreats);
+            GameManager.levelScene.guiManager.RefreshBudget();
             levelSummaryWindow.SetVisible(true);
             levelSceneAnimator.SetTrigger("swipeout");
-            levelSummaryWindow.Refresh();
+            levelSummaryWindow.Refresh();         
+            AnalyticsManager.PauseTimer();
         }
+
+        public void DisplayLevelScene(bool fromLeft) {
+            if (fromLeft) {
+                levelSceneAnimator.SetTrigger("swipeinleft");
+                levelSummaryWindow.animator.SetTrigger("swipeoutright");
+                GameManager.levelScene.attackVisualiser.ClearVisualisation();
+                HideThreatSummary();
+                AnalyticsManager.ResumeTimer();
+                return;
+            }
+            levelSummaryWindow.animator.SetTrigger("swipeout");
+            levelSceneAnimator.SetTrigger("swipein");
+            AnalyticsManager.ResumeTimer();
+        }
+
+        public void BugReport() {
+            string link =
+                "https://docs.google.com/forms/d/e/1FAIpQLSdkV3hDfOIQ8UW5pCagnO_p4JB9pZhUKnQ33KUE1-2D_WrzcQ/viewform?usp=pp_url&entry.643683302=";
+            string levelName = GameManager.selectedLevelDescription.levelName;
+
+            
+            string finalLink = link + levelName;
+            
+            Application.OpenURL(finalLink);
+        }
+
+        public void ShowTrash() {
+            trashAnimator.SetBool("Visible", true);
+        }
+
+        public void ShakeTrash() {
+            trashAnimator.SetTrigger("Shake");
+        }
+
+        public void HideTrash() {
+            trashAnimator.SetBool("Visible", false);
+        }
+       
         
     }
     

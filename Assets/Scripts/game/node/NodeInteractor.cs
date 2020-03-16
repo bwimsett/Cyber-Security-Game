@@ -1,4 +1,6 @@
-﻿using DefaultNamespace;
+﻿using System.Collections.Generic;
+using DefaultNamespace;
+using GameAnalyticsSDK.Setup;
 using UnityEngine;
 
 public class NodeInteractor : MonoBehaviour {
@@ -11,7 +13,11 @@ public class NodeInteractor : MonoBehaviour {
     private Connection tempConnection2;
     private Connection tempConnectionCreator;
 
+    private bool collidingWithTrash;
+
     private bool hasDragged = false;
+
+    public float connectionBreakDistance;
     
     void Start() {
         _nodeObject = transform.parent.GetComponent<NodeObject>();
@@ -25,7 +31,19 @@ public class NodeInteractor : MonoBehaviour {
         DragNode();
     }
 
-    public void OnMouseUp() {    
+    public void OnMouseUp() {  
+        // Delete node if dropping on trash
+        if (collidingWithTrash) {
+            GameManager.levelScene.nodeManager.DeleteNode(_nodeObject.GetNode());
+            GameManager.levelScene.guiManager.HideTrash();
+            GameManager.currentLevel.RecalculateBudget();
+            return;
+        }
+        
+        if (_nodeObject.GetNode().IsControl() || GameManager.currentLevel.IsEditMode()) {
+            GameManager.levelScene.guiManager.HideTrash();
+        }
+
         Debug.Log("Has Dragged: "+hasDragged);
         
         if (!hasDragged) {
@@ -65,7 +83,7 @@ public class NodeInteractor : MonoBehaviour {
         Node end2 = tempConnectionCreator.end;
         tempConnection1 = null;
         tempConnection2 = null;
-        GameManager.levelScene.connectionManager.RemoveConnection(tempConnectionCreator);
+        tempConnectionCreator.Disable();
         
         // Move node to middle of two 
         Vector2 end1pos = end1.nodeObject.transform.position;
@@ -80,7 +98,7 @@ public class NodeInteractor : MonoBehaviour {
     
     // Moves the node by the amount since the last dragging movement.
     public void DragNode() {
-        bool isEditMode = GameManager.currentLevel.IsEditMode();
+       bool isEditMode = GameManager.currentLevel.IsEditMode();
         bool isMovable = _nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Logical ||
                          _nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Connection;
 
@@ -96,6 +114,10 @@ public class NodeInteractor : MonoBehaviour {
         
         if (dragDifference.magnitude > 0) {
             hasDragged = true;    
+            // Show trash
+            if (_nodeObject.GetNode().IsControl() || GameManager.currentLevel.IsEditMode()) {
+                GameManager.levelScene.guiManager.ShowTrash();
+            }
         }
         
         // Check node has actually been dragged
@@ -116,6 +138,13 @@ public class NodeInteractor : MonoBehaviour {
 
     // Creates a temporary connection on collision with a connection if this node is a connection node
     private void OnTriggerEnter2D(Collider2D other) {
+        // Check if this is the trash
+        if (other.tag == "Trash") {
+            GameManager.levelScene.guiManager.ShakeTrash();
+            collidingWithTrash = true;
+        }
+        
+        
         // Check this is a connection node
         NodeFamily family = _nodeObject.GetNodeDefinition().nodeFamily;
         if (family != NodeFamily.Connection) {
@@ -133,6 +162,11 @@ public class NodeInteractor : MonoBehaviour {
             return;
         }
         
+        // Check colliding connection isn't disabled
+        if (connectionCollider.GetConnection().isDisabled()) {
+            return;
+        }
+        
         //Create temporary connections between ends of connection
         Connection startingConnection = connectionCollider.GetConnection();
         Node end1 = startingConnection.start;
@@ -144,21 +178,27 @@ public class NodeInteractor : MonoBehaviour {
         if (end1 == thisNode || end2 == thisNode) {
             return;
         }
-
-        if (tempConnectionCreator) {
-            tempConnectionCreator.SetVisible(true);
-        }
         
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
 
+        if (tempConnectionCreator) {
+            tempConnectionCreator.Enable();
+        }
+        
         tempConnectionCreator = startingConnection;
-        tempConnectionCreator.SetVisible(false);
         tempConnection1 = GameManager.levelScene.connectionManager.CreateAndAddConnection(end1, thisNode);
         tempConnection2 = GameManager.levelScene.connectionManager.CreateAndAddConnection(thisNode, end2);
+        
+        tempConnectionCreator.Disable();
     }
 
     private void OnTriggerExit2D(Collider2D other) {
+        if (other.tag == "Trash") {
+            GameManager.levelScene.guiManager.HideTrash();
+            collidingWithTrash = false;
+        }
+        
         // Check this is a connection node
         NodeFamily family = _nodeObject.GetNodeDefinition().nodeFamily;
         if (family != NodeFamily.Connection) {
@@ -178,10 +218,9 @@ public class NodeInteractor : MonoBehaviour {
         }
         
         //Remove connection
-        tempConnectionCreator.SetVisible(true);
+        tempConnectionCreator.Enable();
         tempConnectionCreator = null;
-        GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
-        GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
+        GameManager.levelScene.connectionManager.RemoveAllConnectionsToNode(_nodeObject.GetNode());
 
         tempConnection1 = null;
         tempConnection2 = null;

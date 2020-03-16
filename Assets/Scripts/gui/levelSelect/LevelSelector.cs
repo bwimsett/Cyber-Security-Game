@@ -30,21 +30,22 @@ public class LevelSelector : MonoBehaviour {
     [Range(0,255)]
     public int opacity;
 
+    void Start() {
+        levelSetComponents = new LevelSetComponent[0];
+        RefreshTargetPosition();
+    }
+    
     void Update() {
+        if (levelSetComponents.Length == 0) {
+            return;
+        }
+        
         foreach (LevelSetComponent c in levelSetComponents) {
             c.UpdateConnectionOpacity(opacity);
         }
         UpdatePosition();
     }
-    
-    void Start() {
-        RefreshTargetPosition();
-        Initialise();
-    }
 
-    private void Initialise() {
-        Refresh();
-    }
 
     private void Clear() {
         if (levelSetComponents == null) {

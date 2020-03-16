@@ -1,3 +1,0 @@
-A central computer within the organisation's network. Distributes data to terminals, and completes central calculations.
-
-Must be heavily protected, as threats emerging here can travel throughout the network.

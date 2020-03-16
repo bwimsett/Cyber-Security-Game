@@ -17,6 +17,8 @@ public class LevelSummary_Medals : MonoBehaviour {
     private int selectedMedal;
     
     public void SetMedal(Medal medal) {
+        Reset();
+        
         this.medal = medal;
         
         switch (medal) {
@@ -48,6 +50,12 @@ public class LevelSummary_Medals : MonoBehaviour {
             medals[i].transform.SetSiblingIndex(3-Mathf.Abs(distanceFromMedal));
     
             medals[i].SetText(currentLevel.GetMedalBoundary(medalTypes[i])+"+");
+        }
+    }
+
+    public void Reset() {
+        foreach (LevelSummary_Medal medal in medals) {
+            medal.transform.localPosition = new Vector2(900, 0); 
         }
     }
 

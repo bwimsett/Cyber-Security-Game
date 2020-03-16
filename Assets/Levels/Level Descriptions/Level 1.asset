@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Encrypted Communication
   levelFile: {fileID: 4900000, guid: d9742cfc3ffc20346a2ee82874a27f55, type: 3}
+  nextLevel: {fileID: 11400000, guid: ad0f980d173af7d41a27d858a6774e56, type: 2}
