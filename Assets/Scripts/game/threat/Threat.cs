@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using DefaultNamespace;
+using GameAnalyticsSDK.Setup;
 
 namespace backend {
     public class Threat {
@@ -13,11 +14,12 @@ namespace backend {
         private int nodeHealth;
         private int accessLevel;
         
-        public Threat(ThreatType threatType, Threat parentThreat, Node node, int strength) {
+        public Threat(ThreatType threatType, Threat parentThreat, Node node, int strength, int accessLevel) {
             this.threatType = threatType;
             this.parentThreat = parentThreat;
             this.node = node;
             this.strength = strength;
+            this.accessLevel = accessLevel;
             if (parentThreat != null) {
                 accessLevel = parentThreat.GetAccessLevel();
             }
@@ -45,21 +47,11 @@ namespace backend {
         }
 
         private void Propagate(ThreatStatus status) {
-            Node[] nodes = node.GetConnectedNodes();
-
-            foreach (Node n in nodes) {
-
-                Connection c = GameManager.levelScene.connectionManager.GetConnection(node, n);
-                bool flowValid = false;
-
-                // Check the threat can flow in this direction down this connection
-                if (c) {
-                    flowValid = c.FlowDirectionValid(node, n);
-                }
-                
-                if (!IsInParentChain(n) && flowValid) {
-                    GameManager.levelScene.threatManager.CreateThreat(threatType, this, n);
-                }
+            // Attack connections
+            Connection[] connections = GameManager.levelScene.connectionManager.GetConnectionsToNode(node);
+            
+            foreach (Connection c in connections) {      
+                c.Attack(threatType, this, node);
             }
         }
 
@@ -89,7 +81,7 @@ namespace backend {
             return ThreatStatus.Success;
         }
         
-        private bool IsInParentChain(Node node) {
+        public bool IsInParentChain(Node node) {
             if (this.node == node) {
                 return true;
             }

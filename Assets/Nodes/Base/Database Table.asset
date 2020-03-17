@@ -35,13 +35,11 @@ MonoBehaviour:
   - threatType: 11
     threatStatus: 4
   threatEvolutions:
-  - threatType: 15
-    evolution: 1
-  - threatType: 15
-    evolution: 2
   - threatType: 18
     evolution: 15
   - threatType: 11
     evolution: 1
   - threatType: 11
     evolution: 12
+  - threatType: 15
+    evolution: 17

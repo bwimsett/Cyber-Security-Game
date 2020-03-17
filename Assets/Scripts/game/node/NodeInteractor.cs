@@ -11,7 +11,6 @@ public class NodeInteractor : MonoBehaviour {
     private Connection currentColliderConnection;
     private Connection tempConnection1;
     private Connection tempConnection2;
-    private Connection tempConnectionCreator;
 
     private bool collidingWithTrash;
 
@@ -48,11 +47,16 @@ public class NodeInteractor : MonoBehaviour {
         
         if (!hasDragged) {
             OpenNodeSettings();
+            return;
         }
 
         hasDragged = false;
+
+        if (_nodeObject.GetNode().GetConnection() == null) {
+            return;
+        }
         
-        MoveConnectionNodeIntoPlace();
+        _nodeObject.GetNode().GetConnection().AddConnectionNode(_nodeObject.GetNode());
     }
 
     public void OnMouseOver() {
@@ -63,15 +67,23 @@ public class NodeInteractor : MonoBehaviour {
         _nodeObject.nodeNameTextAnimator.SetBool("Visible", false);
     }
 
-    private void MoveConnectionNodeIntoPlace() {
+    public void RemoveTemporaryConnections() {
+        GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
+        GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
+        _nodeObject.GetNode().GetConnection().Enable();
+    }
+    
+    public void MoveConnectionNodeIntoPlace(Vector2 position) {
         // Check node family
         if (_nodeObject.GetNodeDefinition().nodeFamily != NodeFamily.Connection) {
             //Debug.Log("Mouse up, but not a connection node.");
             return;
         }
+
+        Connection connectionParent = _nodeObject.GetNode().GetConnection();
         
         // Check for temporary connections
-        if (tempConnectionCreator == null) {
+        if (connectionParent == null) {
             //Debug.Log("Mouse up, but no temporary connection creator");
             return;
         }
@@ -79,11 +91,9 @@ public class NodeInteractor : MonoBehaviour {
         //Debug.Log("Mouse up. Moving to mid point.");
         
         // Remove temporary connection creator
-        Node end1 = tempConnectionCreator.start;
-        Node end2 = tempConnectionCreator.end;
-        tempConnection1 = null;
-        tempConnection2 = null;
-        tempConnectionCreator.Disable();
+        Node end1 = connectionParent.start;
+        Node end2 = connectionParent.end;
+        //connectionParent.Disable();
         
         // Move node to middle of two 
         Vector2 end1pos = end1.nodeObject.transform.position;
@@ -91,7 +101,7 @@ public class NodeInteractor : MonoBehaviour {
         
         Vector2 midPoint = Vector2.Lerp(end1pos, end2pos, 0.5f);
 
-        _nodeObject.MoveToPosition(midPoint);
+        _nodeObject.MoveToPosition(position);
         
         RefreshConnections();
     }
@@ -111,9 +121,10 @@ public class NodeInteractor : MonoBehaviour {
         Vector2 dragDifference = currentDragPos - dragStartPos;
 
         dragStartPos = currentDragPos;
-        
+
         if (dragDifference.magnitude > 0) {
             hasDragged = true;    
+            Debug.Log(dragDifference.magnitude);
             // Show trash
             if (_nodeObject.GetNode().IsControl() || GameManager.currentLevel.IsEditMode()) {
                 GameManager.levelScene.guiManager.ShowTrash();
@@ -138,6 +149,8 @@ public class NodeInteractor : MonoBehaviour {
 
     // Creates a temporary connection on collision with a connection if this node is a connection node
     private void OnTriggerEnter2D(Collider2D other) {
+        Connection connectionParent = _nodeObject.GetNode().GetConnection();
+        
         // Check if this is the trash
         if (other.tag == "Trash") {
             GameManager.levelScene.guiManager.ShakeTrash();
@@ -152,7 +165,7 @@ public class NodeInteractor : MonoBehaviour {
         }
         
         //Check node doesn't already have connections
-        if (_nodeObject.GetNode().connectedNodes.Count > 0 && !tempConnectionCreator) {
+        if (_nodeObject.GetNode().connectedNodes.Count > 0 && !connectionParent) {
             return;
         }
         
@@ -164,6 +177,11 @@ public class NodeInteractor : MonoBehaviour {
         
         // Check colliding connection isn't disabled
         if (connectionCollider.GetConnection().isDisabled()) {
+            return;
+        }
+
+        // If the node already rests on a connection
+        if (connectionParent) {
             return;
         }
         
@@ -182,15 +200,17 @@ public class NodeInteractor : MonoBehaviour {
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection1);
         GameManager.levelScene.connectionManager.RemoveConnection(tempConnection2);
 
-        if (tempConnectionCreator) {
-            tempConnectionCreator.Enable();
+        if (connectionParent) {
+            connectionParent.Enable();
         }
         
-        tempConnectionCreator = startingConnection;
+        _nodeObject.GetNode().SetConnection(startingConnection);
         tempConnection1 = GameManager.levelScene.connectionManager.CreateAndAddConnection(end1, thisNode);
         tempConnection2 = GameManager.levelScene.connectionManager.CreateAndAddConnection(thisNode, end2);
+        tempConnection1.HideChevron();
+        tempConnection2.HideChevron();
         
-        tempConnectionCreator.Disable();
+        startingConnection.Disable();
     }
 
     private void OnTriggerExit2D(Collider2D other) {
@@ -213,18 +233,18 @@ public class NodeInteractor : MonoBehaviour {
         
         // Check if connection is the temporary connection creator
         Connection connection = connectionCollider.GetConnection();
-        if (connection != tempConnectionCreator) {
+        Connection connectionParent = _nodeObject.GetNode().GetConnection();
+        if (connection != connectionParent) {
             return;
         }
         
         //Remove connection
-        tempConnectionCreator.Enable();
-        tempConnectionCreator = null;
-        GameManager.levelScene.connectionManager.RemoveAllConnectionsToNode(_nodeObject.GetNode());
-
-        tempConnection1 = null;
-        tempConnection2 = null;
-
+        if (tempConnection1 || tempConnection2) {
+            RemoveTemporaryConnections();
+        }
+        
+        connectionParent.RemoveConnectionNode(_nodeObject.GetNode());
+        _nodeObject.GetNode().ClearConnection();
     }
     
     public void RefreshConnections() {

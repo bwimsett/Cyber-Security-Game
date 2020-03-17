@@ -11,6 +11,8 @@ public class Node {
     private int nodeID;
     private NodeBehaviour behaviour;
 
+    private Connection onConnection; // If this is a connection node, this is the connection it is on.
+
     public Node(NodeObject nodeObject) {
         this.nodeObject = nodeObject;
         connectedNodes = new List<Node>();
@@ -78,5 +80,17 @@ public class Node {
 
     public NodeBehaviour GetBehaviour() {
         return behaviour;
+    }
+
+    public void SetConnection(Connection connection) {
+        this.onConnection = connection;
+    }
+
+    public void ClearConnection() {
+        onConnection = null;
+    }
+
+    public Connection GetConnection() {
+        return onConnection;
     }
 }

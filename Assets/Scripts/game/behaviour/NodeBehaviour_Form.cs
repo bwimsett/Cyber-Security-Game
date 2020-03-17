@@ -27,7 +27,11 @@ namespace DefaultNamespace {
                 return ThreatStatus.Success;
             }
 
-            if (threatAccessLevel > (int) fields[1].GetValue() && authorisedAccess) {
+            if (threatAccessLevel > (int)GetFieldWithSet(ControlDropdownOptionSets.Access).GetValue() && unauthorisedAccess) {
+                return ThreatStatus.Evolve;
+            }    
+            
+            if (threatAccessLevel > (int)GetFieldWithSet(ControlDropdownOptionSets.Access).GetValue() && authorisedAccess) {
                 return ThreatStatus.Success;
             }    
             

@@ -22,9 +22,13 @@ namespace DefaultNamespace {
             
             // If the threat came from a password gate of access level too low
             if (threatAccessLevel < (int)GetFieldWithSet(ControlDropdownOptionSets.Access).GetValue() && unauthorisedAccess) {
-                return ThreatStatus.Evolve;
+                return ThreatStatus.Success;
             }
 
+            if (threatAccessLevel > (int)GetFieldWithSet(ControlDropdownOptionSets.Access).GetValue() && unauthorisedAccess) {
+                return ThreatStatus.Evolve;
+            }    
+            
             if (threatAccessLevel > (int)GetFieldWithSet(ControlDropdownOptionSets.Access).GetValue() && authorisedAccess) {
                 return ThreatStatus.Success;
             }    

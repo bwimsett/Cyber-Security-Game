@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc885ced06044f338712d55ea612af2b, type: 3}
   m_Name: Worm
   m_EditorClassIdentifier: 
-  threatType: 0
+  threatType: 11
   threatName: Worm
   startSentences:
   - node: 11

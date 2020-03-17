@@ -4,6 +4,7 @@ using backend;
 using backend.level_serialization;
 using backend.threat_modelling;
 using DefaultNamespace.node;
+using GameAnalyticsSDK.Setup;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,7 +40,7 @@ namespace DefaultNamespace {
             selectedStartingThreats = new NodeField("Starting Threats", optionSet, true , true);
         }
         
-        public virtual ThreatStatus Attack(Threat threat) {       
+        public virtual ThreatStatus Attack(Threat threat) { 
             Node[] connectedNodes = node.GetConnectedNodes();
             
             threat.SetNodeHealth(startingHealth);
@@ -79,6 +80,7 @@ namespace DefaultNamespace {
         
             // Create threat
             Threat newThreat = GameManager.levelScene.threatManager.CreateThreat(chosenEvolution, threat, node);
+            newThreat.SetAccessLevel(threat.GetAccessLevel());
         }
 
         public NodeField[] GetFields() {
@@ -113,9 +115,10 @@ namespace DefaultNamespace {
                 }
 
                 int strength = selectedStartingThreats.GetThreatStrength(i);
+
+                Node startNode = node;
                 
-                Threat t = new Threat(threatTypes[i], null, node, strength);
-                //Debug.Log(t);
+                Threat t = new Threat(threatTypes[i], null, startNode, strength, 0);
                 
                 outputThreats.Add(t);
             }

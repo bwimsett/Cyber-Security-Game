@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using backend;
 using DefaultNamespace;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class Connection : MonoBehaviour {
     public ConnectionCollider connectionCollider;
     public Sprite duplexChevron;
     public Sprite simplexChevron;
+
+    private List<Node> connectionNodes;
 
     private bool simulatingThreat;
     private float threatSimulationPercentComplete;
@@ -37,6 +40,7 @@ public class Connection : MonoBehaviour {
     
     void Start(){
         RefreshChevron();
+        connectionNodes = new List<Node>();
     }
     
     public void Refresh() {
@@ -178,17 +182,6 @@ public class Connection : MonoBehaviour {
         }
     }
 
-    public void SetVisible(bool visible) {
-        if (visible) {
-            lineRenderer.enabled = true;
-            connectionChevron.enabled = true;
-            return;
-        }
-
-        lineRenderer.enabled = false;
-        connectionChevron.enabled = false;
-    }
-
     public void ToggleDuplex() {
         duplex = !duplex;
         Debug.Log(duplex);
@@ -216,12 +209,29 @@ public class Connection : MonoBehaviour {
         disabled = false;
     }
 
+    public void HideChevron() {
+        connectionChevron.enabled = false;
+    }
+    
     public bool isDisabled() {
         return disabled;
     }
     
     // Check whether data can flow from the start to the end along this connection.
     public bool FlowDirectionValid(Node start, Node end) {
+
+        if (start == this.start && IsConnectionNode(end)) {
+            return true;
+        }
+
+        if (start == this.end && IsConnectionNode(end)) {
+            if (duplex) {
+                return true;
+            }
+
+            return false;
+        }
+        
         bool forward = (this.start == start && this.end == end);
         bool backward = (this.start == end && this.end == start);
 
@@ -342,4 +352,97 @@ public class Connection : MonoBehaviour {
 
         return newSize;
     }
+
+    public void RefreshConnectionNodes() {
+        int connectionNodeCount = connectionNodes.Count;
+
+        for (int i = 0; i < connectionNodes.Count; i++) {
+            float percent = (i+1)*(1f / (connectionNodeCount + 1));
+            Vector2 pos = Vector2.Lerp(start.nodeObject.transform.position, end.nodeObject.transform.position, percent);
+            connectionNodes[i].nodeObject.nodeInteractor.MoveConnectionNodeIntoPlace(pos);
+        }
+    }
+    
+    public void AddConnectionNode(Node node) {
+        connectionNodes.Add(node);
+        RefreshConnectionNodes();
+    }
+
+    public void RemoveConnectionNode(Node node) {
+        connectionNodes.Remove(node);
+        RefreshConnectionNodes();
+    }
+
+    public bool HasConnectionNode(NodeType nodeType) {
+        foreach (Node n in connectionNodes) {
+            if (n.nodeObject.GetNodeDefinition().nodeType == nodeType) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool IsConnectionNode(Node n) {
+        foreach (Node node in connectionNodes) {
+            if (n == node) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void Attack(ThreatType threatType, Threat parent, Node origin) {
+        bool startInParentChain = parent.IsInParentChain(start);
+        bool endInParentChain = parent.IsInParentChain(end);
+        
+        // Attack ends if there are no connection nodes
+        if (connectionNodes.Count == 0) {
+            if (origin == start && !endInParentChain) {
+                GameManager.levelScene.threatManager.CreateThreat(threatType, parent, end);
+            }
+
+            if (origin == end && FlowDirectionValid(end, start) && !startInParentChain) {
+                GameManager.levelScene.threatManager.CreateThreat(threatType, parent, start);
+            }
+
+            return;
+        }
+
+        bool propagate = false;
+        Threat prevThreat = parent;
+
+        // Attack connection nodes
+        foreach (Node n in connectionNodes) {
+            
+            bool flowValid = FlowDirectionValid(origin, n);
+
+            // Handle propagation for control nodes
+            if (flowValid) {
+                prevThreat = GameManager.levelScene.threatManager.CreateThreat(threatType, prevThreat, n);
+                propagate = prevThreat.GetStatus() == ThreatStatus.Propagate ||
+                            prevThreat.GetStatus() == ThreatStatus.Success;
+            }
+
+            // Break out of the loop and stop infecting if the threat did not propagate;
+            if (!propagate) {
+                break;
+            }
+        }
+
+        if (!propagate) {
+            return;
+        }
+        
+        // Infect end node if all connection nodes have been infected
+        if (origin == start && !endInParentChain) {
+            GameManager.levelScene.threatManager.CreateThreat(threatType, prevThreat, end);
+        }
+
+        if (origin == end && !startInParentChain) {
+            GameManager.levelScene.threatManager.CreateThreat(threatType, prevThreat, start);
+        }
+    }
+    
 }

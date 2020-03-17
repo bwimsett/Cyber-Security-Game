@@ -119,6 +119,7 @@ public class NodeObject : MonoBehaviour {
         if (Vector2.Distance(transform.position, targetPos) < 0.1f) {
             transform.position = targetPos;
             targetPos = Vector2.negativeInfinity;
+            nodeInteractor.RemoveTemporaryConnections();
         }
     }
 

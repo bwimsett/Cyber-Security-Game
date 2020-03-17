@@ -8,7 +8,7 @@ namespace DefaultNamespace {
         public NodeBehaviour_PasswordGate(Node node) : base(node) {
             
         }
-
+        
         public override Threat[] GenerateThreats() {
             Threat[] threats = base.GenerateThreats();
 
