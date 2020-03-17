@@ -60,7 +60,7 @@ public class ConnectionCollider : MonoBehaviour {
         // If node is not base or table, ignore it
         NodeDefinition nodeDef = otherNodeObject.GetNodeDefinition();
 
-        if (nodeDef.nodeFamily != NodeFamily.Base) {
+        if (nodeDef.nodeFamily != NodeFamily.Base || !GameManager.currentLevel.IsEditMode()) {
             return;
         }
 

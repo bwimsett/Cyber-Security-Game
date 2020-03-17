@@ -47,7 +47,7 @@ namespace DefaultNamespace {
             // Check if any of the logical nodes connected are effective against the threat
             foreach (Node n in connectedNodes) {
                 if (n.nodeObject.GetNodeDefinition().nodeFamily == NodeFamily.Logical) {
-                    ThreatStatus status = n.GetThreatEffect(threat);
+                    ThreatStatus status = n.Attack(threat);
                     if (status == ThreatStatus.Failure) {
                         return status;
                     }
@@ -158,7 +158,8 @@ namespace DefaultNamespace {
 
                     for(int i = 0; i < bitmask.Length; i++) {
                         // Multiplies health of that option with the bitmask value of 1 or 0
-                        int bitValue = Int32.Parse(""+bitmask[i]);
+                        string bitString = "" + bitmask[i];
+                        int bitValue = Int32.Parse(bitString);
                         totalHealth += f.GetOptionSet().options[i].health * bitValue;
                     }
                 }

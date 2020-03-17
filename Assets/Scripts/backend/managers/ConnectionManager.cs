@@ -37,6 +37,8 @@ namespace DefaultNamespace {
         
         //If the connection already exists, return, otherwise create a new one and add it to connections.
         public Connection CreateAndAddConnection(Node start, Node end) {
+            Debug.Log("Connection created");
+            
             Connection connection = GetConnection(start, end);
 
             if (connection) {

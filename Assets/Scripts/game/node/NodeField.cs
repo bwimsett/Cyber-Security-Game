@@ -61,7 +61,14 @@ namespace DefaultNamespace.node {
             readOnly = isReadOnly;
             this.fieldTitle = fieldTitle;
             optionSet = GameManager.levelScene.nodeManager.GetControlOptionSet(optionSetName);
-            value = new char[optionSet.options.Length];
+            
+            char[] bitmask = new char[optionSet.options.Length];
+            for (int i = 0; i < optionSet.options.Length; i++) {
+                bitmask[i] = '0';
+            }
+
+            value = bitmask;
+            
             this.optionSetName = optionSetName;
             fieldType = NodeFieldType.enumerable_many;
         }
@@ -69,7 +76,14 @@ namespace DefaultNamespace.node {
         public NodeField(string fieldTitle, Control_Dropdown_Option_Set optionSet, bool threats, bool isReadOnly) {
             readOnly = isReadOnly;
             this.fieldTitle = fieldTitle;
-            value = new char[optionSet.options.Length];
+            
+            char[] bitmask = new char[optionSet.options.Length];
+            for (int i = 0; i < optionSet.options.Length; i++) {
+                bitmask[i] = '0';
+            }
+
+            value = bitmask;
+            
             this.optionSet = optionSet;
             fieldType = NodeFieldType.enumerable_many;
 
