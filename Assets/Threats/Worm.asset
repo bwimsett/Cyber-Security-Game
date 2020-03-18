@@ -25,5 +25,11 @@ MonoBehaviour:
     summary: reached a server and manipulated data.
   - node: 2
     summary: reached a database table and manipulated data.
-  - node: 2
-    summary: reached a database table and caused damage to data.
+  - node: 10
+    summary: reached a smartphone and manipulated data.
+  - node: 10
+    summary: spread to a smartphone and caused damage to data.
+  - node: 11
+    summary: reached a PC and manipulated data.
+  - node: 11
+    summary: spread to a PC and caused damage to data.

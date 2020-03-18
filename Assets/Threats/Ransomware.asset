@@ -17,7 +17,11 @@ MonoBehaviour:
   startSentences:
   - node: 1
     summary: Ransomware originating from the internet
+  - node: 11
+    summary: Ransomware originating at a PC
   middleSentences: []
   endSentences:
   - node: 11
     summary: infected and locked down a PC.
+  - node: 0
+    summary: infected and locked down a server.

@@ -10,12 +10,12 @@ namespace DefaultNamespace {
         }
         
         protected override void InitialiseFields() {
-            fields = new NodeField[4];
+            fields = new NodeField[2];
             
             fields[0] = new NodeField("Node Definition", "Scans for, and attempts to eliminate malware from the attached node");
-            fields[1] = new NodeField("Scanned File Types", 0, false,ControlDropdownOptionSets.Antivirus_FileTypes, false);
-            fields[2] = new NodeField("Scan Frequency", 0, false, ControlDropdownOptionSets.Antivirus_ScanFrequency, false);
-            fields[3] = new NodeField("Block media", ControlDropdownOptionSets.Antivirus_BlockMedia, false);
+            /*fields[1] = new NodeField("Scanned File Types", 0, false,ControlDropdownOptionSets.Antivirus_FileTypes, false);
+            fields[2] = new NodeField("Scan Frequency", 0, false, ControlDropdownOptionSets.Antivirus_ScanFrequency, false);*/
+            fields[1] = new NodeField("Block media", ControlDropdownOptionSets.Antivirus_BlockMedia, false);
         }
 
         public override ThreatStatus Attack(Threat threat) {

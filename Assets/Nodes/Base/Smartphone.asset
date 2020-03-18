@@ -24,4 +24,10 @@ MonoBehaviour:
   threatResponses:
   - threatType: 3
     threatStatus: 1
+  - threatType: 9
+    threatStatus: 0
+  - threatType: 10
+    threatStatus: 0
+  - threatType: 11
+    threatStatus: 0
   threatEvolutions: []

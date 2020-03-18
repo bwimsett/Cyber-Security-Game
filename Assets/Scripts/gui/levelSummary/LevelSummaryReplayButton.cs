@@ -1,5 +1,6 @@
 using backend;
 using DefaultNamespace;
+using GameAnalyticsSDK.Setup;
 using UnityEngine;
 
 namespace gui.levelSummary {
@@ -11,9 +12,14 @@ namespace gui.levelSummary {
         }
 
         public void ReplayThreat() {
+
+            Threat[] threats = GameManager.levelScene.threatManager.GetThreats(ThreatStatus.Success);
+            Debug.Log(threats[threatIndex].GetStringTrace());
+
+            /*
             GameManager.levelScene.guiManager.DisplayLevelScene(true);
             GameManager.levelScene.guiManager.OpenThreatSummary();
-            GameManager.levelScene.guiManager.threatSummaryScreen.SetThreatIndex(threatIndex);
+            GameManager.levelScene.guiManager.threatSummaryScreen.SetThreatIndex(threatIndex);*/
         }
     }
 }

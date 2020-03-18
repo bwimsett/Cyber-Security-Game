@@ -140,6 +140,9 @@ namespace DefaultNamespace{
                 case NodeType.Form:
                     behaviour = new NodeBehaviour_Form(node);
                     break;
+                case NodeType.Mail_Scanner:
+                    behaviour = new NodeBehaviour_MailScanner(node);
+                    break;
                 default:
                     behaviour = new NodeBehaviour(node);
                     break;

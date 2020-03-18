@@ -20,8 +20,8 @@ MonoBehaviour:
   middleSentences: []
   endSentences:
   - node: 0
-    summary: caused a server to crash
+    summary: caused a server to crash.
   - node: 0
-    summary: caused a server to freeze
+    summary: caused a server to freeze.
   - node: 0
-    summary: made a server unresponsive
+    summary: made a server unresponsive.

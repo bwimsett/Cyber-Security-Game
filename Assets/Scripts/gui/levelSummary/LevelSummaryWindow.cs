@@ -39,9 +39,19 @@ public class LevelSummaryWindow : Window {
 
         nextLevelButton.interactable = true;
 
-        int tokensRequired = GameManager.selectedLevelDescription.nextLevel.unlockTokens -
-                             GameManager.currentSaveGame.GetTokens();
+        int tokensRequired = 0;
+        
+        if (GameManager.selectedLevelDescription.nextLevel) {
+            tokensRequired = GameManager.selectedLevelDescription.nextLevel.unlockTokens -
+                                 GameManager.currentSaveGame.GetTokens();
+        }
+
         nextLevelButtonText.text = "Next";
+
+        if (!GameManager.selectedLevelDescription.nextLevel) {
+            nextLevelButtonText.text = "";
+            nextLevelButton.interactable = false;
+        }
         
         // Update next button
         if (tokensRequired > 0) {

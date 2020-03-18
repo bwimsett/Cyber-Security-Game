@@ -132,11 +132,25 @@ namespace DefaultNamespace.node {
                 return 0;
             }
 
+            int cost = 0;
+            
+            if (fieldType == NodeFieldType.enumerable_many) {
+                
+                char[] bitmask = (char[]) value;
+                for (int i = 0; i < bitmask.Length; i++) {
+                    if (bitmask[i] == '1') {
+                        cost += optionSet.options[i].cost;
+                    }
+                }
+
+                return cost;
+            }
+            
             if (fieldType != NodeFieldType.enumerable_single) {
                 return 0;
             }
 
-            int cost = optionSet.options[(int) value].cost;
+            cost = optionSet.options[(int) value].cost;
 
             return cost;
         }

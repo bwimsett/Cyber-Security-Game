@@ -95,10 +95,29 @@ namespace DefaultNamespace {
             }
 
             char[] selectedStartingThreatsMask = (char[]) nodeSave.selectedStartingThreats.GetValue();
-
+            Control_Dropdown_Option[] optionSet = selectedStartingThreats.GetOptionSet().options;
+            
             // If the selected starting threats mask matches the number of options
-            if (selectedStartingThreatsMask.Length == selectedStartingThreats.GetOptionSet().options.Length) {
+            if (selectedStartingThreatsMask.Length == optionSet.Length) {
                 selectedStartingThreats = nodeSave.selectedStartingThreats;
+            }
+            else {
+                // Otherwise create a new mask with the old values preserved
+                char[] newMask = new char[optionSet.Length];
+                InitialiseStartingThreatSet();
+                
+                for (int i = 0; i < newMask.Length; i++) {
+                    if (i < selectedStartingThreatsMask.Length) {
+                        newMask[i] = selectedStartingThreatsMask[i];
+                        selectedStartingThreats.SetThreatStrength(i, nodeSave.selectedStartingThreats.GetThreatStrength(i));
+                        continue;
+                    }
+
+                    newMask[i] = '0';
+                }
+
+                
+                selectedStartingThreats.SetValue(newMask);
             }
         }
 

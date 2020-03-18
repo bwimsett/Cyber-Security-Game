@@ -31,3 +31,5 @@ MonoBehaviour:
   threatEvolutions:
   - threatType: 18
     evolution: 15
+  - threatType: 15
+    evolution: 17

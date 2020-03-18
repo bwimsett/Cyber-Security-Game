@@ -138,6 +138,7 @@
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Captcha.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_ConnectionEncryption.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Form.cs" />
+    <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_MailScanner.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_PasswordGate.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Sanitisation.cs" />
     <Compile Include="Assets\Scripts\game\behaviour\NodeBehaviour_Table.cs" />

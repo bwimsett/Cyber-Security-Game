@@ -10,18 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc885ced06044f338712d55ea612af2b, type: 3}
-  m_Name: Trojan
+  m_Name: SQL Injection URL
   m_EditorClassIdentifier: 
-  threatType: 9
-  threatName: Trojan
+  threatType: 6
+  threatName: SQL Injection
   startSentences:
-  - node: 1
-    summary: A Trojan downloaded from the internet
-  - node: 11
-    summary: A Trojan installed on a PC
+  - node: 13
+    summary: An unsanitised URL
   middleSentences: []
-  endSentences:
-  - node: 11
-    summary: infected another PC.
-  - node: 0
-    summary: infected a server.
+  endSentences: []

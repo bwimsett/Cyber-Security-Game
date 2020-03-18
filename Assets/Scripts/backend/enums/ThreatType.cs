@@ -23,5 +23,6 @@ namespace DefaultNamespace {
         Unauthorised_Access_Medium,
         Unauthorised_Access_High,
         Unauthorised_Access_VeryHigh,
+        Mail_Malware
     }
 }

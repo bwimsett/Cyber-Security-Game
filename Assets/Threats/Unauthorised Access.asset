@@ -23,3 +23,7 @@ MonoBehaviour:
   endSentences:
   - node: 14
     summary: lead to access of a form.
+  - node: 2
+    summary: lead to theft of data from a table.
+  - node: 2
+    summary: resulted in destruction of data in a table.

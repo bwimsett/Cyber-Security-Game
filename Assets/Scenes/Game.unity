@@ -5525,6 +5525,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4ca08b34c6720f4ea10a2a1b7878be4, type: 2}
   - {fileID: 11400000, guid: b1130b8549cfebc49b79e9c9ce849633, type: 2}
   - {fileID: 11400000, guid: 78e749ebed9b5674bb2ff5fd79b294f5, type: 2}
+  - {fileID: 11400000, guid: 08ba7a1d15f887942842c2c4aea59804, type: 2}
+  - {fileID: 11400000, guid: 46d83df1b8d040047943372d9a21ea2a, type: 2}
+  - {fileID: 11400000, guid: dd03b6cbf01d8114abfb70649d919c1a, type: 2}
+  - {fileID: 11400000, guid: b74e2c4e34a4c494783e24bc982f296c, type: 2}
   evolutionAdjectives:
   - became
   - evolved into
